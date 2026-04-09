@@ -10,7 +10,7 @@ No build pipeline. All pages are standalone `.html` files.
 | Product | Status | App Store ID | Page | Index badge |
 |---|---|---|---|---|
 | ExifArmor | **Live** | `id6760979268` | `apps/exifarmor.html` | `Live on App Store` (cyan) |
-| ParkArmor | **Live** | `id_PARKARMOR` ← fill in | `apps/parkarmor.html` | `Live on App Store` (green) |
+| ParkArmor | **Live** | `id6760988040` | `apps/parkarmor.html` | `Live on App Store` (green) |
 | DocArmor | Planned | — | `apps/docarmor.html` | `Planned` (gray) |
 | WraithVPN | In development | `id6745785827` | `apps/wraith.html` | not on index yet |
 | Enclave | In development | — | `enclave.html` | not on index yet |
