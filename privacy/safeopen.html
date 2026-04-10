@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — SafeOpen by Katafract</title>
-  <meta name="description" content="SafeOpen privacy policy. All scanning and risk scoring happens on your device. No data collected, no accounts, no cloud.">
+  <meta name="description" content="SafeOpen privacy policy. Free tier is fully on-device. Pro tier uses secure backend processing for AI link analysis and disposable IPv6 sessions.">
   <link rel="canonical" href="https://katafract.com/privacy/safeopen">
   <!-- Open Graph -->
   <meta property="og:title" content="Privacy Policy — SafeOpen by Katafract">
-  <meta property="og:description" content="SafeOpen collects zero data. Your scans and history stay on your device. No servers, no tracking, no accounts.">
+  <meta property="og:description" content="SafeOpen free tier collects nothing. Pro tier uses a secure backend proxy for AI link analysis — your real IP is never exposed to destinations.">
   <meta property="og:url" content="https://katafract.com/privacy/safeopen">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Katafract">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Privacy Policy — SafeOpen by Katafract">
-  <meta name="twitter:description" content="SafeOpen collects zero data. Scans stay on your device.">
+  <meta name="twitter:description" content="SafeOpen free tier collects nothing. Pro uses a secure backend proxy — your IP never touches the destination.">
   <!-- Favicon -->
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <!-- Fonts (self-hosted) -->
@@ -48,38 +48,55 @@
     <div class="prose-body">
 
       <h2>The Short Version</h2>
-      <p>SafeOpen collects no data. Your scans, QR payloads, link history, and risk results never leave your device. There are no servers involved in core scanning and no data is ever transmitted to Katafract or any third party.</p>
+      <p>SafeOpen has two tiers with different privacy profiles. The <strong>free tier</strong> is entirely on-device &mdash; no network calls, no data collected. The <strong>Pro tier</strong> routes link inspection through Katafract&rsquo;s backend proxy so your real IP is never exposed to the destination, and uses AI to summarize what a link contains. This policy explains exactly what happens in each case.</p>
 
-      <h2>What SafeOpen Does</h2>
-      <p>SafeOpen is a QR code and link inspection tool. It uses your device camera to scan QR codes and accepts pasted or shared links. It classifies payloads, scores risk using local heuristics, and stores a scan history in local device storage.</p>
-
-      <h2>Data We Do Not Collect</h2>
-      <p>SafeOpen does not collect, transmit, or store any of the following:</p>
+      <h2>Free Tier &mdash; On-Device Only</h2>
+      <p>Free users of SafeOpen get QR scanning, URL decoding, payload classification, and risk scoring. Every part of this runs locally on your device:</p>
       <ul>
-        <li>QR codes you scan or their decoded content</li>
-        <li>Links you paste or share into the app</li>
-        <li>Risk scores or inspection results</li>
-        <li>Scan history</li>
-        <li>Device identifiers</li>
-        <li>Location data</li>
-        <li>Camera images or video frames</li>
-        <li>Usage analytics or crash reports</li>
+        <li>QR codes and their decoded content never leave your device</li>
+        <li>Links you paste or share into the app are processed locally</li>
+        <li>Risk scoring uses deterministic local algorithms &mdash; no network connection required</li>
+        <li>Scan history is stored in local device storage only (not synced to iCloud or any cloud service)</li>
+        <li>Camera frames are processed in memory and are never written to disk or transmitted</li>
+      </ul>
+      <p>For free-tier users, Katafract receives no data whatsoever.</p>
+
+      <h2>Pro Tier &mdash; Backend Processing</h2>
+      <p>SafeOpen Pro adds AI-powered link analysis and the ability to open links in a disposable browser session with a unique IPv6 identity. These features require backend infrastructure. Here is what happens when you use them:</p>
+
+      <h3>Link Inspection (AI Analysis)</h3>
+      <p>When you tap &ldquo;Analyze &amp; Open Safely,&rdquo; the URL you are inspecting is sent to Katafract&rsquo;s backend. Our servers fetch the destination page anonymously using our proxy infrastructure, then send the page content to OpenAI&rsquo;s API to generate a plain-English summary of what the link contains. The summary is returned to your device and displayed in the app.</p>
+      <ul>
+        <li><strong>What Katafract receives:</strong> The URL being inspected, your anonymous device ID (see below), and a request timestamp. We do not log your real IP address in association with inspection requests.</li>
+        <li><strong>What OpenAI receives:</strong> The content of the fetched page (not your personal information, not your device ID, not your IP). OpenAI processes this under their API terms and privacy policy. We use OpenAI solely for content summarization.</li>
+        <li><strong>Retention:</strong> Inspection session data is ephemeral. Session records are automatically deleted after 10 minutes. We do not retain a history of URLs you have inspected.</li>
       </ul>
 
-      <h2>On-Device Processing</h2>
-      <p>All QR decoding, payload classification, URL normalization, and risk scoring runs entirely on your device using local, deterministic algorithms. No network connection is required or used for these functions. Camera frames are processed in memory and are never written to disk or transmitted anywhere.</p>
+      <h3>Open Safely (Disposable IPv6 Session)</h3>
+      <p>When you open a link using SafeOpen Pro, the connection is routed through a disposable /128 IPv6 address assigned exclusively for that session. The destination website sees this datacenter IPv6 address &mdash; never your real device IP. The IPv6 address is revoked and discarded when you close the session or after 10 minutes, whichever comes first.</p>
 
-      <h2>Local Storage</h2>
-      <p>Scan history is stored in your device&rsquo;s local app storage. It is not synced to iCloud or any cloud service. Deleting the app permanently removes all stored history. You can also clear history from within the app at any time.</p>
+      <h3>Anonymous Device ID</h3>
+      <p>SafeOpen Pro generates a random UUID on first launch and stores it in your device&rsquo;s secure Keychain. This identifier is sent with backend requests solely for rate limiting and session management. It is not tied to your Apple ID, name, email, or any personal information. It cannot be used to identify you. You can reset it by deleting and reinstalling the app.</p>
 
       <h2>Camera Permission</h2>
-      <p>SafeOpen requests camera access solely to scan QR codes. It does not access your photo library, save images, or use the camera for any purpose other than real-time QR decoding. You may deny camera permission and use the paste/share-in workflow instead.</p>
+      <p>SafeOpen requests camera access solely to scan QR codes in real time. It does not access your photo library, save images, or use the camera for any other purpose. You may deny camera permission and use the paste workflow instead.</p>
 
-      <h2>Apple Platform Data</h2>
-      <p>SafeOpen does not use any Apple advertising or analytics frameworks (SKAdNetwork, MeasurementKit, etc.). It does not integrate any third-party SDKs. The Apple Privacy Nutrition Label for SafeOpen reads: <strong>Data Not Collected</strong>.</p>
+      <h2>Subscription &amp; Payments</h2>
+      <p>SafeOpen Pro subscriptions are processed entirely by Apple via StoreKit. Katafract does not receive your Apple ID, payment method, billing address, or any financial information. To manage or cancel your subscription, go to Settings &rarr; Apple ID &rarr; Subscriptions on your device, or visit <a href="https://apps.apple.com/account/subscriptions">apps.apple.com/account/subscriptions</a>.</p>
 
-      <h2>Future Network Features</h2>
-      <p>Future versions of SafeOpen may include optional backend-assisted inspection (such as redirect expansion for short URLs) and integration with the Enclave platform for protected link opening. These features will be clearly disclosed and opt-in. This policy will be updated before any such features ship.</p>
+      <h2>Third-Party Services</h2>
+      <ul>
+        <li><strong>OpenAI</strong> &mdash; Used by Pro tier for link content summarization. Page content (not personal data) is transmitted. Subject to <a href="https://openai.com/policies/privacy-policy" rel="noopener">OpenAI&rsquo;s Privacy Policy</a>.</li>
+        <li><strong>Apple StoreKit</strong> &mdash; Handles all subscription billing. Subject to <a href="https://www.apple.com/legal/privacy/" rel="noopener">Apple&rsquo;s Privacy Policy</a>.</li>
+      </ul>
+      <p>SafeOpen integrates no advertising SDKs, analytics frameworks, or crash-reporting services.</p>
+
+      <h2>Apple Privacy Nutrition Label</h2>
+      <p>The App Store Privacy Nutrition Label for SafeOpen declares:</p>
+      <ul>
+        <li><strong>Free tier:</strong> Data Not Collected</li>
+        <li><strong>Pro tier:</strong> Device ID (anonymous UUID, used for App Functionality, Not Linked to You)</li>
+      </ul>
 
       <h2>Children</h2>
       <p>SafeOpen is not directed at children under 13. We do not knowingly collect any information from children.</p>
@@ -88,7 +105,7 @@
       <p>Material changes will be announced at katafract.com and reflected in an updated effective date above. Continued use of the app after a change constitutes acceptance of the updated policy.</p>
 
       <h2>Contact</h2>
-      <p>Questions about privacy: <a href="mailto:hello@katafract.com">hello@katafract.com</a></p>
+      <p>Privacy questions: <a href="mailto:privacy@katafract.com">privacy@katafract.com</a></p>
       <p>Katafract LLC &mdash; United States</p>
 
     </div>
