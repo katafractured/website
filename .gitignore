@@ -22,3 +22,10 @@ CLAUDE.md
 # Keep og:image assets
 !images/og-*.jpg
 !images/og-*.png
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
