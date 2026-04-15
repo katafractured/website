@@ -309,14 +309,103 @@
       <div class="qr-demo-card">
         <img src="https://connect.katafract.com/safeopen-qr-medium.png" alt="Medium risk QR code — bit.ly shortener">
         <span class="qr-demo-badge qr-badge-medium">Caution</span>
-        <div class="qr-demo-dest">bit.ly/3example</div>
+        <div class="qr-demo-dest">bit.ly/3SafeOpen</div>
         <div class="qr-demo-result">URL shortener — destination hidden. Yellow caution, shortener flag.</div>
       </div>
       <div class="qr-demo-card">
-        <img src="https://connect.katafract.com/safeopen-qr-risky.png" alt="High risk QR code — malware test URL">
+        <img src="https://connect.katafract.com/safeopen-qr-risky.png" alt="High risk QR code — raw IP address">
         <span class="qr-demo-badge qr-badge-high">High Risk</span>
         <div class="qr-demo-dest">192.0.2.1/account/verify</div>
         <div class="qr-demo-result">Raw IP address + HTTP + suspicious path — direct high-risk flag, red warning.</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div style="margin-bottom:0.5rem">
+      <div class="app-section-label">Every QR code type, decoded</div>
+      <h2 class="app-section-title">Not just URLs</h2>
+      <p class="app-section-sub">SafeOpen decodes every QR code format you'll encounter in the real world. Scan these to see how each payload type is presented.</p>
+    </div>
+
+    <div class="qr-demo-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-url-safe.png" alt="URL QR code">
+        <span class="qr-demo-badge qr-badge-safe">URL</span>
+        <div class="qr-demo-dest">katafract.com/apps/safeopen</div>
+        <div class="qr-demo-result">Standard HTTPS link — full inspection, risk score, clean URL.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-shorturl.png" alt="Short URL QR code">
+        <span class="qr-demo-badge qr-badge-medium">Short URL</span>
+        <div class="qr-demo-dest">tinyurl.com/…</div>
+        <div class="qr-demo-result">Shortened link — destination unknown until expanded. Caution flag.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-url-risky.png" alt="Risky URL QR code">
+        <span class="qr-demo-badge qr-badge-high">Risky URL</span>
+        <div class="qr-demo-dest">198.51.100.42:8080/login</div>
+        <div class="qr-demo-result">Raw IP + non-standard port + login path — multiple red flags.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-punycode.png" alt="Punycode domain QR code">
+        <span class="qr-demo-badge qr-badge-high">Lookalike</span>
+        <div class="qr-demo-dest">xn--pple-43d.com</div>
+        <div class="qr-demo-result">Punycode domain masquerading as a well-known brand.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-wifi.png" alt="Wi-Fi QR code">
+        <span class="qr-demo-badge qr-badge-neutral">Wi-Fi</span>
+        <div class="qr-demo-dest">CoffeeShopGuest · WPA</div>
+        <div class="qr-demo-result">Network name, security type, and password shown before you join.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-contact.png" alt="vCard QR code">
+        <span class="qr-demo-badge qr-badge-neutral">Contact</span>
+        <div class="qr-demo-dest">vCard / MECARD</div>
+        <div class="qr-demo-result">Name, org, phone, and email displayed before adding to contacts.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-calendar.png" alt="Calendar QR code">
+        <span class="qr-demo-badge qr-badge-neutral">Calendar</span>
+        <div class="qr-demo-dest">VEVENT</div>
+        <div class="qr-demo-result">Event title, date, and duration shown before adding to calendar.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-sms.png" alt="SMS QR code">
+        <span class="qr-demo-badge qr-badge-neutral">SMS</span>
+        <div class="qr-demo-dest">+1 555 000 1234</div>
+        <div class="qr-demo-result">Phone number and pre-filled message shown before sending.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-email.png" alt="Email QR code">
+        <span class="qr-demo-badge qr-badge-neutral">Email</span>
+        <div class="qr-demo-dest">hello@example.com</div>
+        <div class="qr-demo-result">Recipient, subject, and body shown before opening Mail.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-phone.png" alt="Phone QR code">
+        <span class="qr-demo-badge qr-badge-neutral">Phone</span>
+        <div class="qr-demo-dest">tel:+15550001234</div>
+        <div class="qr-demo-result">Full number displayed before initiating a call.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-geo.png" alt="Geo QR code">
+        <span class="qr-demo-badge qr-badge-neutral">Location</span>
+        <div class="qr-demo-dest">40.7128, -74.0060</div>
+        <div class="qr-demo-result">Coordinates shown with option to open in Maps.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-crypto.png" alt="Crypto wallet QR code">
+        <span class="qr-demo-badge qr-badge-medium">Crypto</span>
+        <div class="qr-demo-dest">bitcoin:1A1zP1…</div>
+        <div class="qr-demo-result">Wallet address decoded and displayed. Verify before sending funds.</div>
+      </div>
+      <div class="qr-demo-card">
+        <img src="https://connect.katafract.com/type-text.png" alt="Plain text QR code">
+        <span class="qr-demo-badge qr-badge-neutral">Plain Text</span>
+        <div class="qr-demo-dest">Hello, world!</div>
+        <div class="qr-demo-result">Raw text content shown in full with copy button.</div>
       </div>
     </div>
 
