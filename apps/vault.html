@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vault — Zero-Knowledge Cloud Storage by Katafract</title>
+  <meta name="description" content="Vault is end-to-end encrypted cloud storage with client-side AES-256-GCM encryption. FastCDC delta sync. Routes through WraithVPN. Coming soon from Katafract.">
+  <link rel="canonical" href="https://katafract.com/apps/vault">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Vault — Zero-Knowledge Cloud Storage by Katafract">
+  <meta property="og:description" content="AES-256-GCM encrypted cloud storage. FastCDC delta sync. Automatic VPN routing. We never see your files. Coming soon.">
+  <meta property="og:url" content="https://katafract.com/apps/vault">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Katafract">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vault — Zero-Knowledge Cloud Storage by Katafract">
+  <meta name="twitter:description" content="Zero-knowledge encrypted storage. Delta sync. Routes through WraithVPN. Coming soon.">
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <!-- Fonts (self-hosted) -->
+  <link rel="preload" href="/fonts/cormorant-garamond-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .app-hero { padding: 4rem 1.5rem 3rem; max-width: 900px; margin: 0 auto; }
+    .app-main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+    .app-hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #FF006E;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .app-hero-eyebrow .back-link { color: var(--dim2); font-size: 0.65rem; letter-spacing: 0.15em; }
+    .app-hero-eyebrow .back-link:hover { color: var(--dim); text-decoration: none; }
+    .app-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 4rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 1.25rem; }
+    .app-hero h1 em { font-style: normal; color: #FF006E; }
+    .app-hero .tagline { font-size: 1.1rem; color: var(--dim); line-height: 1.7; max-width: 580px; margin-bottom: 2.5rem; }
+    .coming-soon-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; padding: 0.6rem 1.25rem; border-radius: 999px; background: rgba(255,0,110,0.07); border: 1px solid rgba(255,0,110,0.2); color: #FF006E; margin-bottom: 3rem; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 3.5rem 0; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 3rem; }
+    .feature-card { background: rgba(10,10,20,0.5); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color 0.2s; }
+    .feature-card:hover { border-color: rgba(255,0,110,0.2); }
+    .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+    .feature-desc { font-size: 0.875rem; color: var(--dim); line-height: 1.65; }
+    .privacy-block { background: rgba(255,0,110,0.03); border: 1px solid rgba(255,0,110,0.1); border-radius: 1rem; padding: 2rem; margin: 2rem 0; }
+    .privacy-block h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--text); margin-bottom: 0.75rem; }
+    .privacy-block p { font-size: 0.9rem; color: var(--dim); line-height: 1.7; margin-bottom: 0.5rem; }
+    .privacy-block p:last-child { margin-bottom: 0; }
+    .privacy-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .privacy-pill { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.25rem 0.75rem; border-radius: 999px; background: rgba(255,0,110,0.06); border: 1px solid rgba(255,0,110,0.15); color: #FF006E; }
+    .app-section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #FF006E; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .app-section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .app-section-sub { font-size: 0.95rem; color: var(--dim); line-height: 1.7; }
+    .comparison-block { background: rgba(255,0,110,0.02); border: 1px solid rgba(255,0,110,0.08); border-radius: 1rem; padding: 2rem; margin: 2rem 0; }
+    .comparison-header { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--text); margin-bottom: 1.5rem; text-align: center; }
+    .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .comparison-item { display: flex; flex-direction: column; gap: 0.25rem; }
+    .comparison-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--dim2); text-transform: uppercase; letter-spacing: 0.08em; }
+    .comparison-val { font-size: 0.95rem; color: var(--text); }
+    @media (min-width: 768px) {
+      .app-hero { padding: 6rem 3.5rem 4.5rem; }
+      .app-main { padding: 0 3.5rem 7rem; }
+    }
+    @media (min-width: 1100px) {
+      .app-hero { padding: 7rem 5rem 5rem; }
+      .app-main { padding: 0 5rem 8rem; }
+    }
+    @media (max-width: 480px) {
+      .app-hero { padding: 3rem 1.25rem 2.5rem; }
+      .app-main { padding: 0 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="/" class="nav-brand">
+      <img src="/katafract-mark.svg" class="nav-mark" alt="">
+      <span class="nav-brand-name">Katafract</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="hide-sm"><a href="/enclave.html">Enclave</a></li>
+      <li><a href="/pricing.html">Pricing</a></li>
+      <li><a href="/about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="app-hero">
+    <div class="app-hero-eyebrow">
+      <span>Vault</span>
+      <span>&middot;</span>
+      <a href="/" class="back-link">by Katafract &nearr;</a>
+    </div>
+    <h1>Your files, <em>encrypted</em>,<br>on your terms</h1>
+    <p class="tagline">Encrypted cloud storage where only you hold the key. AES-256-GCM encryption, FastCDC delta sync, and automatic VPN routing — we never see your files, ever. Backup photos, documents, and videos with confidence.</p>
+    <div class="coming-soon-badge">
+      ☁️ Coming Soon — included with Sovereign subscription
+    </div>
+  </div>
+
+  <main class="app-main">
+
+    <hr class="section-divider">
+
+    <div style="margin-bottom:0.5rem">
+      <div class="app-section-label">Features</div>
+      <h2 class="app-section-title">Storage built around privacy</h2>
+      <p class="app-section-sub">Zero-knowledge by design. We cannot read your files, even if we wanted to.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <div class="feature-title">AES-256-GCM Encryption</div>
+        <div class="feature-desc">Military-grade encryption on your device. Your encryption key never leaves your possession. Katafract stores only encrypted blobs.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">FastCDC Delta Sync</div>
+        <div class="feature-desc">Edit 1 byte of a 1GB file? Only ~64KB uploads. Content-defined chunking means you only sync what changed, not the entire file.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <div class="feature-title">Auto VPN Routing</div>
+        <div class="feature-desc">All traffic routes through WraithVPN automatically. Your ISP sees the WireGuard tunnel, not your files or metadata.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <div class="feature-title">Photo Backup</div>
+        <div class="feature-desc">Backup original-quality photos and videos. Automatic deduplication by content hash — store the same photo once, even across devices.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📦</div>
+        <div class="feature-title">Standard S3 Backend</div>
+        <div class="feature-desc">Your data lives in standard S3. Export anytime with any S3 client. No lock-in, no proprietary APIs — just open standards.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <div class="feature-title">Distributed Globally</div>
+        <div class="feature-desc">Data replicated across US, EU, and Asia. 500Mbps+ unmetered bandwidth per node. Automatic failover, zero manual intervention.</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="privacy-block">
+      <h2>🔒 Mathematically impossible to scan</h2>
+      <p>Vault uses client-side encryption. The server never receives your unencrypted data, never holds your encryption keys, and has no way to read your files. Content scanning, AI training, warrant compliance — all mathematically impossible without your key.</p>
+      <p><strong>Unlike iCloud:</strong> Apple scans photos before they upload. We never see anything to scan. <strong>Unlike Dropbox:</strong> We have no plaintext copy on servers. <strong>Unlike Google Drive:</strong> No content analysis, no AI training, no account profiles built from your data.</p>
+      <div class="privacy-pills">
+        <span class="privacy-pill">AES-256-GCM encrypted</span>
+        <span class="privacy-pill">Client-side only</span>
+        <span class="privacy-pill">No server-side keys</span>
+        <span class="privacy-pill">No content scanning</span>
+        <span class="privacy-pill">Zero logs</span>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="comparison-block">
+      <div class="comparison-header">How Vault compares</div>
+      <div class="comparison-grid">
+        <div class="comparison-item">
+          <div class="comparison-label">Encryption</div>
+          <div class="comparison-val">AES-256-GCM client-side</div>
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-label">Delta Sync</div>
+          <div class="comparison-val">FastCDC (only changed chunks)</div>
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-label">Server Access</div>
+          <div class="comparison-val">Encrypted blobs only</div>
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-label">Content Scanning</div>
+          <div class="comparison-val">Impossible — server can't read</div>
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-label">Data Export</div>
+          <div class="comparison-val">Standard S3 API</div>
+        </div>
+        <div class="comparison-item">
+          <div class="comparison-label">Storage Replication</div>
+          <div class="comparison-val">3x across geographic zones</div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="callout">
+      <p><strong>Included with Sovereign subscription ($19.99/month or $159.99/year).</strong> Vault comes with 1TB of encrypted storage, automatic VPN routing, and synced across all your devices. Add DocArmor Pro free. If you use just Vault with no VPN, standalone storage pricing coming soon.</p>
+      <p style="margin-top:0.75rem;margin-bottom:0"><a href="/pricing.html">See Sovereign tier →</a></p>
+    </div>
+
+    <hr class="section-divider">
+
+    <div style="text-align:center;padding:1rem 0 2rem">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--dim2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem">Included with Sovereign</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--text);margin-bottom:0.5rem">1TB encrypted storage · Zero-knowledge</div>
+      <div style="font-size:0.875rem;color:var(--dim)">iOS, Android, macOS — coming soon</div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/katafract-mark.svg" class="nav-mark" alt=""> Katafract LLC
+      </div>
+      <nav class="footer-nav">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="https://connect.katafract.com/privacy">No-Log Policy</a>
+        <a href="/support.html">Support</a>
+        <a href="/about.html">About</a>
+        <a href="mailto:hello@katafract.com">Contact</a>
+      </nav>
+      <p class="footer-motto">Teneo &middot; Effrenus &middot; Katafractarius</p>
+      <p class="footer-copy">&copy; 2026 Katafract LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

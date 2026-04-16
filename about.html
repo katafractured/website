@@ -144,11 +144,21 @@
           <div class="app-card-desc">Scan QR codes and inspect links before you open them. Our proxy follows the redirect chain and generates an AI summary — before you tap.</div>
           <span class="app-card-status status-live">Live on App Store</span>
         </a>
+        <a href="/apps/vault.html" class="app-card">
+          <div class="app-card-icon">☁️</div>
+          <div class="app-card-name">Vault</div>
+          <div class="app-card-cat">Cloud Storage</div>
+          <div class="app-card-desc">Zero-knowledge encrypted cloud storage with FastCDC delta sync. Your files route through WraithVPN. Only you hold the encryption key.</div>
+          <span class="app-card-status status-soon">Coming Soon</span>
+        </a>
       </div>
 
       <h2>Enclave Platform</h2>
-      <p>Beyond the apps, we operate <strong>Enclave</strong> — a privacy platform for people who want to own their network, identity, and digital perimeter. Haven provides encrypted DNS that blocks ads and trackers. Enclave VPN routes your traffic through global nodes with no logs and no identity required. Sigil issues token-based identities so you never have to hand over an email address.</p>
+      <p>Beyond the apps, we operate <strong>Enclave</strong> — a privacy platform for people who want to own their network, identity, and digital perimeter. Haven provides encrypted DNS that blocks ads and trackers. Enclave VPN routes your traffic through global nodes with no logs and no identity required. Vault provides zero-knowledge encrypted cloud storage. Sigil issues token-based identities so you never have to hand over an email address.</p>
       <p><a href="/pricing.html">See Enclave plans →</a></p>
+
+      <h2>Infrastructure</h2>
+      <p>Katafract's platform is built on a global distributed S3 storage cluster and WireGuard mesh. Every file in Vault is encrypted client-side before it ever touches our servers. The cluster replicates each object 3 times across geographic zones (US East, US West, EU, Asia) to ensure durability and low latency. Bandwidth is unmetered and uncapped — 500Mbps+ per node. Standard S3 API means you own your data: export it anytime with any S3 client, no lock-in. The entire platform runs on WireGuard mesh networking, with zero-knowledge design — we encrypt everything we can and store only what we must.</p>
 
       <h2>How We Build</h2>
       <p>Our core principle: your data is never collected, retained, or sold. For ExifArmor, ParkArmor, and DocArmor, all processing happens entirely on your device — no servers, no network calls, nothing to breach. SafeOpen is different by necessity: inspecting a link requires fetching it, so we do that fetch through our own privacy proxy. We see the destination so you don't have to expose your device to it. We log nothing about you.</p>
@@ -167,7 +177,7 @@
         </div>
         <div class="fact-card">
           <div class="fact-label">Apps</div>
-          <div class="fact-value">3 live · 1 planned</div>
+          <div class="fact-value">4 live · 1 coming</div>
         </div>
         <div class="fact-card">
           <div class="fact-label">Data collected</div>
