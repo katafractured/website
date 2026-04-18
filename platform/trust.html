@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trust posture — Platform — Katafract</title>
+  <meta name="description" content="What Katafract can see, what we cannot see, and why. One page, per module, with no hedging.">
+  <link rel="canonical" href="https://katafract.com/platform/trust.html">
+  <meta property="og:title" content="Trust posture — Katafract">
+  <meta property="og:description" content="What Katafract can see and cannot see, per module. For legal, compliance, and people with real questions.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Katafract">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/cormorant-garamond-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* Two-column "can / cannot" matrix, reused from .data-table but with
+       explicit cell background tinting so the asymmetry is legible at a glance. */
+    .trust-table th:nth-child(2) { color: #33E8A0; }
+    .trust-table th:nth-child(3) { color: #FF006E; }
+    .trust-table td.module-col { font-weight: 600; color: var(--text); white-space: nowrap; }
+    .trust-table td { vertical-align: top; }
+    .trust-table td ul { margin: 0; padding-left: 1.1rem; }
+    .trust-table td ul li { margin-bottom: 0.35rem; font-size: 0.85rem; line-height: 1.55; }
+    @media (max-width: 720px) {
+      .trust-table, .trust-table thead, .trust-table tbody, .trust-table tr, .trust-table th, .trust-table td { display: block; }
+      .trust-table thead { display: none; }
+      .trust-table tr { border-bottom: 1px solid var(--border); padding: 1rem 0; }
+      .trust-table td { padding: 0.25rem 0; border: 0; }
+      .trust-table td.module-col { font-size: 1.05rem; margin-bottom: 0.35rem; }
+      .trust-table td::before {
+        display: block;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--dim2);
+        margin-top: 0.5rem;
+      }
+      .trust-table td.can-col::before { content: 'Can see'; color: #33E8A0; }
+      .trust-table td.cannot-col::before { content: 'Cannot see'; color: #FF006E; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="/" class="nav-brand">
+      <img src="/katafract-mark.svg" class="nav-mark" alt="">
+      <span class="nav-brand-name">Katafract</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="hide-sm"><a href="/platform/">Platform</a></li>
+      <li class="hide-sm"><a href="/canary.html">Canary</a></li>
+      <li><a href="/pricing.html">Pricing</a></li>
+      <li><a href="/about.html" class="hide-sm">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow">Platform / Trust</p>
+      <h1>What Katafract can see</h1>
+      <p class="prose-meta">One page. Every module. No hedging.</p>
+    </div>
+
+    <div class="prose-body">
+
+      <p class="light">This page exists because the answer to "what does this service do with my data" should fit on one screen. Below is a per-module table of what Katafract holds, what we do not, and why. Each row links to the module page if you want the full mechanism.</p>
+
+      <p>We do not distinguish "we could collect this but promise not to" from "we are architecturally unable to collect this." Where the distinction matters, we say so in plain language.</p>
+
+      <h2>Data posture, per module</h2>
+
+      <table class="data-table trust-table">
+        <thead>
+          <tr>
+            <th>Module</th>
+            <th>Can see</th>
+            <th>Cannot see</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="module-col"><a href="/platform/shroudnet.html">ShroudNet</a></td>
+            <td class="can-col">
+              <ul>
+                <li>Node-to-node control traffic (ours)</li>
+                <li>Which of our own servers are online</li>
+                <li>Aggregate infrastructure metrics</li>
+              </ul>
+            </td>
+            <td class="cannot-col">
+              <ul>
+                <li>Customer VPN packets (they never enter this mesh)</li>
+                <li>Customer DNS queries</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="module-col"><a href="/platform/wraithgate.html">WraithGate</a></td>
+            <td class="can-col">
+              <ul>
+                <li>Your current IP during handshake</li>
+                <li>Aggregate bandwidth counters per peer</li>
+                <li>Peer provisioning metadata (region, public key, internal subnet)</li>
+              </ul>
+            </td>
+            <td class="cannot-col">
+              <ul>
+                <li>Packet contents</li>
+                <li>Destination IPs or hostnames</li>
+                <li>Which customer connects to which customer (peer-to-peer is blocked)</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="module-col"><a href="/platform/haven.html">Haven</a></td>
+            <td class="can-col">
+              <ul>
+                <li>Aggregate query-and-block counts per node</li>
+                <li>A query while it is in memory being answered</li>
+              </ul>
+            </td>
+            <td class="cannot-col">
+              <ul>
+                <li>Per-customer query history (disabled on every node)</li>
+                <li>Source IP &rarr; query pairs</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="module-col"><a href="/platform/shards.html">Shards</a></td>
+            <td class="can-col">
+              <ul>
+                <li>Ciphertext blobs + their sizes + upload times</li>
+                <li>Per-bucket object count and total bytes</li>
+                <li>Aggregate read/write rates</li>
+              </ul>
+            </td>
+            <td class="cannot-col">
+              <ul>
+                <li>Plaintext of any Vaultyx file (we do not hold the key)</li>
+                <li>Filenames or folder names</li>
+                <li>Relationships between chunks across files</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="module-col"><a href="/platform/sigil.html">Sigil</a></td>
+            <td class="can-col">
+              <ul>
+                <li>A hash of your subscription token and the tier it belongs to</li>
+                <li>Store transaction identifier, for receipt verification</li>
+                <li>Aggregate quota counters (bytes used, peers provisioned)</li>
+              </ul>
+            </td>
+            <td class="cannot-col">
+              <ul>
+                <li>Your email address or name (not collected by consumer apps)</li>
+                <li>Device identifiers (IDFA, IDFV, advertising IDs)</li>
+                <li>Which Apple ID or Google account is behind a subscription</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td class="module-col"><a href="/platform/artemis.html">Artemis</a></td>
+            <td class="can-col">
+              <ul>
+                <li>Subscription state (tier, expiry, token hash)</li>
+                <li>Peer provisioning records (region, public key, created-at)</li>
+                <li>Fleet health and capacity metrics</li>
+                <li>Audit log of provisioning events</li>
+              </ul>
+            </td>
+            <td class="cannot-col">
+              <ul>
+                <li>Customer packet contents</li>
+                <li>DNS queries</li>
+                <li>Plaintext Vaultyx data</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>The honest edges</h2>
+
+      <p>A few cases do not fit neatly in the table. We call them out explicitly so that the summary above stays trustworthy.</p>
+
+      <h2>Payment processor metadata</h2>
+
+      <p>When you subscribe, the payment flows through either the App Store, the Play Store, or Stripe depending on the product. Those processors are Katafract's vendors. They know your billing identity because billing systems require it. We receive a transaction identifier from them, not your full billing record. We retain the transaction identifier so we can respond to refunds and chargebacks.</p>
+
+      <h2>Support email</h2>
+
+      <p>If you email <a href="mailto:hello@katafract.com">hello@katafract.com</a>, we see your email address and the contents of your message, because that is what email is. Support history is retained in our ticketing system for as long as we can reasonably need to answer follow-ups. If you want a support answer without your email being associated with your subscription, send the mail from a separate address — there is no server-side join that ties them together on our end.</p>
+
+      <h2>Content delivery and DNS on the public web</h2>
+
+      <p>This website — the one you are reading — is served behind Cloudflare. Cloudflare sees the IP that requested each page. That is normal CDN behavior and it is disclosed here for completeness. The website does not track you; we do not run analytics SDKs on it.</p>
+
+      <h2>Compelled disclosure</h2>
+
+      <p>We publish a <a href="/canary.html">warrant canary</a> that we update quarterly. The practical limit of a compelled disclosure is set by what we hold: our response to most lawful requests for customer content will, honestly, be that we do not retain the data requested. Where we do retain data — subscription state, store transaction identifier, a peer's provisioning timestamp — we will respond to a properly scoped legal order, and we will challenge overbroad ones.</p>
+
+      <h2>Third-party subprocessors</h2>
+
+      <p>These are the only third parties that receive any data in the course of normal operation:</p>
+
+      <ul>
+        <li><strong>Apple App Store &amp; Google Play</strong> — receipt validation, subscription lifecycle.</li>
+        <li><strong>Stripe</strong> — payment processing for web-purchased subscriptions.</li>
+        <li><strong>Cloudflare</strong> — CDN and DNS for our public websites.</li>
+        <li><strong>Quad9</strong> and <strong>Cloudflare</strong> (for DNS-over-HTTPS) — upstream resolvers for Haven. They see queries originating from our nodes, not from you.</li>
+        <li><strong>Our VPS and server providers</strong> — the underlying physical infrastructure for our nodes. They can see the node exists. They do not have access to the traffic passing through a running kernel.</li>
+      </ul>
+
+      <p>We do not share data with advertising networks, data brokers, or analytics vendors, because we do not integrate with any.</p>
+
+      <h2>What this means for you</h2>
+
+      <p>The goal of this page is a specific one: if you are deciding whether to trust us with your traffic or your files, you should be able to read the table above, check our module pages to verify the mechanism, and reach a conclusion without needing to take any claim on faith. If that exercise surfaces anything we have stated here that does not hold up under inspection, tell us — we will fix the page, the product, or both.</p>
+
+      <p>Back to <a href="/platform/">all modules</a>.</p>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/katafract-mark.svg" class="nav-mark" alt=""> Katafract LLC
+      </div>
+      <nav class="footer-nav">
+        <a href="/platform/">Platform</a>
+        <a href="/canary.html">Warrant Canary</a>
+        <a href="/privacy.html">Privacy Policies</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/support.html">Support</a>
+        <a href="/about.html">About</a>
+        <a href="mailto:hello@katafract.com">Contact</a>
+      </nav>
+      <p class="footer-motto">Teneo &middot; Effrenus &middot; Katafractarius</p>
+      <p class="footer-copy">&copy; 2026 Katafract LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

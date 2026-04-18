@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shards — Platform — Katafract</title>
+  <meta name="description" content="How Katafract's S3-compatible storage is built. Cluster topology, client-side encryption, and what we hold versus what you hold.">
+  <link rel="canonical" href="https://katafract.com/platform/shards.html">
+  <meta property="og:title" content="Shards — Object storage">
+  <meta property="og:description" content="The distributed S3-compatible storage behind Vaultyx. Client-side encryption, replication, and key handling.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Katafract">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/cormorant-garamond-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="/" class="nav-brand">
+      <img src="/katafract-mark.svg" class="nav-mark" alt="">
+      <span class="nav-brand-name">Katafract</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="hide-sm"><a href="/platform/">Platform</a></li>
+      <li class="hide-sm"><a href="/apps/vaultyx.html">Vaultyx</a></li>
+      <li><a href="/pricing.html">Pricing</a></li>
+      <li><a href="/about.html" class="hide-sm">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow">Platform / Module</p>
+      <h1>Shards</h1>
+      <p class="prose-meta">S3-compatible object storage. What Vaultyx writes to, and what we can read on our side.</p>
+    </div>
+
+    <div class="prose-body">
+
+      <p class="light">Shards is Katafract's object-storage cluster. It is the server-side half of Vaultyx and the storage layer for a handful of internal workloads. It is S3-API-compatible — the same tools and SDKs that work with AWS S3 work here, which matters because you can export your data with any S3 client if you ever decide to leave.</p>
+
+      <h2>Topology</h2>
+
+      <p>Shards runs on <strong>Garage</strong>, an open-source S3-compatible object store designed for geographically distributed clusters. Our production cluster has three nodes across three zones:</p>
+
+      <ul>
+        <li><strong>us-central</strong> — one node</li>
+        <li><strong>us-vin</strong> (US East, Virginia) — one node</li>
+        <li><strong>ca-bhs</strong> (Canada East, Quebec) — one node</li>
+      </ul>
+
+      <p>Each bucket has a replication factor of 2 — every object is stored on two of the three nodes, so the loss of any one zone does not cause data loss. Roughly 31 TB of raw capacity across the cluster at the time of writing; we add nodes when utilization warrants it.</p>
+
+      <p>Customers reach the cluster through a reverse proxy at <code>s3.objstore.io</code>. You never connect to a node's internal address directly. The proxy terminates TLS and forwards S3 requests to whichever cluster node answers for the bucket.</p>
+
+      <h2>Client-side encryption — Vaultyx</h2>
+
+      <p>This is the important part, and it is entirely on the client side.</p>
+
+      <p>When Vaultyx uploads a file, it does the following <em>before</em> any byte leaves your device:</p>
+
+      <ol style="margin:0.75rem 0 1.25rem 1.5rem; color: var(--dim);">
+        <li>Derives a master key from your passphrase using PBKDF2-SHA256 with 600,000 iterations (NIST SP 800-132).</li>
+        <li>Derives a per-folder key from the master key.</li>
+        <li>Splits the file into variable-size chunks using FastCDC (16 KB min, 64 KB average, 256 KB max). Content-defined chunking means small edits invalidate one or two chunks instead of the whole file.</li>
+        <li>Encrypts each chunk with a per-chunk key derived from the folder key, using AES-256-GCM (256-bit key, 96-bit nonce, 128-bit tag).</li>
+        <li>Addresses each chunk by the SHA-256 of its plaintext. Chunks are content-addressed — duplicates dedupe automatically on your own device.</li>
+        <li>Uploads the encrypted chunks as objects under <code>chunks/{hash}</code>, and an encrypted manifest that maps your folder tree to chunk hashes.</li>
+      </ol>
+
+      <p>Your master key is never transmitted. The server receives only AES-GCM ciphertext blobs and an encrypted manifest whose structure is readable (it is a JSON document) but whose filenames and folder names are not.</p>
+
+      <h2>Bucket isolation</h2>
+
+      <p>Each Vaultyx user gets their own bucket prefix: <code>vault-{user_id}/</code>. The per-user access key the client holds is scoped to that prefix. It cannot list or read another user's bucket.</p>
+
+      <p>Quotas live on the server side. The control plane tracks per-user byte usage and rejects presigned PUT URLs that would exceed the plan limit. Quota enforcement is the only user-specific state we maintain about Vaultyx; it counts bytes, not content.</p>
+
+      <h2>What Katafract can see</h2>
+
+      <ul>
+        <li><strong>Ciphertext objects</strong> — the encrypted chunks. We can observe their sizes and the times they were uploaded.</li>
+        <li><strong>Object counts and total bytes per bucket</strong> — used for quota enforcement and billing.</li>
+        <li><strong>Access patterns in aggregate</strong> — how many GET/PUT operations a cluster node serves. We do not retain per-object access logs with customer identifiers.</li>
+        <li><strong>The encrypted manifest as ciphertext</strong> — it sits in a known location (<code>files/*.manifest</code>) in each user's bucket. The filename pattern is known; the contents are AES-GCM ciphertext.</li>
+      </ul>
+
+      <h2>What Katafract cannot see</h2>
+
+      <ul>
+        <li><strong>Plaintext of any file</strong> — the master key never reaches us. AES-256-GCM is not reversible without the key.</li>
+        <li><strong>Folder names and filenames</strong> — these live inside the encrypted manifest. We see that a manifest exists, not what it describes.</li>
+        <li><strong>Chunk relationships across files</strong> — chunks are addressed by the SHA-256 of their plaintext, which we do not know. From our side, they are opaque blobs with random-looking identifiers.</li>
+      </ul>
+
+      <h2>Durability and export</h2>
+
+      <p>Replication factor 2 across three zones means a full-node failure does not lose data, and a full-zone outage does not prevent reads. Our operational practice is to rebalance within 24 hours of node loss; objects are re-replicated to a healthy node before we mark the failure resolved.</p>
+
+      <p>Because Shards speaks the S3 API, you can back up your Vaultyx bucket with any standard S3 client using the credentials in the app. The ciphertext transfers as-is. Keep your passphrase (Vaultyx does not store it) and those backups remain readable only to you.</p>
+
+      <h2>What this means for you</h2>
+
+      <p>The cryptographic promise Vaultyx makes is: we never hold a key that decrypts your files. Shards is the storage half of that promise. It is a well-understood piece of open-source software holding opaque encrypted blobs. If our cluster were compromised tomorrow, the attacker would obtain ciphertext and a manifest ciphertext. They would not obtain anyone's data in readable form.</p>
+
+      <p>Back to <a href="/platform/">all modules</a>.</p>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/katafract-mark.svg" class="nav-mark" alt=""> Katafract LLC
+      </div>
+      <nav class="footer-nav">
+        <a href="/platform/">Platform</a>
+        <a href="/canary.html">Warrant Canary</a>
+        <a href="/privacy.html">Privacy Policies</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/support.html">Support</a>
+        <a href="/about.html">About</a>
+        <a href="mailto:hello@katafract.com">Contact</a>
+      </nav>
+      <p class="footer-motto">Teneo &middot; Effrenus &middot; Katafractarius</p>
+      <p class="footer-copy">&copy; 2026 Katafract LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

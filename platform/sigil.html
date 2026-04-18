@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sigil — Platform — Katafract</title>
+  <meta name="description" content="How the apps authenticate you without holding an email, a name, or a password. Token-based identity by design.">
+  <link rel="canonical" href="https://katafract.com/platform/sigil.html">
+  <meta property="og:title" content="Sigil — Token-based identity">
+  <meta property="og:description" content="Katafract's consumer identity is a token, not an account. Why, and what the server side actually holds.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Katafract">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/cormorant-garamond-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="/" class="nav-brand">
+      <img src="/katafract-mark.svg" class="nav-mark" alt="">
+      <span class="nav-brand-name">Katafract</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="hide-sm"><a href="/platform/">Platform</a></li>
+      <li class="hide-sm"><a href="/enclave.html">Enclave</a></li>
+      <li><a href="/pricing.html">Pricing</a></li>
+      <li><a href="/about.html" class="hide-sm">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow">Platform / Module</p>
+      <h1>Sigil</h1>
+      <p class="prose-meta">Identity without an account. How the apps know you are entitled without knowing who you are.</p>
+    </div>
+
+    <div class="prose-body">
+
+      <p class="light">Sigil is the identity layer for our consumer apps. The design goal is a simple one: we should be able to verify that you have paid for a tier without learning anything else about you. No email address is required. No username. No password. The thing that authenticates you is a subscription token, and the app is the only party that holds it.</p>
+
+      <h2>How it works</h2>
+
+      <p>When you subscribe through the App Store or the Play Store, the store sends a receipt to our control plane. The control plane verifies the receipt against the store's servers, records the entitlement (which tier, which expiry), and issues a <strong>subscription token</strong> — an opaque secret string bound to that entitlement. The token is delivered back to the app over a TLS connection and stored in the device keychain.</p>
+
+      <p>From then on, whenever an app makes a privileged API call — provisioning a WireGuard peer, pulling an encrypted manifest, fetching a presigned storage URL — it sends the token as a bearer credential. Our server hashes the token and looks up the entitlement row. If the row exists and has not expired, the call is authorized.</p>
+
+      <p>We do not store the token itself on our side. We store a hash of the token, the tier, the expiry, and a usage counter for quota enforcement. If the token is ever compromised, rotating it is local to the device.</p>
+
+      <h2>What the store knows</h2>
+
+      <p>The App Store or Play Store knows that your Apple ID or Google account purchased a Katafract product. That is unavoidable for a paid app on either platform. We receive a store-issued transaction identifier that lets us verify the receipt — we do <em>not</em> receive your Apple ID or Google account identity.</p>
+
+      <p>We can map a store-issued transaction ID back to "some paying customer of this tier." We cannot map it to a name, an email, or any other identifier that the platform did not give us — because it did not give us those.</p>
+
+      <h2>The admin side</h2>
+
+      <p>Katafract's internal admin dashboard and operator tooling do use a conventional identity system — <strong>Zitadel</strong>, self-hosted — because our staff needs real accounts with roles and audit trails. Consumer-facing apps never touch Zitadel. It is the control plane's own internal identity provider, and the only people with Zitadel accounts are Katafract employees and authorized operators.</p>
+
+      <p>A small number of apps that need cross-device login (for example, a web portal that reads your subscription status from a browser) use Zitadel with a federated sign-in. This is called out explicitly in each app's privacy policy. The consumer apps on iOS and Android do not require it.</p>
+
+      <h2>What Katafract can see</h2>
+
+      <ul>
+        <li><strong>The token hash and its entitlement</strong> — "this hash belongs to an Enclave subscriber whose subscription runs until December."</li>
+        <li><strong>The store transaction identifier</strong> — used once at purchase time to verify the receipt with Apple or Google. Retained so we can respond to refund events.</li>
+        <li><strong>Aggregate usage counters tied to the token hash</strong> — storage bytes used, peers provisioned, API call volume. These are used to enforce per-tier limits.</li>
+      </ul>
+
+      <h2>What Katafract cannot see</h2>
+
+      <ul>
+        <li><strong>Your email address or real name</strong> — never collected by the consumer apps. If you email us for support, we see your email because email requires it — not because the product does.</li>
+        <li><strong>A link between your token and another customer's token</strong> — tokens are independent per subscription. We have no mechanism to join them.</li>
+        <li><strong>Device identifiers</strong> — we do not collect advertising IDs, IDFVs, Firebase install IDs, or similar. The token identifies a subscription, not a device.</li>
+      </ul>
+
+      <h2>What this means for you</h2>
+
+      <p>If you pay through the App Store for Enclave, the App Store knows you bought it and we know someone did. We do not learn which human is which. That is not a side effect of our privacy preferences — it is the result of designing the identity layer to collect only what is needed to verify a subscription is paid and active.</p>
+
+      <p>Back to <a href="/platform/">all modules</a>.</p>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/katafract-mark.svg" class="nav-mark" alt=""> Katafract LLC
+      </div>
+      <nav class="footer-nav">
+        <a href="/platform/">Platform</a>
+        <a href="/canary.html">Warrant Canary</a>
+        <a href="/privacy.html">Privacy Policies</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/support.html">Support</a>
+        <a href="/about.html">About</a>
+        <a href="mailto:hello@katafract.com">Contact</a>
+      </nav>
+      <p class="footer-motto">Teneo &middot; Effrenus &middot; Katafractarius</p>
+      <p class="footer-copy">&copy; 2026 Katafract LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

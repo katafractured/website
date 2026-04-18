@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShroudNet — Platform — Katafract</title>
+  <meta name="description" content="The WireGuard mesh that connects Katafract's nodes. A description of the protocol, addressing, and isolation model.">
+  <link rel="canonical" href="https://katafract.com/platform/shroudnet.html">
+  <meta property="og:title" content="ShroudNet — WireGuard mesh">
+  <meta property="og:description" content="How Katafract's nodes talk to each other. Mesh topology, peer isolation, and what traffic it carries.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Katafract">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/cormorant-garamond-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="/" class="nav-brand">
+      <img src="/katafract-mark.svg" class="nav-mark" alt="">
+      <span class="nav-brand-name">Katafract</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="hide-sm"><a href="/platform/">Platform</a></li>
+      <li class="hide-sm"><a href="/enclave.html">Enclave</a></li>
+      <li><a href="/pricing.html">Pricing</a></li>
+      <li><a href="/about.html" class="hide-sm">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow">Platform / Module</p>
+      <h1>ShroudNet</h1>
+      <p class="prose-meta">The internal mesh. Not something customers connect to directly.</p>
+    </div>
+
+    <div class="prose-body">
+
+      <p class="light">ShroudNet is the private network that connects Katafract's servers to each other. It is not a customer-facing product. When we refer to "the mesh" anywhere else on this site, we mean ShroudNet.</p>
+
+      <h2>What it is</h2>
+
+      <p>A WireGuard-based overlay network running on private carrier-grade NAT address space. Every Katafract server — the control plane, the data layer, the VPN exit nodes, the storage nodes — joins the mesh and receives a stable internal address. Services talk to each other over this mesh rather than the public internet.</p>
+
+      <p>We maintain our own mesh coordinator. It assigns addresses, authorizes nodes onto the network, and publishes routes. Enrollment is out-of-band: a new node has to be manually approved before it can talk to anything internal.</p>
+
+      <h2>How it works</h2>
+
+      <p>WireGuard's handshake is Noise IKpsk2. Each node holds a static Curve25519 keypair; sessions are rekeyed every 2 minutes of traffic or 120 seconds of silence. The payload cipher is ChaCha20-Poly1305 with a 128-bit authentication tag. There is no TLS, no certificate chain, and no fallback to a weaker cipher — WireGuard deliberately has one option.</p>
+
+      <p>Every node runs a Prometheus node exporter bound to its mesh address. The monitoring host pulls metrics over the mesh. Nothing in that monitoring flow is exposed on the public internet.</p>
+
+      <p>The control plane exposes an internal-only HTTP endpoint on its mesh address for node heartbeats. Each VPN node POSTs a heartbeat every 30 seconds with a signed token. Heartbeats that fail the signature check are dropped.</p>
+
+      <h2>Isolation</h2>
+
+      <p>Customer WireGuard tunnels — the ones WraithVPN opens — terminate on WraithGate exit nodes. Those tunnels are <em>not</em> on ShroudNet. On each exit node, iptables enforces that customer WireGuard traffic may only exit to the public internet: packets from the customer interface to any mesh address are dropped. The two networks share a physical server but are kernel-isolated.</p>
+
+      <p>This means a customer connected to a WraithGate node cannot see other customers on the same node, cannot reach the mesh, and cannot reach other Katafract servers. Peer-to-peer between customer endpoints is blocked at the node.</p>
+
+      <h2>What Katafract can see</h2>
+
+      <ul>
+        <li><strong>Node-to-node traffic</strong> — we operate both endpoints, so the packets are ours by definition. Contents are application-layer metrics, heartbeats, Postgres replication, Garage RPC, and similar infrastructure traffic.</li>
+        <li><strong>Node presence</strong> — whether each server is online and reachable over the mesh. We monitor this continuously.</li>
+        <li><strong>Node-level resource usage</strong> — CPU, memory, disk, bandwidth, per server, aggregated by Prometheus.</li>
+      </ul>
+
+      <h2>What Katafract cannot see via ShroudNet</h2>
+
+      <ul>
+        <li>ShroudNet does not carry customer packet payloads. Customer VPN traffic transits WraithGate's public interface and egresses directly to the internet — it never enters the mesh.</li>
+        <li>A compromised VPN exit node cannot pivot to other Katafract servers over the mesh without also stealing a WireGuard static key from disk. iptables and key separation are both enforced.</li>
+      </ul>
+
+      <h2>What this means for you</h2>
+
+      <p>ShroudNet is infrastructure plumbing. The reason it exists on a customer-facing site at all is that people ask how our servers authenticate each other and whether our monitoring can see inside their tunnels. The answer is: our servers authenticate over a separate encrypted mesh with its own keys, and customer tunnels are isolated from that mesh at the kernel level.</p>
+
+      <p>Back to <a href="/platform/">all modules</a>.</p>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/katafract-mark.svg" class="nav-mark" alt=""> Katafract LLC
+      </div>
+      <nav class="footer-nav">
+        <a href="/platform/">Platform</a>
+        <a href="/canary.html">Warrant Canary</a>
+        <a href="/privacy.html">Privacy Policies</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/support.html">Support</a>
+        <a href="/about.html">About</a>
+        <a href="mailto:hello@katafract.com">Contact</a>
+      </nav>
+      <p class="footer-motto">Teneo &middot; Effrenus &middot; Katafractarius</p>
+      <p class="footer-copy">&copy; 2026 Katafract LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
