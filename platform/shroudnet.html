@@ -45,15 +45,15 @@
 
       <h2>What it is</h2>
 
-      <p>A WireGuard-based overlay network running on private carrier-grade NAT address space. Every Katafract server — the control plane, the data layer, the VPN exit nodes, the storage nodes — joins the mesh and receives a stable internal address. Services talk to each other over this mesh rather than the public internet.</p>
+      <p>A WireGuard-based overlay network running on private address space. Every Katafract server — the control plane, the data layer, the VPN exit nodes, the storage nodes — joins the mesh and receives a stable internal address. Services talk to each other over this mesh rather than the public internet.</p>
 
-      <p>We maintain our own mesh coordinator. It assigns addresses, authorizes nodes onto the network, and publishes routes. Enrollment is out-of-band: a new node has to be manually approved before it can talk to anything internal.</p>
+      <p>We run our own mesh control plane. It assigns addresses, authorizes nodes onto the network, and publishes routes. Enrollment is out-of-band: a new node has to be manually approved before it can talk to anything internal.</p>
 
       <h2>How it works</h2>
 
       <p>WireGuard's handshake is Noise IKpsk2. Each node holds a static Curve25519 keypair; sessions are rekeyed every 2 minutes of traffic or 120 seconds of silence. The payload cipher is ChaCha20-Poly1305 with a 128-bit authentication tag. There is no TLS, no certificate chain, and no fallback to a weaker cipher — WireGuard deliberately has one option.</p>
 
-      <p>Every node runs a Prometheus node exporter bound to its mesh address. The monitoring host pulls metrics over the mesh. Nothing in that monitoring flow is exposed on the public internet.</p>
+      <p>Every node runs a metrics exporter bound to its mesh address. The monitoring host pulls metrics over the mesh. Nothing in that monitoring flow is exposed on the public internet.</p>
 
       <p>The control plane exposes an internal-only HTTP endpoint on its mesh address for node heartbeats. Each VPN node POSTs a heartbeat every 30 seconds with a signed token. Heartbeats that fail the signature check are dropped.</p>
 
@@ -66,9 +66,9 @@
       <h2>What Katafract can see</h2>
 
       <ul>
-        <li><strong>Node-to-node traffic</strong> — we operate both endpoints, so the packets are ours by definition. Contents are application-layer metrics, heartbeats, Postgres replication, Garage RPC, and similar infrastructure traffic.</li>
+        <li><strong>Node-to-node traffic</strong> — we operate both endpoints, so the packets are ours by definition. Contents are application-layer metrics, heartbeats, database replication, storage-cluster RPC, and similar infrastructure traffic.</li>
         <li><strong>Node presence</strong> — whether each server is online and reachable over the mesh. We monitor this continuously.</li>
-        <li><strong>Node-level resource usage</strong> — CPU, memory, disk, bandwidth, per server, aggregated by Prometheus.</li>
+        <li><strong>Node-level resource usage</strong> — CPU, memory, disk, bandwidth, per server, aggregated by our metrics stack.</li>
       </ul>
 
       <h2>What Katafract cannot see via ShroudNet</h2>

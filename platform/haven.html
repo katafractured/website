@@ -46,8 +46,8 @@
       <h2>Resolver stack</h2>
 
       <ul>
-        <li><strong>AdGuard Home</strong> — the filtering front door. Applies blocklists, answers from cache, implements DNS-over-HTTPS and DNS-over-TLS for Haven-only customers.</li>
-        <li><strong>Unbound</strong> — a validating recursive resolver below AdGuard. Available for queries that need recursion. Performs DNSSEC validation.</li>
+        <li><strong>Filtering front door</strong> — applies blocklists, answers from cache, implements DNS-over-HTTPS and DNS-over-TLS for Haven-only customers. Industry-standard filtering software, deployed on every node.</li>
+        <li><strong>Validating recursive resolver</strong> — performs DNSSEC validation, available for queries that need recursion below our stack.</li>
         <li><strong>Upstream resolvers</strong> — Quad9 and Cloudflare, over DoH, in parallel. The first valid response wins. Used for the vast majority of queries that do not require recursion below our stack.</li>
       </ul>
 
@@ -55,12 +55,7 @@
 
       <h2>Blocklists</h2>
 
-      <p>Two lists are applied by default:</p>
-
-      <ul>
-        <li><strong>AdGuard DNS filter</strong> — ad and tracker blocking, maintained by AdGuard.</li>
-        <li><strong>OISD full</strong> — a community-maintained aggregate list that blocks known malicious, phishing, and scam domains.</li>
-      </ul>
+      <p>Two well-known lists are applied by default: a general ad-and-tracker filter, and a community-maintained aggregate list that covers known malicious, phishing, and scam domains. Both are reputable, widely adopted lists maintained by third parties.</p>
 
       <p>Blocklist updates are pulled on a schedule from their published sources. We do not author or modify the lists. If a domain is blocked that you need, our support address is the correct route — we do not maintain a per-customer allowlist yet.</p>
 
@@ -78,7 +73,7 @@
       <h2>What Katafract does not log</h2>
 
       <ul>
-        <li><strong>Per-customer query history</strong> — AdGuard Home's query log is disabled on every production node. There is no file that associates a client address with the domains it looked up.</li>
+        <li><strong>Per-customer query history</strong> — the resolver's query log is disabled on every production node. There is no file that associates a client address with the domains it looked up.</li>
         <li><strong>Source addresses</strong> — the resolver does not write source IP + query pairs anywhere.</li>
         <li><strong>Remote transfer</strong> — nothing at the resolver layer ships query data off the node. There is nothing to transfer.</li>
       </ul>

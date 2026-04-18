@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Artemis — Platform — Katafract</title>
+  <title>Control plane — Platform — Katafract</title>
   <meta name="description" content="The control plane. What the central API does, which data it holds, and what happens when it is offline.">
   <link rel="canonical" href="https://katafract.com/platform/artemis.html">
-  <meta property="og:title" content="Artemis — Control plane">
+  <meta property="og:title" content="Control plane — Katafract">
   <meta property="og:description" content="The API and scheduler that operate Katafract's fleet. What it holds, and what it does not.">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Katafract">
@@ -35,13 +35,13 @@
   <main class="prose-page">
     <div class="prose-header">
       <p class="prose-eyebrow">Platform / Module</p>
-      <h1>Artemis</h1>
-      <p class="prose-meta">The control plane. Not a customer-facing brand — this is the machinery that operates the fleet.</p>
+      <h1>Control plane</h1>
+      <p class="prose-meta">The machinery that operates the fleet. Not a service customers reach directly.</p>
     </div>
 
     <div class="prose-body">
 
-      <p class="light">Artemis is the internal name for Katafract's control plane: one API server, one background worker, one scheduler. It is the system that takes a subscription event from Stripe or a store, turns it into a provisioned VPN peer or a storage bucket, and tracks the fleet of nodes that make the product work. It is not a service customers reach directly. We name it here because every other module on this site refers to "the control plane," and people deserve to know what that phrase refers to.</p>
+      <p class="light">The control plane is the system that takes a subscription event from Stripe or an app store, turns it into a provisioned VPN peer or a storage bucket, and tracks the fleet of nodes that make the product work. It is not a service customers reach directly. We describe it here because every other module on this site refers to "the control plane," and people deserve to know what that phrase refers to.</p>
 
       <h2>What it does</h2>
 
@@ -54,11 +54,11 @@
 
       <h2>Where it runs</h2>
 
-      <p>Two instances: a primary on one server, a hot secondary on another. Both instances run the same code; the database is streaming-replicated from primary to secondary. If the primary fails, the secondary can be promoted. Customer API calls hit a load-balanced hostname that resolves to whichever instance is healthy.</p>
+      <p>Redundant control-plane instances with automatic failover. Both instances run the same code against a streaming-replicated database; if the primary fails, a hot standby is promoted. Customer API calls hit a load-balanced hostname that resolves to whichever instance is healthy.</p>
 
-      <p>The database itself is Postgres 17, with a hot standby replica on a separate physical server for recovery. Secrets — API keys, store credentials, TLS private keys — live in a self-hosted secrets manager that the control plane reads from at startup. Nothing on the customer's side depends on these internals; we describe them so that "the control plane" is not a black box.</p>
+      <p>The database is a modern relational engine with an additional hot-standby replica for disaster recovery. Secrets — API keys, store credentials, TLS private keys — live in a self-hosted secrets manager that the control plane reads from at startup. Nothing on the customer's side depends on these internals; we describe them so that "the control plane" is not a black box.</p>
 
-      <h2>What Artemis stores</h2>
+      <h2>What the control plane stores</h2>
 
       <ul>
         <li>Per-customer <strong>subscription state</strong>: tier, expiry, token hash, store transaction identifier. (<a href="/platform/sigil.html">Sigil</a> details the shape of this.)</li>
@@ -67,21 +67,21 @@
         <li><strong>Audit log</strong> of provisioning events: "peer X was provisioned on node Y at time T." Used for debugging and to roll back bad provisions.</li>
       </ul>
 
-      <h2>What Artemis does not store</h2>
+      <h2>What the control plane does not store</h2>
 
       <ul>
-        <li>VPN packet contents, DNS queries, or destination IPs. These do not reach Artemis — they do not reach our mesh at all.</li>
+        <li>VPN packet contents, DNS queries, or destination IPs. These do not reach the control plane — they do not reach our mesh at all.</li>
         <li>Plaintext Vaultyx data. The control plane brokers presigned URLs; the bytes transit directly between your device and Shards.</li>
         <li>Customer email addresses or device identifiers for consumer app usage. The only customer-provided identifier we hold for a paying subscriber is the subscription token hash.</li>
       </ul>
 
       <h2>Observability</h2>
 
-      <p>We run Prometheus and Grafana against our own fleet — node CPU, memory, bandwidth, API latency, error rates. These dashboards are for our operators. They contain aggregate fleet metrics, not per-customer traffic. Grafana login is SSO to our internal identity provider; customer tokens are not valid there.</p>
+      <p>We run industry-standard fleet monitoring against our own infrastructure — node CPU, memory, bandwidth, API latency, error rates. These dashboards are for our operators. They contain aggregate fleet metrics, not per-customer traffic. Operator login is SSO to our internal identity provider; customer tokens are not valid there.</p>
 
       <h2>Failure mode</h2>
 
-      <p>If the control plane is completely offline, existing VPN tunnels keep working — WraithGate nodes hold their peer tables locally, so an active connection does not depend on Artemis being up. Provisioning new peers, rotating servers, and processing new subscriptions stop until the control plane is back. This is the right tradeoff: outages affect onboarding, not in-flight privacy.</p>
+      <p>If the control plane is completely offline, existing VPN tunnels keep working — WraithGate nodes hold their peer tables locally, so an active connection does not depend on the control plane being up. Provisioning new peers, rotating servers, and processing new subscriptions stop until the control plane is back. This is the right tradeoff: outages affect onboarding, not in-flight privacy.</p>
 
       <h2>What this means for you</h2>
 

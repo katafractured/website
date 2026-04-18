@@ -45,14 +45,7 @@
 
       <h2>Regions</h2>
 
-      <p>At the time this page was written, WraithGate runs in these regions:</p>
-
-      <ul>
-        <li><strong>EU</strong>: Nuremberg, Helsinki</li>
-        <li><strong>US East</strong>: Ashburn, Newark</li>
-        <li><strong>US West</strong>: Hillsboro (two nodes)</li>
-        <li><strong>APAC</strong>: Singapore (two nodes), Tokyo, Mumbai</li>
-      </ul>
+      <p>WraithGate operates a global exit-node network with presence across Europe, the Americas, and Asia-Pacific. Capacity in each region is sized to demand and expands as demand grows; the app selects a region on your behalf or lets you pick one. We use multiple underlying providers within each region for resilience.</p>
 
       <p>Each node has a public address assigned by its underlying provider and a private address on our mesh. Customer WireGuard traffic hits the public address; the mesh address is not reachable from your client.</p>
 
@@ -60,7 +53,7 @@
 
       <p>WireGuard, standard upstream kernel module where available, AmneziaWG (a WireGuard fork with obfuscated handshakes) on nodes in regions where traffic shaping against WireGuard has been observed. Same cryptographic primitives either way: Curve25519 key exchange, ChaCha20-Poly1305 payload cipher, BLAKE2s hashing. No TLS layer, no fallback ciphers.</p>
 
-      <p>Client subnets are 10.10.N.0/24 per node with matching IPv6 ULA. Your device is assigned an address from that subnet at provision time. The assignment is stable for the lifetime of the peer record; rotating servers rotates the address.</p>
+      <p>Each node assigns your device a stable internal address from a per-node client subnet (IPv4 with matching IPv6 ULA). The assignment is stable for the lifetime of the peer record; rotating servers rotates the address.</p>
 
       <h2>What happens on the node</h2>
 

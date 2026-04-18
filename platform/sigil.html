@@ -59,9 +59,9 @@
 
       <h2>The admin side</h2>
 
-      <p>Katafract's internal admin dashboard and operator tooling do use a conventional identity system — <strong>Zitadel</strong>, self-hosted — because our staff needs real accounts with roles and audit trails. Consumer-facing apps never touch Zitadel. It is the control plane's own internal identity provider, and the only people with Zitadel accounts are Katafract employees and authorized operators.</p>
+      <p>Katafract's internal admin dashboard and operator tooling do use a conventional, self-hosted OIDC identity provider, because our staff needs real accounts with roles and audit trails. Consumer-facing apps never touch it. It is the control plane's own internal identity system, and the only people with accounts on it are Katafract employees and authorized operators.</p>
 
-      <p>A small number of apps that need cross-device login (for example, a web portal that reads your subscription status from a browser) use Zitadel with a federated sign-in. This is called out explicitly in each app's privacy policy. The consumer apps on iOS and Android do not require it.</p>
+      <p>A small number of apps that need cross-device login (for example, a web portal that reads your subscription status from a browser) use that OIDC provider with a federated sign-in. This is called out explicitly in each app's privacy policy. The consumer apps on iOS and Android do not require it.</p>
 
       <h2>What Katafract can see</h2>
 

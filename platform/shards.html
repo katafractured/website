@@ -45,15 +45,7 @@
 
       <h2>Topology</h2>
 
-      <p>Shards runs on <strong>Garage</strong>, an open-source S3-compatible object store designed for geographically distributed clusters. Our production cluster has three nodes across three zones:</p>
-
-      <ul>
-        <li><strong>us-central</strong> — one node</li>
-        <li><strong>us-vin</strong> (US East, Virginia) — one node</li>
-        <li><strong>ca-bhs</strong> (Canada East, Quebec) — one node</li>
-      </ul>
-
-      <p>Each bucket has a replication factor of 2 — every object is stored on two of the three nodes, so the loss of any one zone does not cause data loss. Roughly 31 TB of raw capacity across the cluster at the time of writing; we add nodes when utilization warrants it.</p>
+      <p>Shards is a production-grade S3-compatible object store designed for geographically distributed clusters. Objects are replicated across multiple regions so that the loss of any one zone does not cause data loss. The cluster scales horizontally — we add nodes and zones as demand warrants.</p>
 
       <p>Customers reach the cluster through a reverse proxy at <code>s3.objstore.io</code>. You never connect to a node's internal address directly. The proxy terminates TLS and forwards S3 requests to whichever cluster node answers for the bucket.</p>
 
@@ -99,13 +91,13 @@
 
       <h2>Durability and export</h2>
 
-      <p>Replication factor 2 across three zones means a full-node failure does not lose data, and a full-zone outage does not prevent reads. Our operational practice is to rebalance within 24 hours of node loss; objects are re-replicated to a healthy node before we mark the failure resolved.</p>
+      <p>Multi-region replication means a full-node failure does not lose data, and a full-zone outage does not prevent reads. Our operational practice is to rebalance promptly after node loss; objects are re-replicated to a healthy zone before we mark the failure resolved.</p>
 
       <p>Because Shards speaks the S3 API, you can back up your Vaultyx bucket with any standard S3 client using the credentials in the app. The ciphertext transfers as-is. Keep your passphrase (Vaultyx does not store it) and those backups remain readable only to you.</p>
 
       <h2>What this means for you</h2>
 
-      <p>The cryptographic promise Vaultyx makes is: we never hold a key that decrypts your files. Shards is the storage half of that promise. It is a well-understood piece of open-source software holding opaque encrypted blobs. If our cluster were compromised tomorrow, the attacker would obtain ciphertext and a manifest ciphertext. They would not obtain anyone's data in readable form.</p>
+      <p>The cryptographic promise Vaultyx makes is: we never hold a key that decrypts your files. Shards is the storage half of that promise. It is production-grade, multi-region object storage holding opaque encrypted blobs. If our cluster were compromised tomorrow, the attacker would obtain ciphertext and a manifest ciphertext. They would not obtain anyone's data in readable form.</p>
 
       <p>Back to <a href="/platform/">all modules</a>.</p>
 
