@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title={`Haven Terms of Service — Katafract`}
+  description={`Terms of Service for Haven DNS, a free ad-blocking DNS resolver.`}
+  section="terms"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+  <Fragment set:html={`<main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow">Haven DNS</p>
+      <h1>Terms of Service</h1>
+      <p class="prose-meta">Last updated April 2026</p>
+    </div>
+
+    <div class="prose-body">
+
+      <h2>Haven DNS Service</h2>
+      <p>Haven is provided by Katafract LLC as a free public DNS resolver. By configuring Haven on your device, you agree to these terms.</p>
+
+      <h2>Use at your own risk</h2>
+      <p>Haven DNS is provided on an "as-is" basis. Katafract makes no warranty that the service will be uninterrupted, error-free, or suitable for any particular purpose. You use Haven at your own risk.</p>
+
+      <h2>Filtering is best-effort</h2>
+      <p>Haven blocks ads and trackers using community-maintained blocklists. While we work to keep these lists current, no blocklist is perfect. Some ads and trackers may still reach your device. Some legitimate websites may be incorrectly blocked.</p>
+
+      <h2>Service availability</h2>
+      <p>Katafract reserves the right to modify, suspend, or discontinue Haven at any time, with or without notice. We maintain Haven because we believe in privacy, but make no commitment to indefinite uptime.</p>
+
+      <h2>Rate limiting</h2>
+      <p>Haven queries may be rate-limited if usage becomes abusive (e.g., thousands of queries per second from a single IP). Fair use is expected.</p>
+
+      <h2>No user profiling</h2>
+      <p>Katafract does not use Haven DNS to profile you, track you, or sell data about you. See our <a href="/privacy/haven">Privacy Policy</a> for details.</p>
+
+      <h2>Prohibited uses</h2>
+      <p>You agree not to use Haven DNS to:</p>
+      <ul>
+        <li>Bypass legitimate parental controls or corporate security policies</li>
+        <li>Access sites or services you're contractually prohibited from accessing</li>
+        <li>Attack or interfere with other networks or services</li>
+        <li>Perform DNS amplification attacks or other abusive queries</li>
+      </ul>
+
+      <h2>Questions?</h2>
+      <p>For questions about these terms, contact <a href="mailto:hello@katafract.com">hello@katafract.com</a>.</p>
+
+    </div>
+  </main>`} />
+</Base>

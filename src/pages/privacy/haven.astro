@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title={`Haven Privacy Policy — Katafract`}
+  description={`How Haven DNS protects your privacy. No user tracking. No account required.`}
+  section="privacy"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+  <Fragment set:html={`<main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow">Haven DNS</p>
+      <h1>Privacy Policy</h1>
+      <p class="prose-meta">Last updated April 2026</p>
+    </div>
+
+    <div class="prose-body">
+
+      <h2>What Haven is</h2>
+      <p>Haven is a free DNS resolver operated by Katafract LLC. It filters DNS queries to block ads, trackers, and malware before requests leave your device.</p>
+
+      <h2>We don't log your queries</h2>
+      <p>Haven DNS does not log your queries tied to your identity, your device, or your IP address. We operate on Katafract's anycast infrastructure across multiple global nodes. When you use Haven, your DNS queries are routed to the nearest node, processed, and returned.</p>
+
+      <h2>We don't require an account</h2>
+      <p>Haven works without sign-up, without authentication, and without personal information. There is nothing to track because there is nothing to identify.</p>
+
+      <h2>How our infrastructure works</h2>
+      <p>Haven DNS runs on the same Katafract network that powers WraithVPN. Our nodes are located globally and use anycast routing to serve queries from the nearest location. Queries do not pass through a central logging point, and we do not correlate queries across nodes or time.</p>
+
+      <h2>Filtering sources</h2>
+      <p>Haven uses open-source blocklists maintained by the security community:</p>
+      <ul>
+        <li><strong>AdGuard DNS filter</strong> — blocks advertising and tracking domains</li>
+        <li><strong>OISD Full Blocklist</strong> — malware, phishing, and invasive tracking</li>
+      </ul>
+      <p>These lists are public and can be audited. We don't add private or proprietary logging endpoints.</p>
+
+      <h2>Transit encryption</h2>
+      <p>Haven queries use DNS-over-HTTPS (DoH) by default. Your queries are encrypted in transit and cannot be inspected by your ISP, router, or network operator.</p>
+
+      <h2>No third-party sharing</h2>
+      <p>Katafract does not sell, rent, or share your data with third parties. Haven is free, and our business model does not depend on monetizing query data.</p>
+
+      <h2>Open-source infrastructure</h2>
+      <p>Haven runs on <a href="https://github.com/AdguardTeam/AdGuardHome">AdGuard Home</a>, which is open-source. Anyone can audit the code to verify our claims about filtering and logging.</p>
+
+      <h2>Questions?</h2>
+      <p>Haven privacy questions can be sent to <a href="mailto:hello@katafract.com">hello@katafract.com</a>. For urgent privacy concerns, use <a href="https://katafract.com/support">our support portal</a>.</p>
+
+    </div>
+  </main>`} />
+</Base>

@@ -1,0 +1,290 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title={`Haven — Private DNS for every device`}
+  description={`Haven DNS blocks ads, trackers, and malware at the DNS layer. Free with no account. Works on iPhone, Mac, and any device that supports DNS-over-HTTPS. Part of Katafract Enclave.`}
+  section="apps"
+  ogDescription={`Haven DNS blocks ads, trackers, and malware at the DNS layer — before requests leave your device. Free. No account. No VPN required.`}
+  ogImage="https://katafract.com/images/og-haven.jpg"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+  <style slot="head" is:global set:html={`
+    /* App page hero */
+    .app-hero {
+      padding: 4rem 1.5rem 3rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .app-main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+    .app-hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #4ADE80;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .app-hero-eyebrow .back-link {
+      color: var(--dim2);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+    }
+    .app-hero-eyebrow .back-link:hover { color: var(--dim); text-decoration: none; }
+    .app-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+    }
+    .app-hero h1 em { font-style: normal; color: #4ADE80; }
+    .app-hero .tagline {
+      font-size: 1.1rem;
+      color: var(--dim);
+      line-height: 1.7;
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+    }
+    .app-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #4ADE80;
+      color: #050510;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.8rem 1.75rem;
+      border-radius: 999px;
+      transition: background 0.15s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: #22c55e; text-decoration: none; }
+    .price-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--dim2);
+    }
+
+    /* Divider */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 3.5rem 0;
+    }
+
+    /* Feature grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0 3rem;
+    }
+    .feature-card {
+      background: rgba(10,10,20,0.5);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: rgba(74,222,128,0.18); }
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .feature-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .feature-desc {
+      font-size: 0.875rem;
+      color: var(--dim);
+      line-height: 1.65;
+    }
+
+    /* Section headings */
+    .app-page-section {
+      margin-bottom: 0.5rem;
+    }
+    .app-section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: #4ADE80;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .app-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .app-section-sub {
+      font-size: 0.95rem;
+      color: var(--dim);
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+    @media (min-width: 768px) {
+      .app-hero { padding: 6rem 3.5rem 4.5rem; }
+      .app-main { padding: 0 3.5rem 7rem; }
+    }
+    @media (min-width: 1100px) {
+      .app-hero { padding: 7rem 5rem 5rem; }
+      .app-main { padding: 0 5rem 8rem; }
+    }
+    @media (max-width: 480px) {
+      .app-hero { padding: 3rem 1.25rem 2.5rem; }
+      .app-main { padding: 0 1.25rem 4rem; }
+    }
+  `}></style>
+  <script slot="head" type="application/ld+json" is:inline set:html={`
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Haven",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": ["iOS", "macOS"],
+    "description": "Private DNS that blocks ads, trackers, and malware at the DNS layer. Free. No account. No VPN required.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "name": "Free"
+    },
+    "url": "https://katafract.com/apps/haven"
+  }
+  `}></script>
+  <Fragment set:html={`<div class="app-hero">
+    <div class="app-hero-eyebrow">
+      <span>Haven</span>
+      <span>&middot;</span>
+      <span>Free</span>
+      <span>&middot;</span>
+      <a href="/" class="back-link">by Katafract &nearr;</a>
+    </div>
+    <h1>Private DNS for<br>every <em>network</em></h1>
+    <p class="tagline">Haven blocks ads, trackers, and malware at the DNS layer — before requests ever leave your device. No VPN. No account. Free on iPhone, Mac, or any device that supports DNS-over-HTTPS. Same anycast fleet that powers WraithVPN.</p>
+    <div class="app-cta-row">
+      <a href="/dns" class="btn-primary">
+        Install Profile
+      </a>
+      <span class="price-note">Free · No signup required · Included with Enclave/Sovereign</span>
+    </div>
+  </div>
+
+  <main class="app-main">
+
+    <hr class="section-divider">
+
+    <div class="app-page-section">
+      <div class="app-section-label">What it does</div>
+      <h2 class="app-section-title">Block ads and trackers system-wide</h2>
+      <p class="app-section-sub">Haven runs on Katafract's global anycast DNS infrastructure. When you configure Haven on your device, all DNS queries route through our filtering layer.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🚫</div>
+        <div class="feature-title">Ad Networks</div>
+        <div class="feature-desc">Blocks Google Ads, Meta Audience Network, AppLovin, and hundreds of other ad providers.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🕵️</div>
+        <div class="feature-title">Tracking</div>
+        <div class="feature-desc">Blocks cross-site trackers, fingerprinting services, analytics beacons, and telemetry endpoints.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚠️</div>
+        <div class="feature-title">Malware</div>
+        <div class="feature-desc">Blocks known malware domains, phishing sites, and command-and-control servers.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <div class="feature-title">Every App</div>
+        <div class="feature-desc">Works across all apps and browsers on your device — including those that ignore manual DNS settings.</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="app-page-section">
+      <div class="app-section-label">Why Haven</div>
+      <h2 class="app-section-title">No account. No VPN. Just DNS.</h2>
+      <p class="app-section-sub">Haven is pure DNS filtering. It doesn't intercept your traffic, doesn't route it anywhere, and doesn't create a VPN tunnel. Your DNS queries route to our filtering layer and back to your device in milliseconds.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔓</div>
+        <div class="feature-title">No Account</div>
+        <div class="feature-desc">Haven works without signing up, without creating an account, and without logging your identity. Install the profile and you're done.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-title">Fast</div>
+        <div class="feature-desc">Queries resolve on Katafract's global anycast network — same as WraithVPN. Sub-millisecond latency in most regions.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-title">Encrypted</div>
+        <div class="feature-desc">Uses DNS-over-HTTPS (DoH) by default, so your queries aren't logged by your ISP.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <div class="feature-title">Works Everywhere</div>
+        <div class="feature-desc">Configure once on iPhone or Mac and it protects all network traffic — Safari, Mail, apps, everything.</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="app-page-section">
+      <div class="app-section-label">Next step</div>
+      <h2 class="app-section-title">Get started in 60 seconds</h2>
+      <p class="app-section-sub">Visit <a href="/dns" style="color:#4ADE80;text-decoration:underline;">our DNS setup page</a> to install Haven on iPhone, Mac, Android, or any device. Full instructions for routers and browsers included.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-title">iPhone & iPad</div>
+        <div class="feature-desc">Download and install a DNS configuration profile in Settings → General → VPN &amp; Device Management.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Mac</div>
+        <div class="feature-desc">Use the same configuration profile as iOS, or configure DNS-over-HTTPS in System Settings → Network.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Router</div>
+        <div class="feature-desc">Configure your router to use Haven DNS (DNS-over-HTTPS or DNS-over-TLS) to protect every device on your network.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-title">Browser</div>
+        <div class="feature-desc">Chrome, Firefox, Safari, and Edge all support DNS-over-HTTPS. Configure directly in each browser's settings.</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <p style="text-align:center;color:var(--dim);font-size:0.95rem;margin-top:2rem;line-height:1.7;">
+      Haven DNS is free and included with all Enclave and Sovereign plans. <a href="/pricing" style="color:#4ADE80;text-decoration:underline;">See what's included →</a>
+    </p>
+
+  </main>`} />
+</Base>

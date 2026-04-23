@@ -1,0 +1,152 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title={`Haven Support — Katafract`}
+  description={`FAQ and support for Haven DNS — setup, troubleshooting, and common questions.`}
+  section="support"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+  <style slot="head" is:global set:html={`
+    .faq-section { margin: 2rem 0; }
+    .faq-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      margin-bottom: 1rem;
+      padding: 0;
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 1.25rem;
+      background: var(--bg2);
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+    }
+    .faq-question:hover {
+      background: var(--bg3);
+    }
+    .faq-toggle {
+      font-size: 0.8rem;
+      color: var(--dim2);
+      font-weight: 400;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 1.25rem;
+    }
+    .faq-answer.open {
+      max-height: 500px;
+      padding: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .faq-answer p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+      color: var(--dim);
+      line-height: 1.65;
+    }
+    .faq-answer p:first-child {
+      margin-top: 0;
+    }
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+    .faq-answer a {
+      color: #4ADE80;
+      text-decoration: underline;
+    }
+  `}></style>
+  <script slot="head" is:inline set:html={`
+    function toggleFaq(id) {
+      const answer = document.getElementById(id);
+      answer.classList.toggle('open');
+    }
+  `}></script>
+  <Fragment set:html={`<main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow">Haven DNS</p>
+      <h1>Support & FAQ</h1>
+      <p class="prose-meta">Common questions about installation, troubleshooting, and usage</p>
+    </div>
+
+    <div class="prose-body">
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq('q1')">
+            <span>How do I install Haven on iOS?</span>
+            <span class="faq-toggle" id="q1-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="q1">
+            <p>Visit <a href="/dns">our DNS setup page</a> on your iPhone using Safari. Tap the link to download the Haven profile. When prompted, open Settings, go to <strong>General → VPN &amp; Device Management</strong>, select the Haven profile, and tap <strong>Install</strong>. Enter your passcode and confirm.</p>
+            <p>Once installed, Haven is active system-wide. You can verify it's working by visiting any website and noticing that ads are gone.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq('q2')">
+            <span>How do I install Haven on Mac?</span>
+            <span class="faq-toggle" id="q2-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="q2">
+            <p>Mac supports the same configuration profile as iOS. Download the Haven profile from <a href="/dns">our DNS setup page</a> and open it. macOS will prompt you to open System Settings and install the profile.</p>
+            <p>Alternatively, you can manually configure DNS-over-HTTPS in <strong>System Settings → Network → [Your Connection] → Details → DNS</strong>. See our setup page for the exact address.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq('q3')">
+            <span>Does Haven work with my router?</span>
+            <span class="faq-toggle" id="q3-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="q3">
+            <p>Yes, but your router must support DNS-over-HTTPS (DoH) or DNS-over-HTTPS (DoT). Most modern routers from Asus, Netgear, TP-Link, Ubiquiti, and MikroTik support encrypted DNS.</p>
+            <p>Log into your router's admin panel and look for DNS settings under <strong>Internet</strong> or <strong>WAN</strong>. Enter the Haven DNS endpoint for your protocol. See <a href="/dns">our setup guide</a> for specific router instructions.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq('q4')">
+            <span>Why does some website break or show errors?</span>
+            <span class="faq-toggle" id="q4-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="q4">
+            <p>Haven uses community-maintained blocklists that occasionally over-block legitimate websites. This is rare, but it happens.</p>
+            <p>If a site doesn't work, you can temporarily disable Haven by going to <strong>Settings → General → VPN &amp; Device Management</strong>, selecting the Haven profile, and tapping <strong>Delete</strong>. To restore it, reinstall the profile from <a href="/dns">our setup page</a>.</p>
+            <p>For persistent issues, let us know at <a href="mailto:hello@katafract.com">hello@katafract.com</a> so we can investigate.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq('q5')">
+            <span>How do I uninstall Haven?</span>
+            <span class="faq-toggle" id="q5-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="q5">
+            <p><strong>On iPhone or iPad:</strong> Go to <strong>Settings → General → VPN &amp; Device Management</strong>, select the Haven profile, and tap <strong>Delete Profile</strong>. Enter your passcode when prompted.</p>
+            <p><strong>On Mac:</strong> Go to <strong>System Settings → General → VPN &amp; Device Management</strong> (or <strong>Network</strong> if you configured it manually), remove the Haven profile or DNS settings.</p>
+            <p><strong>On your router:</strong> Log in, clear the Haven DNS addresses from your WAN or Internet settings, and save.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+      <h2>Still need help?</h2>
+      <p>For questions not covered above, reach out to our team:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:hello@katafract.com">hello@katafract.com</a></li>
+        <li><strong>Support portal:</strong> <a href="https://katafract.com/support">Visit our support page</a></li>
+      </ul>
+
+    </div>
+  </main>`} />
+</Base>
