@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support — Vaultyx by Katafract</title>
+  <meta name="description" content="Get help with Vaultyx encrypted cloud storage. Guides for uploading files, offline copies, folders, selective sync, cross-device sync, and storage management.">
+  <link rel="canonical" href="https://katafract.com/support/vaultyx">
+  <!-- Open Graph -->
+  <meta property="og:title" content="Support — Vaultyx by Katafract">
+  <meta property="og:description" content="Get help with Vaultyx zero-knowledge encrypted storage. Guides for uploading, syncing, recovery, and managing your vault.">
+  <meta property="og:url" content="https://katafract.com/support/vaultyx">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Katafract">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Support — Vaultyx by Katafract">
+  <meta name="twitter:description" content="FAQs, guides, and contact information for Vaultyx encrypted storage.">
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    :root {
+      --vaultyx: #10B981;
+      --vaultyx-dim: rgba(16,185,129,0.1);
+      --vaultyx-border: rgba(16,185,129,0.18);
+    }
+    /* Override prose-eyebrow and faq accent color for vaultyx */
+    .prose-eyebrow { color: var(--vaultyx); }
+    .faq-q::after { color: var(--vaultyx); }
+    .faq-item.open .faq-q { color: var(--vaultyx); }
+
+    /* Section label above each FAQ group */
+    .support-section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--vaultyx);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin: 3rem 0 0.5rem;
+    }
+    .support-section-label:first-of-type { margin-top: 1rem; }
+
+    /* Inline code in FAQ answers */
+    .faq-a code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82em;
+      background: rgba(16,185,129,0.08);
+      border: 1px solid var(--vaultyx-border);
+      border-radius: 4px;
+      padding: 0.1em 0.4em;
+      color: var(--vaultyx);
+    }
+
+    /* Quick-start callout */
+    .callout-vaultyx {
+      border-left: 3px solid var(--vaultyx);
+      background: rgba(16,185,129,0.05);
+      border-radius: 0 0.75rem 0.75rem 0;
+      padding: 1.1rem 1.5rem;
+      margin: 1.5rem 0 2rem;
+      font-size: 0.9rem;
+      color: var(--dim);
+      line-height: 1.75;
+    }
+    .callout-vaultyx strong { color: var(--text); }
+    .callout-vaultyx a { color: var(--vaultyx); }
+  </style>
+    <!-- Privacy-friendly analytics, self-hosted on artemis. No cookies, no PII, no cross-site tracking. -->
+    <script defer data-domain="katafract.com" data-api="/stats/api/event" src="/stats/js/script.js"></script>
+
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="/" class="nav-brand">
+      <img src="/katafract-mark.svg" class="nav-mark" alt="">
+      <span class="nav-brand-name">Katafract</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/support.html" class="active">Support</a></li>
+      <li><a href="/privacy/vaultyx.html">Privacy</a></li>
+      <li><a href="/about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow">Vaultyx &mdash; Support</p>
+      <h1>Vaultyx Support</h1>
+      <p class="prose-meta">Questions? &mdash; <a href="mailto:hello@katafract.com">hello@katafract.com</a> &mdash; <a href="/apps/vaultyx.html">App page &rarr;</a></p>
+    </div>
+
+    <div class="prose-body">
+
+      <div class="callout-vaultyx">
+        <strong>Quick start:</strong> Download Vaultyx from the App Store, sign in with Apple, subscribe to Sovereign, then start uploading files. Your vault is encrypted end-to-end and synced across all your devices in minutes.
+      </div>
+
+      <!-- GETTING STARTED -->
+      <p class="support-section-label">Getting Started</p>
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <button class="faq-q">What is Vaultyx?</button>
+          <div class="faq-a">
+            Vaultyx is a zero-knowledge encrypted cloud storage app built for the Sovereign tier. Every file you upload is encrypted on your device before leaving it &mdash; the encryption happens locally, and only you hold the encryption key. Katafract never sees your files or your encryption keys. Files are stored on encrypted S3-compatible object storage and synced automatically across all your devices.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How do I get started?</button>
+          <div class="faq-a">
+            <ol style="margin:0;padding-left:1.25rem;line-height:1.9">
+              <li>Download Vaultyx from the App Store.</li>
+              <li>Sign in with Apple. No email or password required.</li>
+              <li>Subscribe to Sovereign tier ($18/mo or $144/yr) from the app settings.</li>
+              <li>Create a new vault or unlock an existing one.</li>
+              <li>Tap the + button and select Upload, then choose files from your device or camera.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What plans are available?</button>
+          <div class="faq-a">
+            <strong>Sovereign &mdash; $18/mo ($144/yr):</strong> Everything in Enclave plus 1 TB of encrypted cloud storage in Vaultyx, cross-device sync, selective sync, folder organization, and all future Katafract apps included.<br><br>
+            <strong>Storage add-ons &mdash; $4/mo per TB:</strong> Need more than 1 TB? Purchase additional storage in 1 TB increments at $4 per month.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Which devices does Vaultyx support?</button>
+          <div class="faq-a">
+            Vaultyx is available on iOS 17.0 or later on iPhone and iPad. A macOS app is in development. Android is planned. All your Sovereign subscriptions sync automatically across all devices you sign into with the same Apple ID.
+          </div>
+        </div>
+      </div>
+
+      <!-- UPLOADING & MANAGING FILES -->
+      <p class="support-section-label">Uploading &amp; Managing Files</p>
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <button class="faq-q">How do I upload files to Vaultyx?</button>
+          <div class="faq-a">
+            Open the app, navigate to the vault or folder where you want the file to go, and tap the + button. Select <code>Upload</code> to choose files from your Photos, Files, or any connected app. Vaultyx encrypts the file locally on your device, then uploads the encrypted data. Once complete, you&rsquo;ll see the file in your vault with a timestamp.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can I upload videos and large files?</button>
+          <div class="faq-a">
+            Yes. Vaultyx supports any file type and size up to your remaining storage quota. Large files (over 100 MB) upload in the background, and you can continue using the app while the upload completes. If your app is closed, the upload resumes automatically when you reopen Vaultyx.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How do I organize files into folders?</button>
+          <div class="faq-a">
+            In your vault view, tap the folder icon or the + button and select <code>New Folder</code>. Folders are also encrypted and fully synced. You can nest folders inside folders, and each folder is treated as its own encrypted container.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can I add tags or categories to files?</button>
+          <div class="faq-a">
+            Yes. In the file detail view, add categories to organize and filter files. Categories are synced across your devices and make it easy to find files later. You can apply one or more categories to any file.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How do I rename or move files?</button>
+          <div class="faq-a">
+            Long-press a file to open the actions menu, then tap <code>Rename</code>. To move a file to a different folder, tap and hold the file, then select <code>Move</code>. Choose the destination folder and confirm. Both operations are instant and sync to all your devices.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can I recover a deleted file?</button>
+          <div class="faq-a">
+            Files you delete are moved to the Trash and remain recoverable for 30 days. Open the Vault menu and tap Trash, then select the file and tap <code>Restore</code>. After 30 days, files are permanently deleted and cannot be recovered. Deleted files count against your storage quota until they are emptied from Trash.
+          </div>
+        </div>
+      </div>
+
+      <!-- OFFLINE & SYNCING -->
+      <p class="support-section-label">Offline Access &amp; Syncing</p>
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <button class="faq-q">Can I access my files offline?</button>
+          <div class="faq-a">
+            Yes. Vaultyx automatically downloads a synced copy of your files to your device for offline access. You can open, view, and work with offline files without an internet connection. Changes you make offline are uploaded automatically when you reconnect.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How do I use selective sync to save storage space?</button>
+          <div class="faq-a">
+            By default, Vaultyx syncs all your files to every device. To save space on your iPhone, enable <code>Selective Sync</code> in Settings. Choose which folders or files should download and cache locally. Files not synced locally can still be browsed and accessed through the app, but will require internet to download and view.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How long does it take for files to sync across devices?</button>
+          <div class="faq-a">
+            Files sync instantly under good network conditions. If you upload a file on your iPhone, it will be available on your iPad or Mac within seconds. If you&rsquo;re offline, changes sync as soon as you reconnect. You can also manually trigger a sync by pulling down in the file list.
+          </div>
+        </div>
+      </div>
+
+      <!-- ENCRYPTION & SECURITY -->
+      <p class="support-section-label">Encryption &amp; Security</p>
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <button class="faq-q">What does zero-knowledge encryption mean?</button>
+          <div class="faq-a">
+            Zero-knowledge means Katafract has no ability to see your files or decrypt your data. Your encryption key is generated and stored only on your devices &mdash; it never leaves your control. Files are encrypted before they leave your device and remain encrypted in storage. Only you, and anyone you explicitly share files with, can decrypt and read your vault.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What if I forget my encryption key?</button>
+          <div class="faq-a">
+            <strong>This is critical:</strong> If you forget your encryption key, your vault cannot be recovered. Katafract cannot decrypt your files or help you regain access. The encryption key is derived from your device&rsquo;s local keychain and is not stored anywhere else. If you lose access to all devices where you signed in, your vault is permanently locked. Back up your key in a safe place, or write down the recovery code offered during setup and store it securely offline.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is my vault protected if my device is stolen?</button>
+          <div class="faq-a">
+            Your vault is protected by your device&rsquo;s security and by Vaultyx&rsquo;s encryption. An attacker with your unlocked device would need your encryption key to read your files. If your device is locked, they would need your passcode to even access the Vaultyx app. We recommend enabling biometric (Face ID / Touch ID) authentication in Vaultyx Settings for an additional layer.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can Katafract be forced to hand over my data?</button>
+          <div class="faq-a">
+            We can only hand over what exists in a decrypted form. Vaultyx is designed so that Katafract never holds your encryption keys and never stores plaintext versions of your files. Even if we received a legal order to produce your data, we would have nothing to produce. The encrypted files in storage cannot be decrypted without your key.
+          </div>
+        </div>
+      </div>
+
+      <!-- STORAGE & BILLING -->
+      <p class="support-section-label">Storage &amp; Billing</p>
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <button class="faq-q">How much storage do I get with Sovereign?</button>
+          <div class="faq-a">
+            Sovereign includes 1 TB (1,000 GB) of encrypted cloud storage. You can view your usage at any time in app Settings. Deleted files in Trash count against your quota; empty Trash to reclaim space.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How do I add more storage?</button>
+          <div class="faq-a">
+            When you approach your storage limit, the app will prompt you to purchase an add-on. Each add-on grants an additional 1 TB and costs $4/mo. You can purchase multiple add-ons to get 2 TB, 3 TB, or more. Add-ons are billed monthly alongside your Sovereign subscription.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How do I manage my subscription?</button>
+          <div class="faq-a">
+            Subscriptions purchased through the App Store are managed by Apple. Go to <strong>iOS Settings &rarr; [Your Name] &rarr; Subscriptions</strong> to upgrade your plan, add storage add-ons, or cancel. Cancellation stops renewal at the end of the current billing period.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can I get a refund?</button>
+          <div class="faq-a">
+            Refunds for App Store purchases are handled by Apple at <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a>. Katafract cannot issue refunds for in-app purchases. If you have a billing dispute, contact Apple Support directly.
+          </div>
+        </div>
+      </div>
+
+      <!-- CROSS-DEVICE & ENTITLEMENTS -->
+      <p class="support-section-label">Cross-Device Sync &amp; App Entitlements</p>
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <button class="faq-q">Can I access my vault on multiple devices?</button>
+          <div class="faq-a">
+            Yes. Sign in to Vaultyx on any device with your Apple ID. Your Sovereign subscription and vault are automatically recognized on all signed-in devices. Files and folders sync seamlessly across iPhone, iPad, and Mac.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How do I restore my vault on a new device?</button>
+          <div class="faq-a">
+            Sign in to Vaultyx with the same Apple ID used on your original device. Tap <code>Restore Purchases</code> in Settings. Your subscription will be recognized instantly, and your vault will begin syncing. No re-payment is required.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What is cross-app entitlement sharing?</button>
+          <div class="faq-a">
+            All Katafract Sovereign apps (Vaultyx, WraithVPN, and others) share a single subscription via the iOS App Group <code>group.com.katafract.enclave</code>. If you subscribe to Sovereign in one app, all other Katafract apps automatically recognize your subscription without duplicate purchases.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is Vaultyx available on Android?</button>
+          <div class="faq-a">
+            Android support is planned for a future release. For now, Vaultyx is available on iOS 17.0 or later. You can pre-register your interest on the <a href="/apps/vaultyx.html">Vaultyx app page</a>.
+          </div>
+        </div>
+      </div>
+
+      <!-- TROUBLESHOOTING -->
+      <p class="support-section-label">Troubleshooting</p>
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <button class="faq-q">My files won&rsquo;t upload. What do I do?</button>
+          <div class="faq-a">
+            Try these steps in order:
+            <ol style="margin:0.75rem 0 0;padding-left:1.25rem;line-height:1.9">
+              <li>Check that you have an active Sovereign subscription in Settings.</li>
+              <li>Ensure you have a stable internet connection (WiFi or cellular).</li>
+              <li>Force-quit Vaultyx and reopen it.</li>
+              <li>Check your available storage quota. If full, delete files or purchase an add-on.</li>
+              <li>Try uploading a smaller file first to test.</li>
+              <li>If still blocked, restart your device and try again.</li>
+            </ol>
+            Still not working? Email us with your iOS version and device model.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">My subscription shows active but the app says it&rsquo;s expired.</button>
+          <div class="faq-a">
+            Tap <code>Restore Purchases</code> in Settings to force a subscription check. If the issue persists after 60 seconds, sign out and back in with Apple. The app validates subscriptions against Apple&rsquo;s servers &mdash; a brief network hiccup can cause a stale status to display.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">My vault seems stuck syncing.</button>
+          <div class="faq-a">
+            Check your internet connection first. If connected, pull down to refresh manually. If a file is still syncing after 5 minutes, force-quit the app and reopen it. You can view sync progress in the app settings under &ldquo;Sync Status.&rdquo; Large files over 500 MB may take longer depending on your connection speed.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">I accidentally deleted a file. Can I recover it?</button>
+          <div class="faq-a">
+            If deleted less than 30 days ago, open the Vault menu and tap <code>Trash</code>. Find the file, select it, and tap <code>Restore</code>. Once restored, the file returns to its original folder and resumes syncing to all your devices.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">I see &ldquo;Storage Full&rdquo; but have space left on my device.</button>
+          <div class="faq-a">
+            This warning refers to your Vaultyx quota (1 TB + any add-ons), not your device&rsquo;s internal storage. Go to Settings in Vaultyx and check your storage usage. If full, delete files from Trash, or purchase a storage add-on to increase your vault capacity.
+          </div>
+        </div>
+      </div>
+
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;margin-top:3rem;margin-bottom:0.5rem">Contact Us</h2>
+      <p>Didn&rsquo;t find what you were looking for? We respond fast.</p>
+      <div class="contact-card">
+        <h3>Get in Touch</h3>
+        <p>Katafract LLC</p>
+        <p><a href="mailto:hello@katafract.com">hello@katafract.com</a></p>
+        <p>Typically within one business day. Include your iOS version, device model, and a description of what you were doing when the issue occurred.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/katafract-mark.svg" class="nav-mark" alt=""> Katafract LLC
+      </div>
+      <nav class="footer-nav">
+        <a href="/privacy/vaultyx.html">Privacy Policy</a>
+        <a href="/apps/vaultyx.html">App Page</a>
+        <a href="/support.html">All Support</a>
+        <a href="/about.html">About</a>
+        <a href="mailto:hello@katafract.com">Contact</a>
+      </nav>
+      <p class="footer-motto">Teneo &middot; Effrenus &middot; Katafractarius</p>
+      <p class="footer-copy">&copy; 2026 Katafract LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
