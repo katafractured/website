@@ -7,6 +7,19 @@ import Base from '../layouts/Base.astro';
   ogDescription="Katafract LLC transparency statement. Updated quarterly."
   section="prose"
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Warrant Canary",
+    "description": "Katafract LLC transparency statement. Updated quarterly to confirm we have not received any secret government orders.",
+    "author": {
+      "@type": "Organization",
+      "name": "Katafract LLC",
+      "url": "https://katafract.com"
+    },
+    "datePublished": "2026-01-15",
+    "dateModified": "2026-04-02"
+  })} />
   <link slot="head" rel="stylesheet" href="/style.css" />
   <style slot="head" is:global>
 
@@ -180,7 +193,7 @@ import Base from '../layouts/Base.astro';
 
       <h2>Archive</h2>
 
-      <p>Historical canary statements are committed to our public GitHub repository at <a href="https://github.com/katafractured/website" target="_blank" rel="noopener">github.com/katafractured/website</a> with git history serving as an immutable timestamp. Each quarterly update is a separate commit.</p>
+      <p>Historical canary statements are committed to our public GitHub repository at <a href="https://github.com/katafract-io/katafract-web" target="_blank" rel="noopener">github.com/katafract-io/katafract-web</a> with git history serving as an immutable timestamp. Each quarterly update is a separate commit.</p>
 
       <h2>Legal</h2>
 
