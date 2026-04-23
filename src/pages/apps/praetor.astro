@@ -1,0 +1,147 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Praetor — Encrypted PIM + Email by Katafract"
+  description="Praetor is an offline-first personal information manager and email client. Encrypted sync via IMAP/SMTP. Coming soon with Sovereign tier from Katafract."
+  ogDescription="Offline-first PIM + email. IMAP/SMTP sync. Encrypted locally, never in the cloud. Coming soon."
+  section="apps"
+  twitterCard="summary_large_image"
+>
+  <style slot="head" is:global>
+    .app-hero { padding: 4rem 1.5rem 3rem; max-width: 900px; margin: 0 auto; }
+    .app-main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+    .app-hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: #FF006E;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .app-hero-eyebrow .back-link { color: var(--dim2); font-size: 0.65rem; letter-spacing: 0.15em; }
+    .app-hero-eyebrow .back-link:hover { color: var(--dim); text-decoration: none; }
+    .app-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 4rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 1.25rem; }
+    .app-hero h1 em { font-style: normal; color: #FF006E; }
+    .app-hero .tagline { font-size: 1.1rem; color: var(--dim); line-height: 1.7; max-width: 580px; margin-bottom: 2.5rem; }
+    .coming-soon-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; padding: 0.6rem 1.25rem; border-radius: 999px; background: rgba(255,0,110,0.07); border: 1px solid rgba(255,0,110,0.2); color: #FF006E; margin-bottom: 3rem; }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 3.5rem 0; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 3rem; }
+    .feature-card { background: rgba(10,10,20,0.5); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color 0.2s; }
+    .feature-card:hover { border-color: rgba(255,0,110,0.2); }
+    .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+    .feature-desc { font-size: 0.875rem; color: var(--dim); line-height: 1.65; }
+    .privacy-block { background: rgba(255,0,110,0.03); border: 1px solid rgba(255,0,110,0.1); border-radius: 1rem; padding: 2rem; margin: 2rem 0; }
+    .privacy-block h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--text); margin-bottom: 0.75rem; }
+    .privacy-block p { font-size: 0.9rem; color: var(--dim); line-height: 1.7; margin-bottom: 0.5rem; }
+    .privacy-block p:last-child { margin-bottom: 0; }
+    .privacy-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .privacy-pill { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.25rem 0.75rem; border-radius: 999px; background: rgba(255,0,110,0.06); border: 1px solid rgba(255,0,110,0.15); color: #FF006E; }
+    .app-section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #FF006E; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .app-section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .app-section-sub { font-size: 0.95rem; color: var(--dim); line-height: 1.7; }
+    @media (min-width: 768px) {
+      .app-hero { padding: 6rem 3.5rem 4.5rem; }
+      .app-main { padding: 0 3.5rem 7rem; }
+    }
+    @media (min-width: 1100px) {
+      .app-hero { padding: 7rem 5rem 5rem; }
+      .app-main { padding: 0 5rem 8rem; }
+    }
+    @media (max-width: 480px) {
+      .app-hero { padding: 3rem 1.25rem 2.5rem; }
+      .app-main { padding: 0 1.25rem 4rem; }
+    }
+  </style>
+
+  <script slot="head" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Praetor",
+      "operatingSystem": "iOS, macOS",
+      "applicationCategory": "Productivity",
+      "description": "Offline-first personal information manager and email client. Encrypted IMAP/SMTP sync where your inbox never leaves your device.",
+      "author": {
+        "@type": "Organization",
+        "name": "Katafract LLC"
+      }
+    }
+  </script>
+
+  <div class="app-hero">
+    <div class="app-hero-eyebrow">
+      <span>Praetor</span>
+      <span>&middot;</span>
+      <a href="/" class="back-link">by Katafract &nearr;</a>
+    </div>
+    <h1>Your inbox's <em>commander</em></h1>
+    <p class="tagline">An offline-first personal information manager and email client. Contacts, calendar, and mail that never leave your device. Encrypted IMAP/SMTP sync with zero cloud middleman.</p>
+    <div class="coming-soon-badge">
+      📧 Coming with Sovereign subscription
+    </div>
+  </div>
+
+  <main class="app-main">
+
+    <hr class="section-divider">
+
+    <div style="margin-bottom:0.5rem">
+      <div class="app-section-label">What it'll do</div>
+      <h2 class="app-section-title">Your data, your device, your control</h2>
+      <p class="app-section-sub">Offline-first design means your inbox, contacts, and calendar sync to your device and stay there — encrypted, under your control.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔐</div>
+        <div class="feature-title">Encrypted IMAP/SMTP Sync</div>
+        <div class="feature-desc">Connect any IMAP mailbox. Mail syncs locally, encrypted at rest. You hold all keys. No plaintext mail on servers.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📇</div>
+        <div class="feature-title">Local Contacts + Calendar</div>
+        <div class="feature-desc">Manage contacts and calendar events entirely on your device. Sync via CardDAV/CalDAV or keep them local only. Your choice.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🍎</div>
+        <div class="feature-title">Native macOS + iOS</div>
+        <div class="feature-desc">Swift-first app for Mac and iPhone. Pixel-perfect, zero Electron, zero web wrapper. SwiftUI throughout, Shortcuts support.</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="privacy-block">
+      <h2>🔒 Your inbox, not anyone's data warehouse</h2>
+      <p>Praetor stores mail, contacts, and events locally on your device only. Unlike Gmail, Outlook, and iCloud Mail, your inbox is never scanned for ads, never analyzed for behavioral profiling, and never used to train AI models. Your device is the only copy — we have no access, no backups, no metadata.</p>
+      <div class="privacy-pills">
+        <span class="privacy-pill">Offline-first design</span>
+        <span class="privacy-pill">Local storage only</span>
+        <span class="privacy-pill">IMAP/SMTP open standards</span>
+        <span class="privacy-pill">Zero email scanning</span>
+        <span class="privacy-pill">No behavioral profiling</span>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <div class="callout">
+      <p><strong>Included with Sovereign subscription ($18/month or $144/year).</strong> Praetor will be a native macOS + iOS app for managing email, contacts, and calendar with zero cloud lock-in.</p>
+      <p style="margin-top:0.75rem;margin-bottom:0"><a href="/pricing">See Sovereign tier →</a></p>
+    </div>
+
+    <hr class="section-divider">
+
+    <div style="text-align:center;padding:1rem 0 2rem">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--dim2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem">Included with Sovereign</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--text);margin-bottom:0.5rem">Encrypted IMAP + calendar · Native apps</div>
+      <div style="font-size:0.875rem;color:var(--dim)">macOS, iOS — coming soon</div>
+    </div>
+
+  </main>
+</Base>
