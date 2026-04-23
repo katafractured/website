@@ -2,6 +2,12 @@
 .DS_Store
 Thumbs.db
 
+# Astro build
+node_modules/
+dist/
+.astro/
+.env
+
 # Stray image uploads
 *.png
 *.jpg
@@ -20,9 +26,9 @@ Thumbs.db
 CLAUDE.md
 
 # Keep og:image assets
-!images/og-*.jpg
-!images/og-*.png
+!public/images/og-*.jpg
+!public/images/og-*.png
 
 # Keep app demo images
-!images/safeopen/
-!images/safeopen/*
+!public/images/safeopen/
+!public/images/safeopen/*

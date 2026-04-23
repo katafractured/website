@@ -1,0 +1,178 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Privacy Policy — Vaultyx by Katafract"
+  description="Vaultyx privacy policy. Zero-knowledge encrypted cloud storage. Your files are encrypted on-device with AES-256 before upload. We cannot decrypt them."
+  ogDescription="Vaultyx uses zero-knowledge encryption. Your files are encrypted on-device before upload. Katafract never has access to your encryption keys."
+  section="prose"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+
+
+    <div class="prose-header">
+      <p class="prose-eyebrow">Vaultyx &mdash; Privacy Policy</p>
+      <h1>Vaultyx Privacy Policy</h1>
+      <p class="prose-meta">Katafract LLC &mdash; Last updated April 2026 &mdash; <a href="//privacy">All app policies &rarr;</a></p>
+    </div>
+
+    <div class="prose-body">
+
+      <div class="callout">
+        <p>Vaultyx is a zero-knowledge encrypted cloud storage platform. Your files are encrypted on your device with AES-256 before upload. Katafract cannot decrypt them, cannot read them, and cannot provide them to anyone — not even under legal compulsion. Your data is yours.</p>
+      </div>
+
+      <h2>What We Collect</h2>
+      <p>Vaultyx is designed to minimize data collection. Here's what we do and do not collect:</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Collected?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Your files or file names</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>File content (encrypted or plaintext)</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Your encryption keys</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Your name or email address</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Device identifiers (UDID, IDFA, etc.)</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Usage analytics or telemetry</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Crash logs or diagnostic data</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Encrypted file manifests (metadata only)</td>
+            <td><span class="badge-sometimes">Required</span></td>
+          </tr>
+          <tr>
+            <td>Subscription token (one-way hash)</td>
+            <td><span class="badge-sometimes">Required</span></td>
+          </tr>
+          <tr>
+            <td>Server logs (deleted after 30 days)</td>
+            <td><span class="badge-sometimes">Temporary</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>End-to-End Encryption</h2>
+      <p>All files are encrypted on your device <strong>before</strong> upload using <strong>AES-256-GCM</strong> encryption. The encryption key is derived from your password using <strong>PBKDF2-SHA256 with 600,000 iterations</strong>, making brute-force attacks computationally infeasible.</p>
+      <p>Katafract never receives, stores, or has access to your encryption keys. This means:</p>
+      <ul>
+        <li>We cannot read your files.</li>
+        <li>We cannot decrypt your files, even if compelled by law enforcement.</li>
+        <li>If you forget your password, your files cannot be recovered (not even by us).</li>
+      </ul>
+
+      <h2>File Storage and Encryption</h2>
+      <p>Encrypted file chunks are stored on Shards, Katafract's own S3-compatible object storage platform running on our infrastructure. Files are stored as opaque encrypted blobs — we have no way to inspect, analyze, or decrypt their contents. The encrypted manifest (which tracks which chunks belong to which file) is also encrypted and stored separately.</p>
+      <p>All storage is handled by our own infrastructure. We do not use AWS, Google Cloud, Microsoft Azure, or any third-party cloud provider for your encrypted data.</p>
+
+      <h2>Subscription and Payment</h2>
+      <p>To use Vaultyx, you must maintain an active subscription. We store:</p>
+      <ul>
+        <li>A one-way cryptographic hash of your subscription token (we cannot reverse-engineer your identity from this).</li>
+        <li>Your subscription tier and renewal date (so we know you have access).</li>
+      </ul>
+      <p>We do not store your credit card information, billing address, or Apple ID. Payment is processed by <strong>Stripe</strong> (on the web or via in-app purchase) or <strong>Apple</strong> (iOS/macOS). See Stripe's and Apple's privacy policies for how they handle payment data.</p>
+
+      <h2>Photo Backup</h2>
+      <p>If you use Vaultyx to back up your photo library, those photos are encrypted on-device before upload. We do not:</p>
+      <ul>
+        <li>Scan or analyze photo content.</li>
+        <li>Perform facial recognition, object detection, or any computer vision processing.</li>
+        <li>Compress photos or reduce quality (original quality preserved).</li>
+        <li>Share photos with any third party.</li>
+      </ul>
+      <p>Your photos are encrypted and stored exactly as you upload them. We cannot see them.</p>
+
+      <h2>Request Metadata and Server Logs</h2>
+      <p>Like any web service, we log basic HTTP request metadata to monitor infrastructure health and detect abuse:</p>
+      <ul>
+        <li>Your IP address (during the request only, for DDoS mitigation).</li>
+        <li>Request timestamp, HTTP method, and endpoint.</li>
+        <li>HTTP status code and response size.</li>
+        <li>Request duration.</li>
+      </ul>
+      <p>These logs are retained for <strong>30 days</strong> and then automatically deleted. They do not contain any information about your files, encryption keys, or account identity.</p>
+
+      <h2>Third-Party Services</h2>
+      <p>Vaultyx integrates with a minimal set of external services:</p>
+      <ul>
+        <li><strong>Stripe</strong> — Payment processing (web). Stripe's privacy policy applies to payment data.</li>
+        <li><strong>Apple</strong> — In-app purchases (iOS/macOS). Apple's privacy policy applies.</li>
+        <li><strong>Shards (Katafract's S3)</strong> — Encrypted file storage on our own infrastructure, not a third party.</li>
+      </ul>
+      <p>We do not use:</p>
+      <ul>
+        <li>Analytics SDKs (no Google Analytics, Mixpanel, Amplitude, etc.).</li>
+        <li>Crash reporting services (no Sentry, Bugsnag, etc.).</li>
+        <li>Ad networks or behavioral tracking.</li>
+        <li>Social media SDKs.</li>
+      </ul>
+
+      <h2>Data Retention and Deletion</h2>
+      <p><strong>While subscription is active:</strong> Your encrypted files are stored indefinitely until you delete them.</p>
+      <p><strong>Trash bin:</strong> Deleted files are moved to trash and retained for 30 days before permanent deletion.</p>
+      <p><strong>On subscription cancellation:</strong> Your account is marked for deletion. All files (including trash) are permanently deleted within 30 days.</p>
+      <p><strong>Manual deletion:</strong> You can request immediate permanent deletion at any time by contacting <a href="mailto:privacy@katafract.com">privacy@katafract.com</a>. We will delete your account and all associated files within 48 hours.</p>
+
+      <h2>Your Rights</h2>
+
+      <h3>Export Your Data</h3>
+      <p>Vaultyx stores your encrypted files in S3-compatible storage. You can download all your data using any S3 client (AWS CLI, rclone, Cyberduck, etc.) with your subscription credentials. Your data is yours — no lock-in.</p>
+
+      <h3>Request Deletion</h3>
+      <p>You can delete your account and all files at any time by unsubscribing or by emailing <a href="mailto:privacy@katafract.com">privacy@katafract.com</a>. We will permanently delete your account and all associated encrypted data within 48 hours.</p>
+
+      <h3>Access Your Data</h3>
+      <p>Since all your data is encrypted with your own encryption keys, only you can decrypt it. We cannot provide decrypted copies to you or anyone else — not even you, if you lose your password. We recommend keeping your password safe or using a password manager.</p>
+
+      <h2>Legal Requests and Law Enforcement</h2>
+      <p>If law enforcement requests your data:</p>
+      <ul>
+        <li>We can provide: your encrypted file blobs (useless without your encryption key), your subscription metadata (tier, renewal date).</li>
+        <li>We cannot provide: your encryption keys (we don't have them), plaintext files (we can't decrypt them), your password (we don't store it).</li>
+      </ul>
+      <p>Due to the zero-knowledge design of Vaultyx, even with a court order, we have nothing to hand over except encrypted blobs. This is by design.</p>
+      <p>We maintain a <strong>warrant canary</strong> at <a href="https://katafract.com/canary">katafract.com/canary</a>. If the canary is not updated monthly, you can assume Katafract received a legal request that prohibits us from disclosing it.</p>
+
+      <h2>Children's Privacy</h2>
+      <p>Vaultyx is not directed to users under 13. Parents and guardians should review this privacy policy with their children. Since Vaultyx collects no personal data, users of any age can use the service safely.</p>
+
+      <h2>Changes to This Policy</h2>
+      <p>If we materially change how Vaultyx handles privacy (e.g., adding analytics or storing new types of data), we will update this page with the new date. Since we don't collect email addresses, we cannot notify you directly — please check this page periodically.</p>
+
+      <h2>Contact</h2>
+      <p>If you have questions about this privacy policy, Vaultyx's privacy practices, or wish to request deletion of your account, please reach out:</p>
+      <div class="contact-card">
+        <h3>Privacy Inquiries</h3>
+        <p>Katafract LLC</p>
+        <p><a href="mailto:privacy@katafract.com">privacy@katafract.com</a></p>
+        <p>We typically respond within one business day.</p>
+      </div>
+
+    </div>
+  
+</Base>

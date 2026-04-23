@@ -1,0 +1,102 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Privacy Policy — ExifArmor by Katafract"
+  description="ExifArmor privacy policy. No data collected, no servers, no tracking. Your photos stay on your device."
+  ogDescription="ExifArmor collects zero data. No servers, no tracking, no accounts. Your photos never leave your device."
+  section="prose"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+
+
+    <div class="prose-header">
+      <p class="prose-eyebrow">ExifArmor &mdash; Privacy Policy</p>
+      <h1>ExifArmor Privacy Policy</h1>
+      <p class="prose-meta">Katafract LLC &mdash; Last updated March 2026 &mdash; <a href="//privacy">All app policies &rarr;</a></p>
+    </div>
+
+    <div class="prose-body">
+
+      <div class="callout">
+        <p>ExifArmor is designed to protect your privacy, not compromise it. The app never connects to the internet, never transmits your photos, and collects zero personal data.</p>
+      </div>
+
+      <h2>What Data Does ExifArmor Collect?</h2>
+      <p>None. ExifArmor does not collect, store, transmit, or share any personal data whatsoever.</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Collected?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Photos or image content</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Photo metadata (EXIF, GPS, etc.)</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Device identifiers (IDFA, etc.)</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Location data</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Usage analytics</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Crash logs</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Account or login information</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Photo Library Access</h2>
+      <p>ExifArmor requests access to your photo library so it can read metadata from photos you select and save cleaned copies back to your library. Your photos are processed entirely on your device. No photo data is ever transmitted anywhere.</p>
+
+      <h2>How Metadata Stripping Works</h2>
+      <p>When you strip a photo, ExifArmor creates a new copy of the image with the selected metadata removed. The original photo in your library is never modified. The cleaned copy is saved to your photo library or shared via the iOS share sheet — both handled by iOS, not by our servers.</p>
+
+      <h2>In-App Purchases</h2>
+      <p>ExifArmor Pro is a one-time purchase processed entirely by Apple through the App Store. We do not receive or store your payment information, Apple ID, or any billing details. Purchase verification is handled on-device by Apple's StoreKit framework.</p>
+
+      <h2>Share Extension</h2>
+      <p>The ExifArmor share extension processes images locally on your device. When you use the share extension from another app, the image is stripped of metadata in memory and the cleaned version is returned. No data leaves your device during this process.</p>
+
+      <h2>Third-Party Services</h2>
+      <p>ExifArmor does not integrate with any third-party analytics services, advertising networks, social media SDKs, or data brokers. There are no third-party frameworks in the app that collect or transmit data.</p>
+
+      <h2>Children's Privacy</h2>
+      <p>ExifArmor does not collect personal information from anyone, including children under 13. The app is rated 4+ and is safe for all ages.</p>
+
+      <h2>Data Retention</h2>
+      <p>Since ExifArmor collects no data, there is nothing to retain or delete. Your privacy report statistics (number of photos stripped, badges earned) are stored locally on your device in standard iOS storage and are deleted if you uninstall the app.</p>
+
+      <h2>Changes to This Policy</h2>
+      <p>If we ever change this privacy policy, we will update this page with the new date. Since we don't collect email addresses or contact information, we cannot notify you directly &mdash; please check this page periodically.</p>
+
+      <h2>Contact</h2>
+      <p>If you have questions about this privacy policy or ExifArmor's privacy practices, please reach out:</p>
+      <div class="contact-card">
+        <h3>Privacy Inquiries</h3>
+        <p>Katafract LLC</p>
+        <p><a href="mailto:privacy@katafract.com">privacy@katafract.com</a></p>
+        <p>We typically respond within one business day.</p>
+      </div>
+
+    </div>
+  
+</Base>

@@ -1,0 +1,439 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title={`Haven DNS Setup — Katafract`}
+  description={`Configure Haven private DNS in 60 seconds. Blocks ads, trackers, and malware on every app — no VPN required. Free tier available for all devices.`}
+  section="dns"
+  ogDescription={`Private, ad-blocking DNS. Set it up in 60 seconds on iPhone, Mac, or any device.`}
+  twitterCard="summary"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+  <style slot="head" is:global set:html={`
+    /* Tabs */
+    .tab-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      color: var(--dim);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: -1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .tab-btn.active {
+      color: #4ADE80;
+      border-bottom-color: #4ADE80;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Steps */
+    .steps { display: flex; flex-direction: column; gap: 1.25rem; margin: 0 0 2rem; }
+    .step {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: rgba(74,222,128,0.1);
+      border: 1px solid rgba(74,222,128,0.3);
+      color: #4ADE80;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .step-body h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: var(--text);
+    }
+    .step-body p { font-size: 0.9rem; color: var(--dim); line-height: 1.6; margin-bottom: 0.5rem; }
+    .step-body p:last-child { margin-bottom: 0; }
+
+    /* Code blocks */
+    .dns-addr {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: #4ADE80;
+      margin: 0.5rem 0;
+    }
+    .copy-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--dim);
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 0;
+      transition: color 0.15s;
+    }
+    .copy-btn:hover { color: var(--cyan); }
+
+    /* Info box */
+    .info-box {
+      background: rgba(74,222,128,0.05);
+      border: 1px solid rgba(74,222,128,0.15);
+      border-radius: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .info-box strong { color: #4ADE80; }
+
+    /* Address table */
+    .addr-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+      font-size: 0.875rem;
+    }
+    .addr-table th {
+      text-align: left;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--dim);
+      padding: 0.5rem 1rem 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .addr-table td {
+      padding: 0.65rem 1rem 0.65rem 0;
+      border-bottom: 1px solid var(--border2);
+      vertical-align: middle;
+    }
+    .addr-table td:first-child { color: var(--dim); }
+    .addr-table td code {
+      font-family: 'JetBrains Mono', monospace;
+      color: #4ADE80;
+      font-size: 0.85rem;
+    }
+
+    /* Feature cards */
+    .what-blocks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .block-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+    }
+    .block-card-icon { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .block-card-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+    .block-card-desc { font-size: 0.8rem; color: var(--dim); line-height: 1.5; }
+
+    /* Tier comparison */
+    .tier-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      margin: 1.5rem 0;
+      font-size: 0.875rem;
+    }
+    .tier-col { padding: 1.25rem; }
+    .tier-col + .tier-col { border-left: 1px solid var(--border); }
+    .tier-col.paid { background: rgba(74,222,128,0.03); }
+    .tier-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--dim);
+      margin-bottom: 0.5rem;
+    }
+    .tier-col.paid .tier-name { color: #4ADE80; }
+    .tier-feature { padding: 0.25rem 0; color: var(--dim); }
+    .tier-feature.yes { color: var(--text); }
+    @media (max-width: 560px) {
+      .tier-row { grid-template-columns: 1fr; }
+      .tier-col + .tier-col { border-left: none; border-top: 1px solid var(--border); }
+    }
+  `}></style>
+  <Fragment set:html={`<main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow" style="color:#4ADE80;">Haven DNS</p>
+      <h1>Private DNS Setup</h1>
+      <p class="prose-meta">Blocks ads, trackers &amp; malware &mdash; no app required &mdash; free</p>
+    </div>
+
+    <div class="prose-body">
+
+      <p class="light">Haven DNS is a private, filtering DNS resolver operated by Katafract. Configure it on your iPhone, Mac, or router and every device on that network gets ad blocking and tracker protection at the DNS layer &mdash; before requests leave your device.</p>
+
+      <h2>Haven DNS Addresses</h2>
+
+      <table class="addr-table">
+        <thead>
+          <tr>
+            <th>Protocol</th>
+            <th>Address</th>
+            <th>Use when</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DNS-over-HTTPS (DoH)</td>
+            <td><code>https://dns.katafract.com/dns-query</code></td>
+            <td>Public-facing, iOS, Mac, browsers</td>
+          </tr>
+          <tr>
+            <td>DNS-over-TLS (DoT)</td>
+            <td><code>dns.katafract.com</code> &mdash; port 853</td>
+            <td>Android, routers</td>
+          </tr>
+          <tr>
+            <td>Plain DNS (UDP port 53)</td>
+            <td>Available when connected via Enclave VPN (uses node's WireGuard IP)</td>
+            <td>Only when on Enclave</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box">
+        <strong>Note:</strong> Plain DNS (UDP port 53) is only available when you're connected to Enclave via the node's WireGuard IP (10.10.x.1). For public access without Enclave, use encrypted DNS-over-HTTPS or DNS-over-TLS. iOS 14+, macOS 11+, and most modern routers support encrypted DNS natively.
+      </div>
+
+      <!-- Device tabs -->
+      <h2>Setup Instructions</h2>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(event,'ios')">iPhone</button>
+        <button class="tab-btn" onclick="switchTab(event,'mac')">Mac</button>
+        <button class="tab-btn" onclick="switchTab(event,'router')">Router</button>
+        <button class="tab-btn" onclick="switchTab(event,'browser')">Browser</button>
+      </div>
+
+      <!-- iOS -->
+      <div id="tab-ios" class="tab-content active">
+        <p>iOS supports encrypted DNS via configuration profiles. This is the recommended method &mdash; it applies system-wide, including in apps that don't respect manual DNS settings.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Download the Haven DNS profile</h3>
+              <p>On your iPhone, open Safari and visit:</p>
+              <div class="dns-addr">
+                dns.katafract.com/haven.mobileconfig
+                <button class="copy-btn" onclick="copyText('dns.katafract.com/haven.mobileconfig',this)">copy</button>
+              </div>
+              <p>Safari will prompt you to download a configuration profile.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Install the profile</h3>
+              <p>Open <strong>Settings → General → VPN &amp; Device Management</strong>. Tap the Haven DNS profile, then tap <strong>Install</strong> in the top right. Enter your passcode when prompted.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Verify it's active</h3>
+              <p>Go to <strong>Settings → Wi-Fi</strong>, tap your network name, and confirm the DNS field shows <em>Haven (Katafract)</em>. Open any browser and visit a website &mdash; ads should be gone.</p>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:0.875rem;color:var(--dim);">The profile configures DNS-over-HTTPS system-wide. It does not route your traffic through a VPN &mdash; only DNS queries go through Haven.</p>
+      </div>
+
+      <!-- Mac -->
+      <div id="tab-mac" class="tab-content">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Open Network Settings</h3>
+              <p>Go to <strong>System Settings → Network</strong>, select your active connection (Wi-Fi or Ethernet), click <strong>Details…</strong>, then the <strong>DNS</strong> tab.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Add Haven DNS servers</h3>
+              <p>For encrypted DNS on Mac, download the Haven profile at <code style="font-family:'JetBrains Mono',monospace;">dns.katafract.com/haven.mobileconfig</code>, or use DNS-over-HTTPS in System Settings.</p>
+              <p style="color:var(--dim);font-size:0.85rem">macOS 11+ supports encrypted DNS configuration profiles the same way as iOS. This is recommended for system-wide protection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Router -->
+      <div id="tab-router" class="tab-content">
+        <p>Setting Haven DNS at the router level protects every device on your network automatically &mdash; including smart TVs, game consoles, and guests.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Log in to your router</h3>
+              <p>Open a browser and go to your router's admin page (commonly <code style="font-family:'JetBrains Mono',monospace;">192.168.1.1</code> or <code style="font-family:'JetBrains Mono',monospace;">192.168.0.1</code>). Log in with your admin credentials.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Find DNS settings</h3>
+              <p>Look for <strong>Internet</strong>, <strong>WAN</strong>, or <strong>DNS</strong> settings. The exact location varies by router brand (Netgear: Advanced → Setup → Internet Setup; Asus: WAN → Internet Connection; TP-Link: Advanced → Network → Internet).</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Use Haven DNS via Enclave or encrypted protocols</h3>
+              <p>For encrypted DNS without Enclave VPN, configure your router to use DNS-over-HTTPS or DNS-over-TLS endpoints. When connected to Enclave, Haven DNS is built into the connection automatically.</p>
+              <p style="color:var(--dim);font-size:0.85rem">Public plain DNS addresses have been removed. Haven DNS is accessed via encrypted endpoints (DoH/DoT) or automatically when using Enclave.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Browser -->
+      <div id="tab-browser" class="tab-content">
+        <p>Most modern browsers support DNS-over-HTTPS natively. This only protects DNS queries made by the browser, not other apps.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h3>Chrome / Edge / Brave</h3>
+              <p>Go to <strong>Settings → Privacy and security → Security</strong>. Enable <strong>Use secure DNS</strong>, choose <em>With Custom</em>, and enter:</p>
+              <div class="dns-addr">https://dns.katafract.com/dns-query <button class="copy-btn" onclick="copyText('https://dns.katafract.com/dns-query',this)">copy</button></div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h3>Firefox</h3>
+              <p>Go to <strong>Settings → Privacy &amp; Security</strong>, scroll to <strong>DNS over HTTPS</strong>, select <em>Custom</em>, and paste:</p>
+              <div class="dns-addr">https://dns.katafract.com/dns-query <button class="copy-btn" onclick="copyText('https://dns.katafract.com/dns-query',this)">copy</button></div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h3>Safari</h3>
+              <p>Safari uses system DNS. Use the iOS or Mac tab above for system-wide protection that covers Safari and all other apps.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What it blocks -->
+      <h2>What Haven Blocks</h2>
+      <div class="what-blocks">
+        <div class="block-card">
+          <div class="block-card-icon">🚫</div>
+          <div class="block-card-name">Ads</div>
+          <div class="block-card-desc">Ad networks including Google Ads, Meta Audience Network, AppLovin, and hundreds more.</div>
+        </div>
+        <div class="block-card">
+          <div class="block-card-icon">🕵️</div>
+          <div class="block-card-name">Trackers</div>
+          <div class="block-card-desc">Cross-site tracking, fingerprinting services, analytics beacons, and telemetry endpoints.</div>
+        </div>
+        <div class="block-card">
+          <div class="block-card-icon">⚠️</div>
+          <div class="block-card-name">Malware</div>
+          <div class="block-card-desc">Known malware distribution domains, phishing sites, and command-and-control servers.</div>
+        </div>
+        <div class="block-card">
+          <div class="block-card-icon">💬</div>
+          <div class="block-card-name">Cryptomining</div>
+          <div class="block-card-desc">Browser-based cryptomining scripts and mining pool domains.</div>
+        </div>
+      </div>
+
+      <!-- Free vs paid -->
+      <h2>Free vs. Paid</h2>
+      <div class="tier-row">
+        <div class="tier-col">
+          <div class="tier-name">Feature</div>
+          <div class="tier-feature">Ad blocking</div>
+          <div class="tier-feature">Tracker blocking</div>
+          <div class="tier-feature">Malware domains</div>
+          <div class="tier-feature">DNS-over-HTTPS</div>
+          <div class="tier-feature">Custom blocklists</div>
+          <div class="tier-feature">Query analytics</div>
+          <div class="tier-feature">Priority resolvers</div>
+        </div>
+        <div class="tier-col">
+          <div class="tier-name">Free</div>
+          <div class="tier-feature yes">✓</div>
+          <div class="tier-feature yes">✓</div>
+          <div class="tier-feature yes">✓</div>
+          <div class="tier-feature yes">✓</div>
+          <div class="tier-feature" style="color:var(--dim2)">—</div>
+          <div class="tier-feature" style="color:var(--dim2)">—</div>
+          <div class="tier-feature" style="color:var(--dim2)">—</div>
+        </div>
+        <div class="tier-col paid">
+          <div class="tier-name">Haven — Free</div>
+          <div class="tier-feature yes">✓</div>
+          <div class="tier-feature yes">✓</div>
+          <div class="tier-feature yes">✓</div>
+          <div class="tier-feature yes">✓</div>
+          <div class="tier-feature yes">✓</div>
+          <div class="tier-feature yes">✓</div>
+          <div class="tier-feature yes">✓</div>
+        </div>
+      </div>
+
+      <p>Haven DNS is included with Enclave. <a href="/pricing">See all plans →</a></p>
+
+    </div>
+  </main>`} />
+  <script slot="scripts" is:inline set:html={`
+    function switchTab(e, id) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      e.target.classList.add('active');
+      document.getElementById('tab-' + id).classList.add('active');
+    }
+    function copyText(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'copied!';
+        btn.style.color = '#4ADE80';
+        setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 1500);
+      });
+    }
+  `}></script>
+</Base>

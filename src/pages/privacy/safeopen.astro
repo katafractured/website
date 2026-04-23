@@ -1,0 +1,100 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Privacy Policy &middot; SafeOpen by Katafract"
+  description="SafeOpen privacy policy. Free QR scanner with on-device risk scoring. Optional AI summary and Open Safely consume scan credits and send the URL to Katafract servers. 100% transparent on what is collected."
+  ogDescription="What SafeOpen actually collects, in plain English. No marketing fog."
+  section="prose"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+
+
+    <div class="prose-header">
+      <p class="prose-eyebrow">SafeOpen Privacy Policy</p>
+      <h1>SafeOpen Privacy Policy</h1>
+      <p class="prose-meta">Effective: April 2026 &middot; <a href="//apps/safeopen">About SafeOpen &rarr;</a></p>
+    </div>
+
+    <div class="prose-body">
+
+      <h2>The short version</h2>
+      <p>SafeOpen is a free QR scanner and link inspector. Most of the app runs entirely on your device. Two features (AI Summary and Open Safely) call Katafract servers and consume scan credits. This page tells you exactly what each of those calls sends, where it goes, and how long it stays. We don&rsquo;t hide anything in marketing language.</p>
+
+      <h2>Free, on-device features (no data sent)</h2>
+      <p>The following operate entirely on your device. They make no network requests and Katafract receives nothing from them:</p>
+      <ul>
+        <li>QR code and barcode scanning</li>
+        <li>Link decoding (URL, Wi-Fi, contact, calendar event, SMS, email, geo, crypto, script, plain text)</li>
+        <li>Risk scoring (raw IP detection, punycode lookalike detection, shortened-link detection, unusual port, suspicious tracking parameters, executable script flags, obfuscated content flags, and more)</li>
+        <li>Tracking-parameter stripping (UTM, fbclid, gclid, msclkid, and 35+ other identifiers)</li>
+        <li>Local scan history, stored only in your device&rsquo;s app storage. It is never synced to iCloud, never uploaded, and is deleted when you delete the app or tap Clear History.</li>
+        <li>Camera frames are processed in memory and never written to disk or transmitted.</li>
+      </ul>
+
+      <h2>Features that send data to Katafract</h2>
+      <p>Two features cost 1 scan credit each and require backend processing.</p>
+
+      <h3>AI Summary</h3>
+      <p>When you tap AI Summary on a result, the URL you submitted is sent to Katafract&rsquo;s servers. Our servers fetch the destination page using a Katafract relay node so the destination never sees your IP, then we send the page&rsquo;s text content to OpenAI&rsquo;s API to generate a plain-English summary of what the link contains. The summary comes back to your device.</p>
+      <ul>
+        <li><strong>What we receive:</strong> the URL you submitted, your anonymous device ID (see below), the timestamp, and a region hint if your client supplied one. We do not log your IP address against the inspection request.</li>
+        <li><strong>What OpenAI receives:</strong> the text of the fetched page only. No personal information, no device ID, no IP. OpenAI processes this under their API terms.</li>
+        <li><strong>How long we keep it:</strong> URLs you submit are written to an audit table for abuse prevention and automatically deleted after 30 days by a scheduled job. The audit row is not linked to your Apple ID or any other identity.</li>
+      </ul>
+
+      <h3>Open Safely</h3>
+      <p>When you tap Open Safely, Katafract opens a short-lived browsing session that fetches the URL from one of our relay nodes and streams the rendered page back to you in an isolated, non-persistent in-app browser. The destination website sees the relay&rsquo;s IP address, not yours.</p>
+      <ul>
+        <li><strong>Source IP shown to the destination:</strong> your session is assigned a disposable /128 IPv6 address picked at random from the relay node&rsquo;s /64 prefix. The destination sees only that single address, never your device&rsquo;s real IP. The address is released back to the pool after 10 minutes (or when you close the browser, whichever comes first) and is not reused for at least 24 hours. Disposable IPv6 is currently active on every Katafract relay region (eu-west, eu-north, us-east, us-west, ap-southeast, ap-northeast, ap-south).</li>
+        <li><strong>What we receive:</strong> the URL, your anonymous device ID, the relay node serving you, the session ID, and the session expiry. Same 30-day audit window as AI Summary.</li>
+        <li><strong>What is not stored:</strong> the page content, cookies, local storage, IndexedDB, or any other artifact of the in-app browser session. The session is destroyed at the 10-minute mark or when you close the browser, whichever comes first.</li>
+      </ul>
+
+      <h2>Anonymous device ID</h2>
+      <p>SafeOpen generates a random UUID on first launch and stores it in your device&rsquo;s Keychain under <code>com.katafract.safeopen</code> / <code>device_id</code>. We use this ID for one purpose: tracking your scan-credit balance on our backend so you can spend credits across app launches without an account. It is not linked to your Apple ID, name, email, or any other personal identifier. You can reset it by deleting and reinstalling the app, but doing so resets your credit balance to a fresh 10 welcome credits.</p>
+
+      <h2>Scan credits and purchases</h2>
+      <p>Every install starts with 10 free scan credits. We add 10 more free credits every 30 days. If you need more, you can purchase consumable credit packs in the app: Starter ($0.99 for 100), Standard ($2.99 for 500), or Power ($9.99 for 2,500). Credits never expire and there is no subscription.</p>
+      <p>All purchases are processed by Apple via StoreKit. Katafract does not receive your Apple ID, payment method, billing address, name, or any financial information. After a successful purchase, your iOS app sends Apple&rsquo;s signed transaction ID to our servers; we verify it directly with Apple&rsquo;s App Store Server API and then credit your anonymous device ID with the purchased credits. Each transaction can only be redeemed once.</p>
+
+      <h2>Camera permission</h2>
+      <p>SafeOpen requests camera access for one purpose: scanning QR codes in real time. It does not access your photo library, save images, or use the camera for anything else. You may deny camera permission and use the paste workflow instead.</p>
+
+      <h2>Third-party services we touch</h2>
+      <ul>
+        <li><strong>Apple StoreKit:</strong> handles all credit pack purchases. Subject to <a href="https://www.apple.com/legal/privacy/" rel="noopener">Apple&rsquo;s Privacy Policy</a>.</li>
+        <li><strong>OpenAI:</strong> generates the AI Summary text from the page content we fetch. Page content only, no personal information. Subject to <a href="https://openai.com/policies/privacy-policy" rel="noopener">OpenAI&rsquo;s Privacy Policy</a>.</li>
+      </ul>
+      <p>SafeOpen contains no advertising SDKs, no analytics frameworks, and no crash-reporting services. We do not sell or share data with anyone for any purpose, including advertising or measurement.</p>
+
+      <h2>Apple Privacy Nutrition Label</h2>
+      <p>SafeOpen&rsquo;s App Store Privacy declarations:</p>
+      <ul>
+        <li><strong>Identifiers (Device ID):</strong> collected, not linked to user, not used for tracking. Used for app functionality (credit balance).</li>
+        <li><strong>User Content (Other User Content, the URL you submit to AI Summary or Open Safely):</strong> collected, not linked to user, not used for tracking. Used for app functionality.</li>
+        <li><strong>Purchases:</strong> handled entirely by Apple StoreKit. Katafract does not collect financial or transaction history beyond the opaque transaction ID used to grant credits.</li>
+      </ul>
+
+      <h2>Children</h2>
+      <p>SafeOpen is rated 4+ on the App Store and not directed at children under 13. We do not knowingly collect any personal information from children. If you believe a child has used the app and provided personal information, contact us at the address below and we will delete it.</p>
+
+      <h2>Your data, your control</h2>
+      <p>You can:</p>
+      <ul>
+        <li>Clear your local scan history at any time from Account &rarr; Clear History.</li>
+        <li>Delete your anonymous device ID and credit balance by deleting the app. We have no way to delete the audit row earlier than the automatic 30-day window because the row is not linked to your identity, but it is automatically expunged at that mark.</li>
+        <li>Email <a href="mailto:privacy@katafract.com">privacy@katafract.com</a> with any privacy question and we will respond within one business day.</li>
+      </ul>
+
+      <h2>Changes to this policy</h2>
+      <p>Material changes will be announced at katafract.com and reflected in an updated effective date above. Continued use after a change constitutes acceptance.</p>
+
+      <h2>Contact</h2>
+      <p>Privacy questions: <a href="mailto:privacy@katafract.com">privacy@katafract.com</a></p>
+      <p>General contact: <a href="mailto:hello@katafract.com">hello@katafract.com</a></p>
+      <p>Katafract LLC, United States</p>
+
+    </div>
+  
+</Base>

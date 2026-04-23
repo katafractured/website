@@ -11,8 +11,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Astro site
+        run: npm run build
+
+      - name: Copy Pages Functions into dist
+        # Cloudflare Pages picks up Functions from a `functions/` dir at the
+        # deploy root. wrangler deploys whatever dir we point at, so copy the
+        # functions dir next to the built dist/ so /stats/* proxy ships alongside.
+        run: |
+          if [ -d functions ]; then
+            cp -r functions dist/functions
+          fi
+
       - name: Deploy to Cloudflare Pages
-        run: npx wrangler pages deploy . --project-name katafract-web --branch main
+        run: npx wrangler pages deploy dist --project-name katafract-web --branch main
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: bab9d8a1edbf2d5f4882c4452534c860

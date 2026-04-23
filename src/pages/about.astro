@@ -1,0 +1,185 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="About — Katafract LLC"
+  description="Katafract LLC operates Enclave — a privacy platform covering DNS, VPN, encrypted storage, and identity. A continuously expanding global fleet, operated end-to-end."
+  ogDescription="A privacy platform, operated end-to-end. Continuously expanding global fleet across Hetzner, Vultr, OVH, and Contabo."
+  section="about"
+  twitterCard="summary"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+  <style slot="head" is:global>
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.75rem 0;
+    }
+    a.app-card {
+      display: block;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 0.875rem;
+      padding: 1.25rem 1.5rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    a.app-card:hover { border-color: rgba(0,240,255,0.2); background: var(--bg3); text-decoration: none; }
+    .app-card-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .app-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .app-card-cat {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--dim2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .app-card-desc { color: var(--dim); font-size: 0.875rem; line-height: 1.55; margin-bottom: 0.75rem; }
+    .app-card-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      padding: 0.125rem 0.5rem;
+      border-radius: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .status-live { background: rgba(16,185,129,0.15); color: #10B981; }
+    .status-soon { background: rgba(245,158,11,0.15); color: #F59E0B; }
+    .status-planned { background: rgba(139,92,246,0.15); color: #8B5CF6; }
+
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .fact-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 0.875rem; padding: 1.25rem; }
+    .fact-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--dim2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+    .fact-value { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 700; color: var(--text); }
+
+    .contact-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 0.875rem; padding: 1.5rem; margin: 1.25rem 0; }
+    .contact-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--text); }
+    .contact-card p { margin-bottom: 0.5rem; color: var(--dim); }
+    .contact-card a { color: var(--cyan); }
+    .contact-card a:hover { color: var(--magenta); }
+  </style>
+
+  <main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow">Operator</p>
+      <h1>About Katafract</h1>
+      <p class="prose-meta">A privacy platform, operated end-to-end</p>
+    </div>
+
+    <div class="prose-body">
+
+      <p class="light">Katafract LLC operates <strong>Enclave</strong> — a privacy platform covering DNS, VPN, encrypted storage, and identity. We run the fleet ourselves: a continuously expanding global network of exit nodes and a replicated S3 storage cluster across multiple regions, provisioned programmatically across independent providers so no single host ever holds the whole stack. The iPhone apps we ship alongside Enclave solve adjacent privacy problems — photo metadata, link safety, document vaults. One conviction runs through all of it: your data is yours.</p>
+
+      <div class="philosophy-quote">
+        A cataphract was the heaviest cavalry in the ancient world &mdash; fully armored, unstoppable. We build apps that give your data the same protection.
+      </div>
+
+      <p>Your phone already holds your most sensitive information: your location, your photos, your identity documents. We build around that fact &mdash; not by moving data to servers we control, but by keeping it on the device that already belongs to you.</p>
+
+      <h2>Our Apps</h2>
+
+      <div class="app-grid">
+        <a href="/apps/exifarmor" class="app-card">
+          <div class="app-card-icon">🛡️</div>
+          <div class="app-card-name">ExifArmor</div>
+          <div class="app-card-cat">Photo &amp; Video</div>
+          <div class="app-card-desc">Strip hidden GPS, camera, and timestamp metadata from photos before you share them. One tap. Originals untouched.</div>
+          <span class="app-card-status status-live">Live on App Store</span>
+        </a>
+        <a href="/apps/parkarmor" class="app-card">
+          <div class="app-card-icon">📍</div>
+          <div class="app-card-name">ParkArmor</div>
+          <div class="app-card-cat">Navigation</div>
+          <div class="app-card-desc">Save your parking spot in one tap. Get walking directions back, set a meter timer, check your lock screen widget.</div>
+          <span class="app-card-status status-live">Live on App Store</span>
+        </a>
+        <a href="/apps/docarmor" class="app-card">
+          <div class="app-card-icon">🔐</div>
+          <div class="app-card-name">DocArmor</div>
+          <div class="app-card-cat">Security</div>
+          <div class="app-card-desc">AES-256 encrypted vault for your IDs, insurance cards, and passports. Face ID protected. iCloud sync disabled.</div>
+          <span class="app-card-status status-planned">Planned</span>
+        </a>
+        <a href="/apps/safeopen" class="app-card">
+          <div class="app-card-icon">🔍</div>
+          <div class="app-card-name">SafeOpen</div>
+          <div class="app-card-cat">Security</div>
+          <div class="app-card-desc">Scan QR codes and inspect links before you open them. Our proxy follows the redirect chain and generates an AI summary — before you tap.</div>
+          <span class="app-card-status status-live">Live on App Store</span>
+        </a>
+        <a href="/apps/vaultyx" class="app-card">
+          <div class="app-card-icon">☁️</div>
+          <div class="app-card-name">Vaultyx</div>
+          <div class="app-card-cat">Cloud Storage</div>
+          <div class="app-card-desc">Zero-knowledge encrypted cloud storage with FastCDC delta sync. Your files route through WraithVPN. Only you hold the encryption key.</div>
+          <span class="app-card-status status-soon">Coming Soon</span>
+        </a>
+      </div>
+
+      <h2>Enclave Platform</h2>
+      <p>Beyond the apps, we operate <strong>Enclave</strong> — a privacy platform for people who want to own their network, identity, and digital perimeter. Haven provides encrypted DNS that blocks ads and trackers. WraithVPN routes your traffic through global nodes with no logs and no identity required. Vaultyx provides zero-knowledge encrypted cloud storage. Sigil issues token-based identities so you never have to hand over an email address.</p>
+      <p><a href="/pricing">See Enclave plans →</a></p>
+
+      <h2>Infrastructure</h2>
+      <p>Enclave runs on a continuously expanding global fleet — WireGuard exit nodes across North America, Europe, and Asia, and a geographically replicated S3 storage cluster spanning US East, US Central, and Canada East. New regions come up on request: our provisioner spins new nodes across Hetzner, Vultr, OVH, and Contabo via API in minutes, so the fleet grows with demand rather than sitting on a fixed footprint. Every file in Vaultyx is encrypted client-side before it ever touches our servers. Standard S3 API means you own your data — export it anytime with any S3 client, no lock-in. The entire platform is WireGuard-meshed with zero-knowledge design: we encrypt everything we can and store only what we must.</p>
+
+      <h2>How We Build</h2>
+      <p>Our core principle: your data is never collected, retained, or sold. For ExifArmor, ParkArmor, and DocArmor, all processing happens entirely on your device — no servers, no network calls, nothing to breach. SafeOpen is different by necessity: inspecting a link requires fetching it, so we do that fetch through our own privacy proxy. We see the destination so you don't have to expose your device to it. We log nothing about you.</p>
+      <p>Our apps are free to try and fair to upgrade. ExifArmor and ParkArmor are free with core functionality — no accounts, no timers, no expiry. A single $0.99 one-time purchase unlocks the full experience permanently, tied to your Apple ID. SafeOpen is free — 10 scan credits included, refilled monthly. Additional credits available as one-time in-app purchases (100 for $0.99, 500 for $2.99, 2,500 for $9.99). No subscription, no dark patterns, no dark consent flows.</p>
+
+      <h2>Katafract, by the numbers</h2>
+
+      <div class="fact-grid">
+        <div class="fact-card">
+          <div class="fact-label">Founded</div>
+          <div class="fact-value">2025</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-label">Fleet</div>
+          <div class="fact-value">Global · expanding</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-label">Providers</div>
+          <div class="fact-value">Hetzner · Vultr · OVH · Contabo</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-label">Data collected on users</div>
+          <div class="fact-value">Zero</div>
+        </div>
+      </div>
+
+      <h2>Legal</h2>
+      <p>Katafract, ExifArmor, ParkArmor, SafeOpen, DocArmor, WraithVPN, Vaultyx, and the Katafract shield mark are trademarks of Katafract LLC. All rights reserved.</p>
+      <p>Apple, iPhone, iOS, Face ID, and App Store are trademarks of Apple Inc., registered in the U.S. and other countries. Katafract LLC is an independent developer and is not affiliated with Apple Inc.</p>
+
+      <h2>Contact</h2>
+      <div class="contact-card">
+        <h3>Get in Touch</h3>
+        <p>Katafract LLC</p>
+        <p><a href="mailto:hello@katafract.com">hello@katafract.com</a></p>
+        <p>For general inquiries, press, or partnership questions. We typically respond within one business day.</p>
+      </div>
+
+    </div>
+  </main>
+</Base>

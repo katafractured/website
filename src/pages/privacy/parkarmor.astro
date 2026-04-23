@@ -1,0 +1,109 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Privacy Policy — ParkArmor by Katafract"
+  description="ParkArmor privacy policy. Your parking location never leaves your device. No accounts, no cloud, no tracking."
+  ogDescription="ParkArmor collects zero data. Your location stays on your device. No servers, no tracking, no accounts."
+  section="prose"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+
+
+    <div class="prose-header">
+      <p class="prose-eyebrow">ParkArmor &mdash; Privacy Policy</p>
+      <h1>ParkArmor Privacy Policy</h1>
+      <p class="prose-meta">Katafract LLC &mdash; Last updated March 2026 &mdash; <a href="//privacy">All app policies &rarr;</a></p>
+    </div>
+
+    <div class="prose-body">
+
+      <div class="callout">
+        <p>ParkArmor saves your parking spot so you can find your way back. Your location data is stored only on your device and is never transmitted anywhere. No account required, ever.</p>
+      </div>
+
+      <h2>What Data Does ParkArmor Collect?</h2>
+      <p>None. ParkArmor does not collect, store, transmit, or share any personal data whatsoever.</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Collected?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GPS location of parked car</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Parking photos (garage signs, etc.)</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Location history or movement data</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Device identifiers (IDFA, etc.)</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Usage analytics</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Crash logs</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+          <tr>
+            <td>Account or login information</td>
+            <td><span class="badge-never">Never</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Location Access</h2>
+      <p>ParkArmor uses your device's GPS to record where you parked. This coordinate is stored <strong>only in local device storage</strong> (iOS UserDefaults / on-device database) and is never transmitted to any server. The location is used solely to display a map pin and provide walking directions back to your car via Apple Maps — both of which are handled entirely on-device by iOS.</p>
+      <p>ParkArmor requests "When In Use" location access. It does not request background location access and does not track your location while you are away from your car.</p>
+
+      <h2>Parking Photos</h2>
+      <p>If you photograph a garage sign or parking note as a reminder, that photo is stored locally in the app's private container on your device. It is not added to your photo library unless you explicitly save it there, and it is never uploaded or transmitted anywhere.</p>
+
+      <h2>Parking Timer and Notifications</h2>
+      <p>The parking timer feature uses iOS's local notifications framework (UNUserNotificationCenter). Notifications are scheduled and delivered entirely on your device — no push notification server is involved and no data is sent anywhere to trigger them. Notification permission is requested only when you first use the timer feature.</p>
+
+      <h2>Lock Screen and Home Screen Widgets</h2>
+      <p>ParkArmor's widgets read your saved parking data from local device storage using Apple's WidgetKit framework. Widget data never leaves your device and is not shared with any external service.</p>
+
+      <h2>In-App Purchases</h2>
+      <p>ParkArmor is a one-time purchase processed entirely by Apple through the App Store. We do not receive or store your payment information, Apple ID, or any billing details. Purchase verification is handled on-device by Apple's StoreKit framework.</p>
+
+      <h2>Third-Party Services</h2>
+      <p>ParkArmor does not integrate with any third-party analytics services, advertising networks, social media SDKs, mapping APIs, or data brokers. Navigation is handed off to Apple Maps via a standard iOS URL — no location data is shared with us in that process.</p>
+
+      <h2>iCloud and Backups</h2>
+      <p>ParkArmor stores data in local device storage only. Parking data is not synced via iCloud. Standard iOS device backups (iCloud Backup or local iTunes/Finder backups) may include app data as part of the full device backup — this is standard iOS behavior and the data remains within your Apple account's control.</p>
+
+      <h2>Children's Privacy</h2>
+      <p>ParkArmor does not collect personal information from anyone, including children under 13. The app is rated 4+ and is safe for all ages.</p>
+
+      <h2>Data Retention</h2>
+      <p>All data (saved location, parking photo, timer settings) is stored locally on your device and is deleted when you clear it within the app or uninstall the app. We retain nothing on our end because nothing is ever sent to us.</p>
+
+      <h2>Changes to This Policy</h2>
+      <p>If we ever change this privacy policy, we will update this page with the new date. Since we don't collect email addresses or contact information, we cannot notify you directly &mdash; please check this page periodically.</p>
+
+      <h2>Contact</h2>
+      <p>If you have questions about this privacy policy or ParkArmor's privacy practices, please reach out:</p>
+      <div class="contact-card">
+        <h3>Privacy Inquiries</h3>
+        <p>Katafract LLC</p>
+        <p><a href="mailto:privacy@katafract.com">privacy@katafract.com</a></p>
+        <p>We typically respond within one business day.</p>
+      </div>
+
+    </div>
+  
+</Base>

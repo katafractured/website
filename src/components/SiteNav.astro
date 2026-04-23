@@ -1,0 +1,32 @@
+---
+export interface Props {
+  section?: 'home' | 'enclave' | 'dns' | 'platform' | 'apps' | 'pricing' | 'about' | 'prose';
+}
+const { section = 'home' } = Astro.props;
+const active = (k: string) => (section === k ? 'active' : '');
+---
+<nav id="nav">
+  <a href="/" class="nav-brand">
+    <img src="/katafract-mark.svg" class="nav-mark" alt="" />
+    <span>Katafract</span>
+  </a>
+  <div class="nav-links">
+    <a href="/enclave" class={`hide-sm ${active('enclave')}`}>Enclave</a>
+    <a href="/dns" class={`hide-sm ${active('dns')}`}>Haven DNS</a>
+    <a href="/platform/" class={`hide-sm ${active('platform')}`}>Platform</a>
+    <a href="/#apps" class={`hide-sm ${active('apps')}`}>Apps</a>
+    <a href="/pricing" class={active('pricing')}>Pricing</a>
+    <a href="/about" class={`hide-sm ${active('about')}`}>About</a>
+    <a href="/#signup" class="nav-cta fm">Get Updates</a>
+  </div>
+</nav>
+<script>
+  // Apply loaded class after DOM is ready so the nav fades in.
+  requestAnimationFrame(() => {
+    const n = document.getElementById('nav');
+    if (n) n.classList.add('loaded');
+  });
+</script>
+<style is:global>
+  #nav a.active { color: var(--magenta); }
+</style>

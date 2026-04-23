@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Terms of Service &middot; SafeOpen by Katafract"
+  description="SafeOpen Terms of Service. Free to download, consumable scan credits, no subscription, no auto-renewal."
+  ogDescription="Free to download, consumable scan credits, no subscription, no auto-renewal."
+  section="prose"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+
+
+    <div class="prose-header">
+      <p class="prose-eyebrow">SafeOpen Terms of Service</p>
+      <h1>SafeOpen Terms of Service</h1>
+      <p class="prose-meta">Effective: April 2026 &middot; <a href="//apps/safeopen">About SafeOpen &rarr;</a></p>
+    </div>
+
+    <div class="prose-body">
+
+      <h2>Agreement</h2>
+      <p>By downloading or using SafeOpen ("the app"), you agree to these Terms. If you do not agree, do not use the app. SafeOpen is published by Katafract LLC ("Katafract", "we", "us"), a United States limited liability company.</p>
+
+      <h2>What SafeOpen is</h2>
+      <p>SafeOpen is a QR code and link inspection utility for iOS. It decodes QR codes, classifies payloads, and scores link risk using local on-device algorithms. Two optional features (AI Summary and Open Safely) call Katafract servers and consume scan credits. SafeOpen is informational software. It is not a security guarantee, not a VPN service, and not a replacement for your own judgment about whether to open a link.</p>
+
+      <h2>No warranty on risk scores</h2>
+      <p>SafeOpen&rsquo;s risk scores are produced by deterministic local heuristics and a server-side AI summary. They are informational only. A link scored "Likely Safe" may still be harmful. A link scored "High Risk" may be entirely benign. You are responsible for your own judgment about whether to open any link. Katafract accepts no liability for any harm resulting from a link you choose to open or not open based on SafeOpen&rsquo;s output. The app is provided "as is", without warranties of any kind.</p>
+
+      <h2>Free tier and scan credits</h2>
+      <p>The app is free to download. The on-device features (scanning, risk scoring, tracking-parameter stripping, history) require no credits and can be used indefinitely at no cost.</p>
+      <p>The two backend-powered features (AI Summary and Open Safely) consume 1 scan credit per use. Every install starts with 10 free credits. We add 10 more free credits every 30 days. You may purchase additional credits as consumable in-app purchases:</p>
+      <ul>
+        <li><strong>Starter:</strong> $0.99 for 100 credits</li>
+        <li><strong>Standard:</strong> $2.99 USD for 500 credits</li>
+        <li><strong>Power:</strong> $9.99 USD for 2,500 credits</li>
+      </ul>
+      <p><strong>Credits never expire.</strong> There is no subscription, no auto-renewal, and nothing recurring. Each purchase is a one-time consumable.</p>
+
+      <h2>Refunds</h2>
+      <p>All purchases are processed by Apple. Refund requests must be submitted to Apple at <a href="https://reportaproblem.apple.com" rel="noopener">reportaproblem.apple.com</a> under their standard refund policy. Katafract does not process payments and cannot issue refunds directly.</p>
+      <p>If Apple refunds a credit pack purchase, the credits granted by that purchase will be deducted from your balance. If your balance is insufficient because the credits were already spent, your balance will be set to zero and you will not owe Katafract anything.</p>
+
+      <h2>Lost credits</h2>
+      <p>Your credit balance is tied to the anonymous device UUID stored in your device&rsquo;s Keychain. Deleting and reinstalling the app generates a new UUID and resets your balance to a fresh 10 welcome credits. Credits cannot be transferred between devices or recovered after a reinstall because we have no account system or device-to-account mapping. If you anticipate moving devices, hold off on bulk credit purchases or use the Restore Purchases button on the new device immediately after reinstalling on the original device (Apple will replay the consumable transactions and we will re-grant the credits).</p>
+
+      <h2>Permitted use</h2>
+      <p>SafeOpen is licensed for personal use. You may use the app on any device you own or control. You may not reverse engineer, decompile, redistribute, or scrape the app or its backend outside of Apple&rsquo;s standard distribution channels. You may not use SafeOpen&rsquo;s relay or AI Summary features to inspect, fetch, or summarize content that violates the law or Katafract&rsquo;s acceptable use policy (no CSAM, no malware distribution, no automated abuse). We reserve the right to rate-limit or terminate access from any device that exhibits abusive patterns.</p>
+
+      <h2>Privacy</h2>
+      <p>SafeOpen collects an anonymous device UUID for credit-balance tracking and the URLs you submit to AI Summary or Open Safely for abuse prevention. Full disclosure is in the <a href="//privacy/safeopen">SafeOpen Privacy Policy</a>.</p>
+
+      <h2>Changes</h2>
+      <p>We may update these terms as the app evolves. Material changes will be announced at katafract.com and reflected in an updated effective date above. Continued use after a change constitutes acceptance.</p>
+
+      <h2>Governing law</h2>
+      <p>These terms are governed by the laws of the United States and the state in which Katafract LLC is registered, without regard to conflict-of-law provisions.</p>
+
+      <h2>Contact</h2>
+      <p><a href="mailto:hello@katafract.com">hello@katafract.com</a></p>
+      <p>Katafract LLC, United States</p>
+
+    </div>
+  
+</Base>

@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Control plane — Platform — Katafract"
+  description="The control plane. What the central API does, which data it holds, and what happens when it is offline."
+  section="platform"
+  twitterCard="summary"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+
+  <main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow">Platform / Module</p>
+      <h1>Control plane</h1>
+      <p class="prose-meta">The machinery that operates the fleet. Not a service customers reach directly.</p>
+    </div>
+
+    <div class="prose-body">
+
+      <p class="light">The control plane is the system that takes a subscription event from Stripe or an app store, turns it into a provisioned VPN peer or a storage bucket, and tracks the fleet of nodes that make the product work. It is not a service customers reach directly. We describe it here because every other module on this site refers to "the control plane," and people deserve to know what that phrase refers to.</p>
+
+      <h2>What it does</h2>
+
+      <ul>
+        <li><strong>Provisioning.</strong> When the VPN app asks for a peer in a region, the API writes a peer record to the database, generates a WireGuard configuration, SSHes to the chosen exit node over the mesh, and installs the peer. The round trip usually completes in a few seconds.</li>
+        <li><strong>Billing webhooks.</strong> Stripe events and App Store / Play Store receipts land here. The API verifies them, records the resulting entitlement, and issues a subscription token (see <a href="/platform/sigil">Sigil</a>).</li>
+        <li><strong>Fleet management.</strong> The scheduler decides which regions need more capacity, monitors node health via heartbeats, and coordinates updates. It also handles node replacement: a dying exit node is drained, a new one is provisioned, customer peers are re-applied on the new node.</li>
+        <li><strong>Internal admin dashboard.</strong> A React app accessible only to Katafract operators, behind our internal identity provider. Operators use it to view fleet state and handle support cases. Customer data in the dashboard is limited to what support needs to answer a ticket — a subscription status, the region of a peer, no packet contents or DNS queries.</li>
+      </ul>
+
+      <h2>Where it runs</h2>
+
+      <p>Redundant control-plane instances with automatic failover. Both instances run the same code against a streaming-replicated database; if the primary fails, a hot standby is promoted. Customer API calls hit a load-balanced hostname that resolves to whichever instance is healthy.</p>
+
+      <p>The database is a modern relational engine with an additional hot-standby replica for disaster recovery. Secrets — API keys, store credentials, TLS private keys — live in a self-hosted secrets manager that the control plane reads from at startup. Nothing on the customer's side depends on these internals; we describe them so that "the control plane" is not a black box.</p>
+
+      <h2>What the control plane stores</h2>
+
+      <ul>
+        <li>Per-customer <strong>subscription state</strong>: tier, expiry, token hash, store transaction identifier. (<a href="/platform/sigil">Sigil</a> details the shape of this.)</li>
+        <li>Per-customer <strong>peer records</strong>: which WraithGate node the peer lives on, WireGuard public key, internal subnet address, timestamp of last provision. We do not store traffic metadata.</li>
+        <li><strong>Fleet telemetry</strong>: node heartbeats, capacity counters, health state. Not tied to individual customers.</li>
+        <li><strong>Audit log</strong> of provisioning events: "peer X was provisioned on node Y at time T." Used for debugging and to roll back bad provisions.</li>
+      </ul>
+
+      <h2>What the control plane does not store</h2>
+
+      <ul>
+        <li>VPN packet contents, DNS queries, or destination IPs. These do not reach the control plane — they do not reach our mesh at all.</li>
+        <li>Plaintext Vaultyx data. The control plane brokers presigned URLs; the bytes transit directly between your device and Shards.</li>
+        <li>Customer email addresses or device identifiers for consumer app usage. The only customer-provided identifier we hold for a paying subscriber is the subscription token hash.</li>
+      </ul>
+
+      <h2>Observability</h2>
+
+      <p>We run industry-standard fleet monitoring against our own infrastructure — node CPU, memory, bandwidth, API latency, error rates. These dashboards are for our operators. They contain aggregate fleet metrics, not per-customer traffic. Operator login is SSO to our internal identity provider; customer tokens are not valid there.</p>
+
+      <h2>Failure mode</h2>
+
+      <p>If the control plane is completely offline, existing VPN tunnels keep working — WraithGate nodes hold their peer tables locally, so an active connection does not depend on the control plane being up. Provisioning new peers, rotating servers, and processing new subscriptions stop until the control plane is back. This is the right tradeoff: outages affect onboarding, not in-flight privacy.</p>
+
+      <h2>What this means for you</h2>
+
+      <p>The control plane is where a lot of privacy products quietly retain too much — "for support," "for analytics," "for fraud prevention." Ours holds subscription state and fleet health, and that is roughly it. If an outage takes the control plane down, your existing tunnels do not notice. If a compelled disclosure asked the control plane for customer traffic, the honest answer is that the control plane never sees customer traffic.</p>
+
+      <p>Back to <a href="/platform/">all modules</a>.</p>
+
+    </div>
+  </main>
+</Base>

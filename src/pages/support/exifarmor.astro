@@ -1,0 +1,129 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Support — ExifArmor by Katafract"
+  description="Get help with ExifArmor. FAQs, how-to guides, and contact information."
+  section="prose"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+
+
+    <div class="prose-header">
+      <p class="prose-eyebrow">ExifArmor &mdash; Support</p>
+      <h1>ExifArmor Support</h1>
+      <p class="prose-meta">Questions? &mdash; <a href="mailto:hello@katafract.com">hello@katafract.com</a> &mdash; <a href="//support">All app support &rarr;</a></p>
+    </div>
+
+    <div class="prose-body">
+
+      <h2>Getting Started</h2>
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <button class="faq-q">What is EXIF metadata?</button>
+          <div class="faq-a">
+            EXIF (Exchangeable image file format) is hidden data embedded in every photo by your camera or phone. It can include your precise GPS location, the make and model of your device, timestamps, camera settings like aperture and ISO, and more. When you share a photo, this data travels with it &mdash; visible to anyone who knows how to look.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How do I strip metadata from a photo?</button>
+          <div class="faq-a">
+            Open ExifArmor and tap the photo picker on the Home tab. Select one or more photos, then tap &ldquo;Preview Exposure&rdquo; to see what metadata is embedded. Tap &ldquo;Strip &amp; Save&rdquo; to remove it all. Your cleaned photo is saved back to your photo library.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Does ExifArmor modify my original photo?</button>
+          <div class="faq-a">
+            No. ExifArmor creates a new cleaned copy of your photo and saves it to your library. Your original photo is never modified or deleted. You can delete the original yourself if you choose.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What metadata does ExifArmor remove?</button>
+          <div class="faq-a">
+            By default, ExifArmor removes all EXIF metadata including GPS coordinates, camera make and model, timestamps, lens info, exposure settings, device serial numbers, and any software tags. With ExifArmor Pro you can customize exactly which fields to keep or remove.
+          </div>
+        </div>
+      </div>
+
+      <h2>ExifArmor Pro</h2>
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <button class="faq-q">What is included in ExifArmor Pro?</button>
+          <div class="faq-a">
+            Pro unlocks: unlimited photo strips (free tier is 5/day), batch processing for multiple photos at once, the iOS share extension to strip directly from other apps, and custom strip options to choose exactly which metadata fields to remove.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is Pro a subscription?</button>
+          <div class="faq-a">
+            No. ExifArmor Pro is a one-time upgrade for $0.99. Pay once and own it forever &mdash; no recurring charges, no subscription.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How do I restore my Pro purchase on a new device?</button>
+          <div class="faq-a">
+            Open ExifArmor, tap the Settings tab, and tap &ldquo;Restore Purchases.&rdquo; As long as you&rsquo;re signed in with the same Apple ID used for the original purchase, Pro will be restored at no charge.
+          </div>
+        </div>
+      </div>
+
+      <h2>Privacy &amp; Data</h2>
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <button class="faq-q">Does ExifArmor send my photos anywhere?</button>
+          <div class="faq-a">
+            Never. All processing happens entirely on your device. Your photos and their metadata never leave your iPhone through ExifArmor. There are no servers involved in the stripping process.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Why does ExifArmor need access to my photo library?</button>
+          <div class="faq-a">
+            ExifArmor needs read access to let you select photos, and write access to save the cleaned copies back to your library. It only accesses photos you explicitly select &mdash; it never scans or reads your full library in the background.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Does ExifArmor collect any data?</button>
+          <div class="faq-a">
+            No. ExifArmor collects zero data. There are no analytics SDKs, no crash reporters, no network calls of any kind. See the full <a href="//privacy/exifarmor">ExifArmor Privacy Policy</a> for details.
+          </div>
+        </div>
+      </div>
+
+      <h2>Troubleshooting</h2>
+
+      <div class="faq-section">
+        <div class="faq-item">
+          <button class="faq-q">The app says I&rsquo;ve reached my daily limit. What do I do?</button>
+          <div class="faq-a">
+            The free tier allows 5 strips per day. The limit resets at midnight local time. To remove the limit entirely, upgrade to ExifArmor Pro from the Settings tab &mdash; it&rsquo;s a one-time $0.99 purchase.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">The Share Extension isn&rsquo;t appearing in my share sheet.</button>
+          <div class="faq-a">
+            ExifArmor Pro is required for the share extension. If you have Pro and the extension still doesn&rsquo;t appear: open the share sheet in Photos, scroll to the bottom of the app row, tap &ldquo;More,&rdquo; and enable ExifArmor in the list. You may also need to tap &ldquo;Edit&rdquo; to make it appear in your quick actions.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">The stripped photo looks different from the original.</button>
+          <div class="faq-a">
+            ExifArmor only removes metadata &mdash; it does not alter the pixel data of your photos. If you notice a visual difference, it is likely due to color profile information that may be embedded as metadata. The image content itself is preserved exactly.
+          </div>
+        </div>
+      </div>
+
+      <h2>Contact Us</h2>
+      <p>Didn&rsquo;t find what you were looking for? We&rsquo;re happy to help.</p>
+      <div class="contact-card">
+        <h3>Get in Touch</h3>
+        <p>Katafract LLC</p>
+        <p><a href="mailto:hello@katafract.com">hello@katafract.com</a></p>
+        <p>We typically respond within one business day.</p>
+      </div>
+
+    </div>
+  
+</Base>

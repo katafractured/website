@@ -1,0 +1,134 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base
+  title="Platform Architecture — Katafract"
+  description="How the Enclave platform is built. Modules, infrastructure, trust boundaries — and what we can and cannot see."
+  section="platform"
+  twitterCard="summary"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+  <style slot="head" is:global>
+    /* Module index grid — reused pattern from about.html app-card but named differently
+       to avoid any collision with home page .app-card. */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1.75rem 0 2.5rem;
+    }
+    a.module-card {
+      display: block;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 0.875rem;
+      padding: 1.25rem 1.5rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    a.module-card:hover { border-color: rgba(0,240,255,0.2); background: var(--bg3); text-decoration: none; }
+    .module-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .module-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--dim2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.6rem;
+    }
+    .module-desc { font-size: 0.9rem; color: var(--dim); line-height: 1.6; }
+  </style>
+
+  <main class="prose-page">
+    <div class="prose-header">
+      <p class="prose-eyebrow">Platform</p>
+      <h1>How Enclave is built</h1>
+      <p class="prose-meta">A plain description of the modules, what they do, and what Katafract can see.</p>
+    </div>
+
+    <div class="prose-body">
+
+      <p class="light">Most privacy products market a feature and hide the architecture. We publish the architecture. These pages are written for people who want to know how a service works before they trust it with their traffic, their DNS, or their files.</p>
+
+      <p>Enclave is seven modules. Each is independent — you can use Haven DNS without the VPN, or Vaultyx without Haven — but they share one property: we designed them so that the private parts of your data never reach our servers in a form we can read. Where that is impossible (a VPN node has to see packet routing metadata; a billing system has to see a Stripe customer ID), we say so.</p>
+
+      <h2>The modules</h2>
+
+      <div class="module-grid">
+        <a href="/platform/shroudnet" class="module-card">
+          <div class="module-name">ShroudNet</div>
+          <div class="module-role">Network fabric</div>
+          <div class="module-desc">The WireGuard mesh that connects our nodes to each other. Not something you connect to directly.</div>
+        </a>
+        <a href="/platform/wraithgate" class="module-card">
+          <div class="module-name">WraithGate</div>
+          <div class="module-role">VPN exit nodes</div>
+          <div class="module-desc">Global WireGuard endpoints. When you use the VPN app, this is the server your device hands traffic to.</div>
+        </a>
+        <a href="/platform/haven" class="module-card">
+          <div class="module-name">Haven</div>
+          <div class="module-role">DNS filtering</div>
+          <div class="module-desc">Industry-standard DNS filtering on every VPN node. Blocks ads, trackers, and malicious domains. No query logs.</div>
+        </a>
+        <a href="/platform/shards" class="module-card">
+          <div class="module-name">Shards</div>
+          <div class="module-role">Object storage</div>
+          <div class="module-desc">Multi-region, S3-compatible storage. Vaultyx stores its encrypted chunks here. We never hold your key.</div>
+        </a>
+        <a href="/platform/sigil" class="module-card">
+          <div class="module-name">Sigil</div>
+          <div class="module-role">Token-based identity</div>
+          <div class="module-desc">How the apps authenticate you without holding an email, a password, or a name.</div>
+        </a>
+        <a href="/platform/artemis" class="module-card">
+          <div class="module-name">Control plane</div>
+          <div class="module-role">Fleet operations</div>
+          <div class="module-desc">The API and scheduler that provisions VPN peers, handles billing, and operates the fleet. Our systems, not yours.</div>
+        </a>
+        <a href="/platform/trust" class="module-card">
+          <div class="module-name">Trust posture</div>
+          <div class="module-role">What we can see</div>
+          <div class="module-desc">A single page that lists, per module, what data Katafract can read, what we cannot, and why.</div>
+        </a>
+      </div>
+
+      <h2>How to read these pages</h2>
+
+      <p>Each page answers four questions in roughly the same order:</p>
+
+      <ul>
+        <li><strong>What is it?</strong> The function, in one sentence a non-engineer can parse.</li>
+        <li><strong>How does it work?</strong> The stack. Protocol names, cryptographic primitives, deployment topology.</li>
+        <li><strong>What can Katafract see?</strong> Concrete data we hold, for how long, and why.</li>
+        <li><strong>What can Katafract not see?</strong> The things our architecture prevents us from knowing, even if we were compelled to disclose them.</li>
+      </ul>
+
+      <p>Pages end with a short "What this means for you" note — what the architecture buys you, stated honestly. No upsell.</p>
+
+      <h2>Why publish this</h2>
+
+      <p>Trust is cheap to claim and expensive to verify. A product page that says "zero-knowledge encryption" without explaining where the key lives, which cipher does the work, and what the server actually stores is indistinguishable from one that says the same thing dishonestly. Describing the mechanism is the only way to let a technical reader check our claim against what is physically possible.</p>
+
+      <p>We publish this because our customers should be able to argue with our architecture. If you read these pages and find a claim that does not line up with the mechanism — tell us. <a href="mailto:hello@katafract.com">hello@katafract.com</a>.</p>
+
+      <h2>Related transparency pages</h2>
+
+      <ul>
+        <li><a href="/canary">Warrant canary</a> — quarterly statement on legal process we have not received.</li>
+        <li><a href="https://connect.katafract.com/privacy">No-log policy</a> — what the VPN and DNS modules do not store.</li>
+        <li><a href="/privacy">Privacy policies</a> — per-app privacy documents.</li>
+      </ul>
+
+      <h2>What this means for you</h2>
+
+      <p>You should be able to use a privacy tool without taking anyone's word for anything. These pages describe Enclave at the level of a VP-of-IT reading a vendor design review — protocol, primitive, trust boundary. Read whichever module you care about. Skip the rest.</p>
+
+    </div>
+  </main>
+</Base>

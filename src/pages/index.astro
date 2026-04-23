@@ -1,0 +1,772 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title={`Katafract Enclave — Own your network, identity, and files`}
+  description={`Armored privacy for independent thinkers. No accounts, no cloud, no tracking. Your data stays on your device, by design.`}
+  section="home"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+  <style slot="head" is:global set:html={`
+    :root {
+      --bg:       #050510;
+      --bg2:      #0a0a14;
+      --bg3:      #0e0e1c;
+      --border:   rgba(100,100,120,0.1);
+      --border2:  rgba(100,100,120,0.06);
+      --cyan:     #00F0FF;
+      --magenta:  #FF006E;
+      --text:     #EBF0F7;
+      --dim:      #8C94A6;
+      --dim2:     #4a5060;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .fd { font-family: 'Cormorant Garamond', Georgia, serif; }
+    .fm { font-family: 'JetBrains Mono', monospace; }
+
+    /* ── Animations ── */
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+    @keyframes scan  { 0%{top:0%} 100%{top:100%} }
+    @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(40px)} to{opacity:1;transform:translateY(0)} }
+    .float { animation: float 4s ease-in-out infinite; }
+    .pulse { animation: pulse 2s ease-in-out infinite; }
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up-d1 { transition-delay: .15s; }
+    .fade-up-d2 { transition-delay: .3s; }
+
+    /* ── Glow dots ── */
+    .glow { position: absolute; pointer-events: none; border-radius: 50%; transform: translate(-50%,-50%); }
+
+    /* ── Scanline ── */
+    .scanline { position: relative; }
+    .scanline::after {
+      content: ''; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,240,255,.12), transparent);
+      animation: scan 6s linear infinite; pointer-events: none; z-index: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 max(2rem, calc((100% - 1080px) / 2));
+      background: rgba(5,5,15,.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,240,255,.06);
+      overflow: visible;
+      opacity: 0; transform: translateY(-20px);
+      transition: opacity .6s ease .3s, transform .6s ease .3s;
+    }
+    nav.loaded { opacity: 1; transform: translateY(0); }
+    .nav-brand { display: flex; align-items: center; gap: .65rem; }
+    .nav-brand .nav-mark { height: 2.75rem; width: auto; aspect-ratio: 100/118; flex-shrink: 0; display: block; }
+    .nav-brand span { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; letter-spacing: .04em; color: var(--text); }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; }
+    .nav-links a { color: var(--dim); font-size: .8rem; letter-spacing: .02em; transition: color .15s; }
+    .nav-links a:hover { color: var(--cyan); text-decoration: none; }
+    .nav-cta {
+      font-family: 'JetBrains Mono', monospace; font-size: .72rem;
+      padding: .45rem 1.1rem; border-radius: 999px;
+      border: 1px solid rgba(100,100,120,.4);
+      color: var(--dim); transition: border-color .15s, color .15s;
+    }
+    .nav-cta:hover { border-color: var(--cyan); color: var(--cyan); text-decoration: none; }
+    @media (min-width: 768px) { nav { height: 68px; } .nav-brand .nav-mark { height: 3.2rem; } .nav-brand span { font-size: 1.25rem; } .nav-links { gap: 2.25rem; } .nav-links a { font-size: .875rem; } }
+    @media (min-width: 1100px) { nav { height: 72px; } .nav-brand .nav-mark { height: 3.5rem; } .nav-brand span { font-size: 1.3rem; } }
+    @media (max-width: 640px) { nav { height: 54px; padding: 0 1.25rem; } .nav-brand .nav-mark { height: 2.4rem; } .nav-links { gap: 1.1rem; } }
+    @media (max-width: 480px) { nav { padding: 0 1rem; } .nav-links .hide-sm { display: none; } .nav-links { gap: 1rem; } }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 6rem 2rem 4rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero-inner {
+      position: relative; z-index: 1; max-width: 900px; margin: 0 auto;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(.16,1,.3,1) .5s, transform 1s cubic-bezier(.16,1,.3,1) .5s;
+    }
+    .hero-inner.loaded { opacity: 1; transform: translateY(0); }
+    .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: var(--dim2); letter-spacing: .35em; text-transform: uppercase; margin-bottom: 2rem; }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif; font-weight: 700; line-height: 1.0;
+      letter-spacing: -.01em; margin-bottom: 1.5rem;
+      font-size: clamp(3.5rem, 8vw, 5.5rem);
+      text-shadow: 0 0 60px rgba(0,240,255,.2);
+    }
+    .hero h1 em { font-style: normal; color: var(--cyan); }
+    .hero p { font-size: clamp(1rem,2vw,1.2rem); color: var(--dim); max-width: 640px; margin: 0 auto 3rem; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--cyan); color: #050510;
+      font-weight: 700; font-size: .9rem;
+      padding: .875rem 2rem; border-radius: 999px;
+      transition: opacity .15s, transform .1s;
+    }
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); text-decoration: none; }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: .5rem;
+      color: var(--dim); font-size: .9rem;
+      padding: .875rem 2rem; border-radius: 999px;
+      border: 1px solid rgba(100,100,120,.3);
+      transition: border-color .15s, color .15s;
+    }
+    .btn-ghost:hover { border-color: rgba(100,100,120,.6); color: var(--text); text-decoration: none; }
+    .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); opacity: .3; }
+    .hero-scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, transparent, var(--cyan)); margin: 0 auto; }
+
+    /* ── Sections ── */
+    section { position: relative; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .section-pad { padding: 8rem 0; }
+    @media (max-width: 640px) { .section-pad { padding: 5rem 0; } .container { padding: 0 1.25rem; } }
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: var(--cyan); letter-spacing: .3em; text-transform: uppercase; margin-bottom: 1rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+    .section-sub { color: var(--dim); max-width: 600px; line-height: 1.7; margin-bottom: 3.5rem; }
+
+    /* ── Philosophy ── */
+    .philosophy-body { max-width: 720px; }
+    .philosophy-body p { color: var(--dim); font-size: 1.1rem; line-height: 1.85; margin-bottom: 1.5rem; }
+    .philosophy-body p.highlight { color: #c8cfd8; }
+    .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1rem; margin-top: 4rem; }
+    .pillar {
+      padding: 1.75rem; border-radius: 1rem;
+      background: rgba(10,10,20,.6);
+      border: 1px solid rgba(100,100,120,.12);
+      transition: border-color .2s;
+    }
+    .pillar:hover { border-color: rgba(0,240,255,.15); }
+    .pillar-icon { color: var(--cyan); opacity: .6; margin-bottom: 1rem; font-size: 1.2rem; transition: opacity .2s; }
+    .pillar:hover .pillar-icon { opacity: 1; }
+    .pillar h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; margin-bottom: .6rem; }
+    .pillar p { color: var(--dim); font-size: .875rem; line-height: 1.65; }
+
+    /* ── Apps ── */
+    .app-list { display: flex; flex-direction: column; gap: .75rem; }
+    .app-card {
+      border-radius: 1rem; border: 1px solid rgba(100,100,120,.12);
+      background: rgba(10,10,20,.3);
+      overflow: hidden; cursor: pointer;
+      transition: border-color .3s, background .3s;
+    }
+    .app-card.open { background: rgba(10,10,20,.8); }
+    .app-card-header {
+      padding: 1.25rem 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .app-icon {
+      width: 48px; height: 48px; border-radius: .75rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 1.35rem;
+      border: 1px solid; /* color set inline */
+    }
+    .app-meta { flex: 1; min-width: 0; }
+    .app-name-row { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; margin-bottom: .2rem; }
+    .app-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; }
+    .app-badge {
+      font-family: 'JetBrains Mono', monospace; font-size: .65rem;
+      padding: .2rem .6rem; border-radius: 999px;
+    }
+    .app-cat { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: var(--dim2); }
+    .app-tagline { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: var(--dim); }
+    .app-price { font-family: 'JetBrains Mono', monospace; font-size: .85rem; font-weight: 600; flex-shrink: 0; }
+    .app-chevron { color: var(--dim2); flex-shrink: 0; font-size: 1rem; transition: transform .3s; }
+    .app-card.open .app-chevron { transform: rotate(90deg); }
+    .app-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .5s cubic-bezier(.16,1,.3,1), opacity .4s ease;
+      opacity: 0;
+    }
+    .app-card.open .app-body { max-height: 600px; opacity: 1; }
+    .app-body-inner { padding: 0 1.5rem 2rem; display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    .app-desc-col { flex: 1; min-width: 200px; }
+    .app-desc-col p { color: var(--dim); line-height: 1.7; margin-bottom: 1.5rem; font-size: .95rem; }
+    .app-features { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem .75rem; margin-bottom: 1.5rem; }
+    .app-feature { display: flex; align-items: flex-start; gap: .5rem; font-size: .875rem; color: var(--dim); }
+    .app-feature-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+    .app-price-note { font-size: .75rem; color: var(--dim2); }
+    .app-mockup-col { width: 200px; flex-shrink: 0; }
+    .app-mockup {
+      border-radius: 1rem; border: 1px solid rgba(100,100,120,.3);
+      background: #0a0a14; overflow: hidden;
+    }
+    .app-store-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: white; color: #050510;
+      font-weight: 700; font-size: .85rem;
+      padding: .6rem 1.25rem; border-radius: 999px;
+      margin-top: 1rem;
+      transition: background .15s;
+    }
+    .app-store-btn:hover { background: #e8e8e8; text-decoration: none; }
+    .app-detail-link {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace; font-size: .75rem;
+      margin-top: .75rem; margin-left: 1rem;
+      color: var(--dim); text-decoration: none;
+      transition: color .15s;
+    }
+    .app-detail-link:hover { color: var(--text); text-decoration: none; }
+    @media (max-width: 640px) { .app-mockup-col { display: none; } .app-features { grid-template-columns: 1fr; } .app-price { display: none; } .app-cat { display: none; } }
+
+    /* Mockup styles */
+    .mock-pad { padding: 1rem; }
+    .mock-box { border-radius: .75rem; padding: .75rem; margin-bottom: .75rem; }
+    .mock-label { font-family: 'JetBrains Mono', monospace; font-size: .65rem; margin-bottom: .35rem; display: flex; align-items: center; gap: .4rem; }
+    .mock-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .mock-data { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: #8C94A6; line-height: 1.8; }
+    .mock-row { display: flex; align-items: center; justify-content: space-between; padding: .4rem 0; border-bottom: 1px solid rgba(255,255,255,.04); }
+    .mock-row:last-child { border-bottom: none; }
+    .mock-row-left .name { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: #EBF0F7; }
+    .mock-row-left .sub  { font-family: 'JetBrains Mono', monospace; font-size: .55rem; color: #8C94A6; }
+    .mock-row-val { font-family: 'JetBrains Mono', monospace; font-size: .65rem; font-weight: 600; }
+    .mock-center { text-align: center; }
+
+    /* ── Stats ── */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 1rem; }
+    .stat-card { padding: 1.5rem; border-radius: 1rem; border: 1px solid rgba(100,100,120,.2); background: rgba(10,10,20,.5); text-align: center; }
+    .stat-val { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 700; color: var(--cyan); }
+    .stat-label { font-size: .75rem; color: var(--dim); margin-top: .25rem; }
+
+    /* ── Ecosystem ── */
+    .ecosystem-card {
+      border-radius: 1.25rem; border: 1px solid rgba(100,100,120,.2);
+      background: rgba(10,10,20,.5);
+      padding: 2.5rem; display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;
+    }
+    .ecosystem-icon {
+      width: 64px; height: 64px; border-radius: 1rem; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 2rem;
+      background: rgba(56,189,248,.08); border: 1px solid rgba(56,189,248,.15);
+    }
+    .ecosystem-body { flex: 1; min-width: 200px; }
+    .ecosystem-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 700; margin-bottom: .5rem; }
+    .ecosystem-body .tagline { font-style: italic; color: var(--dim); font-size: .95rem; margin-bottom: 1rem; }
+    .ecosystem-body p { color: var(--dim); font-size: .9rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .ecosystem-actions { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
+    .btn-outline-blue {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-size: .875rem; padding: .625rem 1.25rem; border-radius: 999px;
+      border: 1px solid rgba(56,189,248,.2); color: #38BDF8;
+      transition: border-color .15s;
+    }
+    .btn-outline-blue:hover { border-color: rgba(56,189,248,.5); text-decoration: none; }
+    .platform-note { font-size: .875rem; color: var(--dim); display: flex; align-items: center; gap: .4rem; }
+
+    /* ── Signup ── */
+    .signup-section { position: relative; overflow: hidden; }
+    .signup-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+    .signup-form { display: flex; gap: .75rem; max-width: 420px; margin: 0 auto; flex-wrap: wrap; }
+    .signup-form input {
+      flex: 1; min-width: 0;
+      font-family: 'JetBrains Mono', monospace; font-size: .875rem;
+      padding: .875rem 1.25rem; border-radius: 999px;
+      background: rgba(15,15,25,.8); border: 1px solid rgba(100,100,120,.3);
+      color: var(--text); outline: none;
+      transition: border-color .15s;
+    }
+    .signup-form input::placeholder { color: var(--dim2); }
+    .signup-form input:focus { border-color: rgba(0,240,255,.3); }
+    .signup-success { display: flex; align-items: center; justify-content: center; gap: .5rem; color: var(--cyan); padding: 1rem; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border2);
+      padding: 4rem 2rem 2.5rem;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 3rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .footer-brand-block .brand { display: flex; align-items: center; gap: .6rem; margin-bottom: 1rem; }
+    .footer-brand-block .brand .nav-mark { height: 1.3rem; width: auto; display: block; }
+    .footer-brand-block .brand span { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--text); }
+    .footer-brand-block p { color: var(--dim2); font-size: .875rem; max-width: 260px; line-height: 1.6; }
+    .footer-motto { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: var(--dim2); letter-spacing: .15em; margin-top: 1rem; }
+    .footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4rem; }
+    .footer-col-title { font-size: .7rem; font-weight: 600; color: var(--dim2); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .75rem; }
+    .footer-col a { display: block; color: var(--dim); font-size: .875rem; margin-bottom: .5rem; transition: color .15s; }
+    .footer-col a:hover { color: var(--cyan); text-decoration: none; }
+    .footer-bottom { border-top: 1px solid var(--border2); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-bottom span { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: var(--dim2); }
+    @media (max-width: 640px) { .footer-top { flex-direction: column; } }
+  `}></style>
+  <script slot="head" type="application/ld+json" is:inline set:html={`
+{"@context":"https://schema.org","@type":"Organization","name":"Katafract LLC","url":"https://katafract.com","logo":"https://katafract.com/katafract-mark.svg","description":"Privacy platform operator. Own your network, identity, and files across a continuously expanding global fleet.","contactPoint":{"@type":"ContactPoint","email":"hello@katafract.com","contactType":"customer support","areaServed":"Worldwide"},"sameAs":["https://github.com/katafract-io"]}
+  `}></script>
+  <Fragment set:html={`<!-- Hero -->
+<section class="hero scanline">
+  <div class="glow" style="left:20%;top:30%;width:500px;height:500px;background:radial-gradient(circle,rgba(0,240,255,.07) 0%,transparent 70%)"></div>
+  <div class="glow" style="left:80%;top:60%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,0,110,.07) 0%,transparent 70%)"></div>
+  <div class="hero-inner" id="hero-inner">
+    <div class="hero-eyebrow">Teneo &middot; Effrenus &middot; Katafractarius</div>
+    <div class="hero-mark float">
+      <img src="/katafract-mark.svg" alt="Katafract" width="96" height="110" style="display:block;margin:0 auto 2.5rem;filter:drop-shadow(0 0 28px rgba(0,240,255,0.18))">
+    </div>
+    <h1 class="fd">Your own<br><em>Enclave</em>.</h1>
+    <p>You don't connect to the internet. You operate inside your own Enclave. Haven DNS, WraithVPN, Vaultyx cloud storage — one privacy perimeter, operated end-to-end by Katafract.</p>
+    <div class="hero-actions">
+      <a href="/dns" class="btn-primary">Set up Haven free <span>→</span></a>
+      <a href="/pricing" class="btn-ghost">See Enclave plans</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div></div>
+</section>
+
+<!-- Philosophy -->
+<section id="philosophy" class="section-pad">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">Philosophy</div>
+      <h2 class="section-title fd">The cataphract never<br>forgot who they were</h2>
+    </div>
+    <div class="philosophy-body fade-up fade-up-d1">
+      <p>In the ancient world, the cataphract was the most heavily armored warrior on the battlefield — rider and horse sheathed in layered steel. But unlike infantry ground into interchangeable units, every cataphract fought as an individual. Their own mount, their own lance, their own identity beneath the armor.</p>
+      <p>We build software the same way. Every app solves a real problem we've experienced personally. Every app runs entirely on your device. Every app is priced once and fairly — no subscriptions unless we're paying for compute on your behalf.</p>
+      <p class="highlight">Maximum protection. Zero loss of self. Your tools should serve you, not shape you.</p>
+    </div>
+    <div class="pillars fade-up fade-up-d2">
+      <div class="pillar">
+        <div class="pillar-icon">🔒</div>
+        <h3 class="fd">On-device only</h3>
+        <p>Every app processes locally. No accounts, no cloud sync, no analytics SDKs. Apple privacy label for all: data not collected.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">👁</div>
+        <h3 class="fd">Problems we have too</h3>
+        <p>We don't build apps for market research. We build tools we personally need, then share them with everyone else.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🛡</div>
+        <h3 class="fd">Nothing to breach</h3>
+        <p>No servers storing your data means no databases to hack, no breaches to disclose, and nothing to subpoena. Ever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Apps -->
+<section id="apps" class="section-pad">
+  <div class="glow" style="left:70%;top:20%;width:400px;height:400px;background:radial-gradient(circle,rgba(0,240,255,.05) 0%,transparent 70%)"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="fade-up">
+      <div class="section-label">Apps</div>
+      <h2 class="section-title fd">Privacy tools for iPhone</h2>
+      <p class="section-sub">Six apps, one standard: your data stays on your device or travels encrypted. Free to try — upgrade once for the full experience.</p>
+    </div>
+
+    <div class="app-list fade-up fade-up-d1">
+
+      <!-- ExifArmor -->
+      <div class="app-card" data-app="0" style="--app-color:#00F0FF">
+        <div class="app-card-header">
+          <div class="app-icon" style="background:rgba(0,240,255,.05);border-color:rgba(0,240,255,.15);color:#00F0FF">🛡️</div>
+          <div class="app-meta">
+            <div class="app-name-row">
+              <span class="app-name fd">ExifArmor</span>
+              <span class="app-badge fm" style="background:rgba(0,240,255,.1);color:#00F0FF">Live on App Store</span>
+              <span class="app-cat fm">Privacy</span>
+            </div>
+            <div class="app-tagline fm">Share photos, not your location</div>
+          </div>
+          <span class="app-price fm" style="color:#00F0FF">Free · $0.99 one-time</span>
+          <span class="app-chevron">›</span>
+        </div>
+        <div class="app-body">
+          <div class="app-body-inner">
+            <div class="app-desc-col">
+              <p>Every photo you share contains hidden metadata — your GPS coordinates, device model, and the time it was taken. ExifArmor reveals what's hidden, then strips it with one tap. Originals are never touched.</p>
+              <div class="app-features">
+                <div class="app-feature"><div class="app-feature-dot" style="background:#00F0FF"></div>Exposure preview with GPS map</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#00F0FF"></div>5 free strips per day</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#00F0FF"></div>Pro: unlimited + batch mode</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#00F0FF"></div>Pro: share extension for any app</div>
+              </div>
+              <div class="app-price-note fm">Free · $0.99 one-time OR included with Enclave $8/mo</div>
+              <a href="https://apps.apple.com/app/id6760979268" class="app-store-btn" style="margin-top:1rem">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+                App Store
+              </a>
+              <a href="/apps/exifarmor" class="app-detail-link">Full details →</a>
+            </div>
+            <div class="app-mockup-col">
+              <div class="app-mockup float">
+                <div class="mock-pad">
+                  <div class="mock-box" style="background:rgba(255,64,64,.1);border:1px solid rgba(255,64,64,.2)">
+                    <div class="mock-label" style="color:#FF4040"><div class="mock-dot pulse" style="background:#FF4040"></div>HIGH RISK</div>
+                    <div class="mock-data">📍 37.7749°N, 122.4194°W<br>📱 iPhone 15 Pro<br>🕐 Mar 15, 2:23 PM</div>
+                  </div>
+                  <div class="mock-box" style="background:rgba(0,240,255,.08);border:1px solid rgba(0,240,255,.2);text-align:center">
+                    <div class="mock-label" style="color:#00F0FF;justify-content:center">Strip All Metadata</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ParkArmor -->
+      <div class="app-card" data-app="1">
+        <div class="app-card-header">
+          <div class="app-icon" style="background:rgba(74,222,128,.05);border-color:rgba(74,222,128,.15);color:#4ADE80">📍</div>
+          <div class="app-meta">
+            <div class="app-name-row">
+              <span class="app-name fd">ParkArmor</span>
+              <span class="app-badge fm" style="background:rgba(74,222,128,.1);color:#4ADE80">Live on App Store</span>
+              <span class="app-cat fm">Utility</span>
+            </div>
+            <div class="app-tagline fm">Never lose your car again</div>
+          </div>
+          <span class="app-price fm" style="color:#4ADE80">Free · $0.99 one-time</span>
+          <span class="app-chevron">›</span>
+        </div>
+        <div class="app-body">
+          <div class="app-body-inner">
+            <div class="app-desc-col">
+              <p>One tap saves your parked car location. Photo your garage sign, get walking directions back, set a parking timer with notifications. Your location never leaves your device — no account, no cloud, just works.</p>
+              <div class="app-features">
+                <div class="app-feature"><div class="app-feature-dot" style="background:#4ADE80"></div>Free: save your last parking spot</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#4ADE80"></div>Pro: multiple spots + history</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#4ADE80"></div>Pro: timer, widget, full app</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#4ADE80"></div>Location always stays on device</div>
+              </div>
+              <div class="app-price-note fm">Free · $0.99 one-time OR included with Enclave $8/mo</div>
+              <a href="https://apps.apple.com/app/id6760988040" class="app-store-btn" style="margin-top:1rem">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+                App Store
+              </a>
+              <a href="/apps/parkarmor" class="app-detail-link">Full details →</a>
+            </div>
+            <div class="app-mockup-col">
+              <div class="app-mockup float">
+                <div class="mock-pad">
+                  <div class="mock-box" style="background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.15)">
+                    <div class="mock-label" style="color:#4ADE80">📍 PINNED</div>
+                    <div class="mock-data">Level 3, Section B<br>0.2 mi &middot; 47 min left</div>
+                  </div>
+                  <div class="mock-box" style="background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.12);text-align:center">
+                    <div class="mock-label" style="color:#4ADE80;justify-content:center">Navigate Back →</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DocArmor -->
+      <div class="app-card" data-app="2">
+        <div class="app-card-header">
+          <div class="app-icon" style="background:rgba(232,121,249,.05);border-color:rgba(232,121,249,.15);color:#E879F9">🔐</div>
+          <div class="app-meta">
+            <div class="app-name-row">
+              <span class="app-name fd">DocArmor</span>
+              <span class="app-badge fm" style="background:rgba(74,222,128,.1);color:#4ADE80">Live on App Store</span>
+              <span class="app-cat fm">Security</span>
+            </div>
+            <div class="app-tagline fm">Your IDs, encrypted, on your device</div>
+          </div>
+          <span class="app-price fm" style="color:#E879F9">Free · $7.99 unlock</span>
+          <span class="app-chevron">›</span>
+        </div>
+        <div class="app-body">
+          <div class="app-body-inner">
+            <div class="app-desc-col">
+              <p>Your driver's license, insurance cards, and vaccine records are probably sitting unencrypted in your camera roll right now — syncing to iCloud, visible in shared albums. DocArmor scans, encrypts, and locks them behind Face ID. Nothing ever leaves your phone unless you add Sovereign.</p>
+              <div class="app-features">
+                <div class="app-feature"><div class="app-feature-dot" style="background:#E879F9"></div>Built-in document scanner</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#E879F9"></div>AES-256 encrypted storage</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#E879F9"></div>Face ID / Touch ID locked</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#E879F9"></div>Optional encrypted cloud backup with Sovereign</div>
+              </div>
+              <div class="app-price-note fm">Free to try &middot; $12.99 one-time unlocks premium features &middot; Sovereign bundle adds cloud backup</div>
+              <a href="/apps/docarmor" class="app-detail-link">Full details →</a>
+            </div>
+            <div class="app-mockup-col">
+              <div class="app-mockup float">
+                <div class="mock-pad">
+                  <div class="mock-row"><div class="mock-row-left"><div class="name">🪪 Driver's License</div></div><span style="color:#E879F9;font-size:.7rem">🔒</span></div>
+                  <div class="mock-row"><div class="mock-row-left"><div class="name">🏥 Health Insurance</div></div><span style="color:#E879F9;font-size:.7rem">🔒</span></div>
+                  <div class="mock-row"><div class="mock-row-left"><div class="name">📘 Passport</div></div><span style="color:#E879F9;font-size:.7rem">🔒</span></div>
+                  <div class="mock-row" style="margin-top:.5rem">
+                    <div class="mock-box" style="width:100%;text-align:center;background:rgba(232,121,249,.06);border:1px solid rgba(232,121,249,.12);padding:.4rem;border-radius:.5rem">
+                      <span style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#E879F9">🔒 Encrypted · Face ID</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SafeOpen -->
+      <div class="app-card" data-app="3">
+        <div class="app-card-header">
+          <div class="app-icon" style="background:rgba(249,115,22,.05);border-color:rgba(249,115,22,.15);color:#F97316">🔍</div>
+          <div class="app-meta">
+            <div class="app-name-row">
+              <span class="app-name fd">SafeOpen</span>
+              <span class="app-badge fm" style="background:rgba(249,115,22,.1);color:#F97316">Live on App Store</span>
+              <span class="app-cat fm">Security</span>
+            </div>
+            <div class="app-tagline fm">Know what you&rsquo;re opening</div>
+          </div>
+          <span class="app-price fm" style="color:#F97316">Free + In-App</span>
+          <span class="app-chevron">›</span>
+        </div>
+        <div class="app-body">
+          <div class="app-body-inner">
+            <div class="app-desc-col">
+              <p>QR codes and short links can lead anywhere. SafeOpen follows the full redirect chain through a privacy proxy, strips tracking parameters, and generates an AI summary of the destination — all before you decide to open it.</p>
+              <div class="app-features">
+                <div class="app-feature"><div class="app-feature-dot" style="background:#F97316"></div>QR scanner + short link resolver</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#F97316"></div>Privacy proxy — we browse first, not you</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#F97316"></div>AI summary of destination content</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#F97316"></div>38+ tracking parameters stripped</div>
+              </div>
+              <div class="app-price-note fm">Free + In-App Purchases</div>
+              <a href="https://apps.apple.com/app/id6761782681" class="app-store-btn" style="margin-top:1rem">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+                App Store
+              </a>
+              <a href="/apps/safeopen" class="app-detail-link">Full details →</a>
+            </div>
+            <div class="app-mockup-col">
+              <div class="app-mockup float">
+                <div class="mock-pad">
+                  <div class="mock-box" style="background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.15)">
+                    <div class="mock-label" style="color:#F97316">&#x26A0;&#xFE0F; USE CAUTION</div>
+                    <div class="mock-data">bit.ly/x7k2p<br>&#x2192; suspicious-domain.ru<br>Short URL &middot; Unknown destination</div>
+                  </div>
+                  <div class="mock-box" style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.12);text-align:center">
+                    <div class="mock-label" style="color:#F97316;justify-content:center">Inspect Before Opening</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vaultyx -->
+      <div class="app-card" data-app="4">
+        <div class="app-card-header">
+          <div class="app-icon" style="background:rgba(255,0,110,.05);border-color:rgba(255,0,110,.15);color:#FF006E">☁️</div>
+          <div class="app-meta">
+            <div class="app-name-row">
+              <span class="app-name fd">Vaultyx</span>
+              <span class="app-badge fm" style="background:rgba(255,0,110,.1);color:#FF006E">Coming Soon</span>
+              <span class="app-cat fm">Cloud Storage</span>
+            </div>
+            <div class="app-tagline fm">Zero-knowledge encrypted cloud storage</div>
+          </div>
+          <span class="app-price fm" style="color:#FF006E">With Sovereign</span>
+          <span class="app-chevron">›</span>
+        </div>
+        <div class="app-body">
+          <div class="app-body-inner">
+            <div class="app-desc-col">
+              <p>End-to-end encrypted cloud storage where only you hold the key. AES-256-GCM encryption, FastCDC delta sync (only changed chunks upload), and automatic VPN routing. Backup photos, documents, and videos with zero-knowledge encryption.</p>
+              <div class="app-features">
+                <div class="app-feature"><div class="app-feature-dot" style="background:#FF006E"></div>Client-side AES-256-GCM encryption</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#FF006E"></div>FastCDC delta sync — edit 1 byte, upload 64KB</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#FF006E"></div>Auto routes through WraithVPN</div>
+                <div class="app-feature"><div class="app-feature-dot" style="background:#FF006E"></div>No server-side keys — we never see files</div>
+              </div>
+              <div class="app-price-note fm">Included with Sovereign subscription</div>
+              <a href="/apps/vaultyx" class="app-detail-link">Full details →</a>
+            </div>
+            <div class="app-mockup-col">
+              <div class="app-mockup float">
+                <div class="mock-pad">
+                  <div class="mock-box" style="background:rgba(255,0,110,.08);border:1px solid rgba(255,0,110,.15)">
+                    <div class="mock-label" style="color:#FF006E">🔐 ENCRYPTED</div>
+                    <div class="mock-data">Photos<br>Documents<br>Videos synced</div>
+                  </div>
+                  <div class="mock-box" style="background:rgba(255,0,110,.06);border:1px solid rgba(255,0,110,.12);text-align:center">
+                    <div class="mock-label" style="color:#FF006E;justify-content:center">1TB Storage Included</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /app-list -->
+  </div>
+</section>
+
+<!-- Enclave Platform -->
+<section id="enclave" class="section-pad" style="background:linear-gradient(to bottom,transparent,rgba(255,0,110,.015),transparent)">
+  <div class="glow" style="left:20%;top:50%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,0,110,.06) 0%,transparent 70%)"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="fade-up">
+      <div class="section-label">Platform</div>
+      <h2 class="section-title fd">Your own Enclave.</h2>
+      <p class="section-sub">The apps protect what's already on your device. Enclave protects everything you send, receive, and become online — network traffic, identity, and accounts — with infrastructure that adapts around you.</p>
+    </div>
+
+    <div class="fade-up fade-up-d1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:3rem">
+
+      <!-- Enclave -->
+      <div style="background:#0a0a14;border:1px solid rgba(255,0,110,.25);border-radius:16px;padding:2rem;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;right:0;width:180px;height:180px;background:radial-gradient(circle,rgba(255,0,110,.1) 0%,transparent 70%);pointer-events:none"></div>
+        <div class="fm" style="font-size:.65rem;color:#FF006E;letter-spacing:.25em;text-transform:uppercase;margin-bottom:1rem">Enclave</div>
+        <h3 class="fd" style="font-size:1.8rem;margin-bottom:.75rem">Own your connection</h3>
+        <p style="color:#8C94A6;font-size:.9rem;line-height:1.7;margin-bottom:1.5rem">VPN through global nodes — plus Haven DNS. Token-based: no username, no email stored.</p>
+        <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.75rem">
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#8C94A6"><span style="color:#FF006E">✓</span> Global VPN nodes (EU, US, Asia)</div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#8C94A6"><span style="color:#FF006E">✓</span> Haven DNS included</div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#8C94A6"><span style="color:#FF006E">✓</span> 5 devices</div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#8C94A6"><span style="color:#FF006E">✓</span> All utility apps unlocked</div>
+        </div>
+        <div class="fm" style="font-size:1.3rem;font-weight:600;color:#FF006E;margin-bottom:1rem">$8<span style="font-size:.75rem;color:#8C94A6;font-weight:400">/month</span> · $64<span style="font-size:.75rem;color:#8C94A6;font-weight:400">/year</span></div>
+        <a href="https://buy.stripe.com/28E3cv0tH2qK5EK4kUffy0j" style="display:inline-block;padding:.6rem 1.25rem;background:linear-gradient(135deg,rgba(255,0,110,.2),rgba(255,0,110,.1));border:1px solid rgba(255,0,110,.4);border-radius:8px;color:#FF006E;font-size:.85rem;font-family:'JetBrains Mono',monospace">Get Enclave →</a>
+        <a href="/enclave" style="display:block;margin-top:.75rem;color:#8C94A6;font-size:.85rem;border-bottom:1px solid rgba(100,100,120,.3);padding-bottom:2px;width:fit-content">Learn more →</a>
+      </div>
+
+      <!-- Sovereign -->
+      <div style="background:#0a0a14;border:1px solid rgba(255,0,110,.25);border-radius:16px;padding:2rem;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;right:0;width:180px;height:180px;background:radial-gradient(circle,rgba(255,0,110,.1) 0%,transparent 70%);pointer-events:none"></div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1rem">
+          <div class="fm" style="font-size:.65rem;color:#FF006E;letter-spacing:.25em;text-transform:uppercase">Sovereign</div>
+          <span class="fm" style="font-size:.6rem;padding:.2rem .5rem;border-radius:999px;background:rgba(255,0,110,.15);color:#FF006E">Premium</span>
+        </div>
+        <h3 class="fd" style="font-size:1.8rem;margin-bottom:.75rem">Complete privacy perimeter</h3>
+        <p style="color:#8C94A6;font-size:.9rem;line-height:1.7;margin-bottom:1.5rem">Everything in Enclave plus multi-hop VPN, 1 TB encrypted storage, and exclusive apps. Your complete enclave.</p>
+        <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.75rem">
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#8C94A6"><span style="color:#FF006E">✓</span> Multi-hop VPN routing</div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#8C94A6"><span style="color:#FF006E">✓</span> 1 TB Vaultyx storage</div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#8C94A6"><span style="color:#FF006E">✓</span> All future apps included</div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:#8C94A6"><span style="color:#FF006E">✓</span> Priority support</div>
+        </div>
+        <div class="fm" style="font-size:1.3rem;font-weight:600;color:#FF006E;margin-bottom:1rem">$18<span style="font-size:.75rem;color:#8C94A6;font-weight:400">/month</span> · $144<span style="font-size:.75rem;color:#8C94A6;font-weight:400">/year</span></div>
+        <a href="https://buy.stripe.com/7sY9ATekx1mG2sydVuffy0h" style="display:inline-block;padding:.6rem 1.25rem;background:linear-gradient(135deg,rgba(255,0,110,.2),rgba(255,0,110,.1));border:1px solid rgba(255,0,110,.4);border-radius:8px;color:#FF006E;font-size:.85rem;font-family:'JetBrains Mono',monospace">Get Sovereign →</a>
+        <a href="/pricing" style="display:block;margin-top:.75rem;color:#8C94A6;font-size:.85rem;border-bottom:1px solid rgba(100,100,120,.3);padding-bottom:2px;width:fit-content">Learn more →</a>
+      </div>
+
+    </div>
+
+    <div class="fade-up fade-up-d2" style="text-align:center">
+      <p style="color:#4a5060;font-size:.85rem;font-family:'JetBrains Mono',monospace;margin-bottom:1rem">compute we pay for → subscriptions we charge for · everything else → one-time</p>
+      <a href="/pricing" style="color:#8C94A6;font-size:.875rem;border-bottom:1px solid rgba(100,100,120,.3);padding-bottom:2px">Full pricing comparison →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Privacy Commitment -->
+<section class="section-pad" style="background:linear-gradient(to bottom,transparent,rgba(0,240,255,.015),transparent)">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;max-width:700px;margin:0 auto">
+      <div class="section-label">Our Commitment</div>
+      <h2 class="section-title fd">Privacy is the architecture</h2>
+      <p style="color:var(--dim);font-size:1.1rem;line-height:1.7;margin-bottom:3.5rem">We don't bolt privacy on as an afterthought. Every app is engineered from the ground up to never need your data. No servers to breach. No databases to leak. Nothing to subpoena.</p>
+    </div>
+    <div class="stats-grid fade-up fade-up-d1">
+      <div class="stat-card"><div class="stat-val fd">Zero</div><div class="stat-label">data collected</div></div>
+      <div class="stat-card"><div class="stat-val fd">Zero</div><div class="stat-label">cloud accounts</div></div>
+      <div class="stat-card"><div class="stat-val fd">Zero</div><div class="stat-label">analytics SDKs</div></div>
+      <div class="stat-card"><div class="stat-val fd">Zero</div><div class="stat-label">user data retained</div></div>
+      <div class="stat-card"><div class="stat-val fd">Six</div><div class="stat-label">apps, one standard</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Ecosystem — hidden until sister products are ready to launch
+<section id="ecosystem" class="section-pad">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">Ecosystem</div>
+      <h2 class="section-title fd">Sister products</h2>
+      <p class="section-sub">Built by the same team, with the same values. Different brand, same conviction.</p>
+    </div>
+    <div class="ecosystem-card fade-up fade-up-d1">
+      <div class="ecosystem-icon">✈️</div>
+      <div class="ecosystem-body">
+        <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
+          <h3 class="fd" style="margin:0">AeroMosaic</h3>
+          <span class="fm" style="font-size:.65rem;padding:.2rem .6rem;border-radius:999px;background:rgba(56,189,248,.1);color:#38BDF8">Partner</span>
+        </div>
+        <div class="tagline">Your travel memories. Your photos. Your plans. Your details.</div>
+        <p>A travel companion for people who want to preserve their experiences without handing their itineraries, photos, and personal details to big tech. Your memories are stored on your terms.</p>
+        <div class="ecosystem-actions">
+          <a href="https://aeromosaic.io" target="_blank" rel="noopener" class="btn-outline-blue">Visit AeroMosaic →</a>
+          <span class="platform-note fm" style="font-size:.8rem">📱 iOS &amp; Android</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- Signup -->
+<section id="signup" class="signup-section section-pad">
+  <div class="glow" style="left:50%;top:50%;width:600px;height:600px;background:radial-gradient(circle,rgba(0,240,255,.05) 0%,transparent 70%)"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="signup-inner fade-up">
+      <div class="section-label">Stay Updated</div>
+      <h2 class="section-title fd">Ship notifications</h2>
+      <p style="color:var(--dim);margin-bottom:2.5rem;line-height:1.7">Get notified when we launch new apps or ship updates. No spam, no tracking — just announcements.</p>
+      <form class="signup-form" id="signup-form" action="https://api.katafract.com/v1/newsletter/subscribe" method="POST">
+        <input type="email" name="email" placeholder="your@email.com" required>
+        <button type="submit" class="btn-primary fm">✉ Subscribe</button>
+      </form>
+      <div id="signup-success" class="signup-success" style="display:none">⬡ You're on the list.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->`} />
+  <script slot="scripts" is:inline set:html={`
+  // Nav load animation
+  document.getElementById('nav').classList.add('loaded');
+  document.getElementById('hero-inner').classList.add('loaded');
+
+  // Scroll-triggered fade-up
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // App accordion
+  document.querySelectorAll('.app-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return;
+      const isOpen = card.classList.contains('open');
+      document.querySelectorAll('.app-card').forEach(c => {
+        c.classList.remove('open');
+        const color = c.style.getPropertyValue('--app-color') || 'rgba(100,100,120,.12)';
+        c.style.borderColor = 'rgba(100,100,120,.12)';
+      });
+      if (!isOpen) {
+        card.classList.add('open');
+        const appColor = card.querySelector('.app-price')?.style.color;
+        if (appColor) card.style.borderColor = appColor.replace('rgb','rgba').replace(')',', 0.2)') || 'rgba(0,240,255,.2)';
+      }
+    });
+  });
+
+  // Email signup
+  document.getElementById('signup-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = this.querySelector('input[type=email]').value;
+    if (email.includes('@')) {
+      this.style.display = 'none';
+      document.getElementById('signup-success').style.display = 'flex';
+    }
+  });
+`}></script>
+</Base>
