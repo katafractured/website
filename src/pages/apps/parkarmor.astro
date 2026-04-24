@@ -27,12 +27,13 @@ import Base from '../../layouts/Base.astro';
   </script>
 
   <style slot="head" is:global>
+    :root { --app-accent: var(--parkarmor); }
     .app-hero { padding: 4rem 1.5rem 3rem; max-width: 900px; margin: 0 auto; }
     .app-main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 5rem; }
     .app-hero-eyebrow {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
-      color: #4ADE80;
+      color: var(--app-accent);
       letter-spacing: 0.3em;
       text-transform: uppercase;
       margin-bottom: 1.25rem;
@@ -50,7 +51,7 @@ import Base from '../../layouts/Base.astro';
       letter-spacing: -0.01em;
       margin-bottom: 1.25rem;
     }
-    .app-hero h1 em { font-style: normal; color: #4ADE80; }
+    .app-hero h1 em { font-style: normal; color: var(--app-accent); }
     .app-hero .tagline { font-size: 1.1rem; color: var(--dim); line-height: 1.7; max-width: 580px; margin-bottom: 2.5rem; }
     .app-cta-row {
       display: flex;
@@ -89,8 +90,8 @@ import Base from '../../layouts/Base.astro';
     .privacy-block p { font-size: 0.9rem; color: var(--dim); line-height: 1.7; margin-bottom: 0.5rem; }
     .privacy-block p:last-child { margin-bottom: 0; }
     .privacy-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-    .privacy-pill { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.25rem 0.75rem; border-radius: 999px; background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.15); color: #4ADE80; }
-    .app-section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: #4ADE80; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .privacy-pill { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.25rem 0.75rem; border-radius: 999px; background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.15); color: var(--app-accent); }
+    .app-section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--app-accent); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.75rem; }
     .app-section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
     .app-section-sub { font-size: 0.95rem; color: var(--dim); line-height: 1.7; }
     @media (min-width: 768px) {
@@ -122,7 +123,7 @@ import Base from '../../layouts/Base.astro';
       </a>
       <span class="price-note">Free · Pro available · Or bundled with Enclave · <a href="/pricing" style="color:var(--cyan)">See pricing</a></span>
     </div>
-    <div style="margin-top:0.75rem;font-size:0.85rem;color:var(--dim)">Android? <a href="/android/" style="color:#4ADE80">Join the waitlist →</a></div>
+    <div style="margin-top:0.75rem;font-size:0.85rem;color:var(--dim)">Android? <a href="/android/" style="color:var(--parkarmor)">Join the waitlist →</a></div>
   </div>
 
   <main class="app-main">
@@ -138,22 +139,22 @@ import Base from '../../layouts/Base.astro';
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">&#x1F4CD;</div>
-        <div class="feature-title">One-Tap Pin <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#4ADE80;letter-spacing:0.05em">FREE</span></div>
+        <div class="feature-title">One-Tap Pin <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--parkarmor);letter-spacing:0.05em">FREE</span></div>
         <div class="feature-desc">Tap once as you walk away. ParkArmor saves your current GPS location. The free tier always remembers your most recent spot.</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">&#x1F9ED;</div>
-        <div class="feature-title">Walking Directions <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#4ADE80;letter-spacing:0.05em">FREE</span></div>
+        <div class="feature-title">Walking Directions <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--parkarmor);letter-spacing:0.05em">FREE</span></div>
         <div class="feature-desc">Tap &ldquo;Navigate Back&rdquo; to launch Apple Maps with walking directions to your exact spot. No fumbling, no searching.</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">&#x23F1;&#xFE0F;</div>
-        <div class="feature-title">Parking Timer <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#4ADE80;letter-spacing:0.05em">PRO</span></div>
+        <div class="feature-title">Parking Timer <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--parkarmor);letter-spacing:0.05em">PRO</span></div>
         <div class="feature-desc">Set your meter expiry and get a local notification before time runs out. No server &mdash; the alert fires entirely on your device.</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">&#x1F4F1;</div>
-        <div class="feature-title">Lock Screen Widget <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#4ADE80;letter-spacing:0.05em">PRO</span></div>
+        <div class="feature-title">Lock Screen Widget <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--parkarmor);letter-spacing:0.05em">PRO</span></div>
         <div class="feature-desc">See your saved spot and timer countdown without unlocking your phone. Multiple saved spots and full history also unlocked with Pro.</div>
       </div>
     </div>
