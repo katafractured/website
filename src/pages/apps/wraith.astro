@@ -1,11 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
-import PageHero from '../../components/PageHero.astro';
 ---
 <Base
-  title="WraithVPN — WireGuard VPN"
-  description="Wraith is a privacy-first VPN built on WireGuard. No logs, no tracking, no compromise. Global nodes across EU, US, and Asia. Haven DNS included. Built by people who refuse to be the product."
-  ogDescription="Privacy-first VPN. No logs, no tracking, no compromise. WireGuard-based, global nodes across EU, US, and Asia, Haven DNS built-in. Available on iOS."
+  title="Wraith — Fast, private WireGuard VPN with Haven DNS built in"
+  description="Wraith is Katafract's WireGuard VPN. Fleet we operate ourselves, Haven DNS at every exit, kill switch, 5 devices, no logs. Included with Enclave and Sovereign. iOS out now."
+  ogDescription="Fast, private WireGuard VPN with Haven DNS at every exit. No logs. 5 devices. Included with Enclave ($8/mo) and Sovereign ($18/mo). iOS."
   ogImage="https://katafract.com/images/og-wraith.jpg"
   section="apps"
   twitterCard="summary_large_image"
@@ -19,15 +18,55 @@ import PageHero from '../../components/PageHero.astro';
       --wraith-glow: rgba(129,140,248,0.06);
     }
 
+    /* App hero */
+    .app-hero { padding: 4rem 1.5rem 2.5rem; max-width: 960px; margin: 0 auto; }
+    .app-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--wraith);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .app-hero-eyebrow .back-link { color: var(--dim2); letter-spacing: 0.15em; }
+    .app-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.25rem, 5.2vw, 3.75rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .app-hero h1 em { font-style: normal; color: var(--wraith); }
+    .app-hero .tagline {
+      font-size: 1.1rem;
+      color: var(--dim);
+      line-height: 1.65;
+      max-width: 620px;
+      margin-bottom: 0.5rem;
+    }
+    .app-hero .trust-line {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--dim2);
+      letter-spacing: 0.02em;
+      margin-top: 0.5rem;
+      margin-bottom: 2.25rem;
+    }
+
     /* App main container */
     .app-main { max-width: 960px; margin: 0 auto; padding: 0 1.5rem 5rem; }
 
     .app-cta-row {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
+      gap: 1rem;
       flex-wrap: wrap;
-      margin-bottom: 3rem;
+      margin-bottom: 0.5rem;
     }
 
     .btn-appstore {
@@ -61,8 +100,9 @@ import PageHero from '../../components/PageHero.astro';
 
     .price-note {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       color: var(--dim2);
+      letter-spacing: 0.04em;
     }
 
     /* Live badge */
@@ -104,7 +144,7 @@ import PageHero from '../../components/PageHero.astro';
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1rem;
-      margin: 2rem 0 3rem;
+      margin: 2rem 0 1rem;
     }
     .feature-card {
       background: var(--wraith-glow);
@@ -152,153 +192,157 @@ import PageHero from '../../components/PageHero.astro';
       margin-bottom: 0;
     }
 
-    /* Node grid */
-    .nodes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 0.75rem;
-      margin: 1.75rem 0 2.5rem;
-    }
-    .node-card {
-      background: rgba(10,10,20,0.6);
-      border: 1px solid var(--border);
-      border-radius: 0.875rem;
-      padding: 1.1rem 1.25rem;
-      transition: border-color 0.2s;
-    }
-    .node-card:hover { border-color: var(--wraith-border); }
-    .node-region {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem;
-      color: var(--wraith);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-    }
-    .node-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.2rem;
-    }
-    .node-city {
-      font-size: 0.8rem;
-      color: var(--dim2);
-    }
-    .node-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.6rem;
-      color: #33E8A0;
-      margin-top: 0.6rem;
-    }
-    .node-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #33E8A0;
-    }
-
-    /* Manifesto / privacy block */
-    .manifesto {
+    /* Why block — Tek voice */
+    .why-block {
       background: var(--wraith-glow);
       border: 1px solid var(--wraith-border);
       border-radius: 1rem;
-      padding: 2.25rem 2rem;
-      margin: 2rem 0;
+      padding: 2rem 2rem;
+      margin: 1.5rem 0 0;
     }
-    .manifesto-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.62rem;
-      color: var(--wraith);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .manifesto h2 {
+    .why-block p {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 700;
+      font-size: 1.25rem;
       color: var(--text);
-      line-height: 1.25;
-      margin-bottom: 1.25rem;
+      line-height: 1.55;
+      margin: 0 0 0.9rem 0;
     }
-    .manifesto p {
-      font-size: 0.9rem;
-      color: var(--dim);
-      line-height: 1.8;
-      margin-bottom: 0.75rem;
-    }
-    .manifesto p:last-of-type { margin-bottom: 0; }
-
-    .privacy-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.25rem;
-    }
-    .privacy-pill {
+    .why-block p:last-of-type { margin-bottom: 0; }
+    .why-block .attribution {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      background: rgba(51,232,160,0.06);
-      border: 1px solid rgba(51,232,160,0.15);
-      color: #33E8A0;
+      font-size: 0.7rem;
+      color: var(--dim2);
+      letter-spacing: 0.08em;
+      margin-top: 1.25rem;
+      text-transform: uppercase;
     }
 
-    /* How it works steps */
-    .steps {
+    /* How-it-works trust rows */
+    .trust-rows {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-      margin: 2rem 0 3rem;
+      gap: 1rem;
+      margin: 2rem 0 1rem;
     }
-    .step { display: flex; gap: 1.25rem; align-items: flex-start; }
-    .step-num {
+    .trust-row {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 1.1rem;
+      align-items: start;
+      padding: 1.1rem 1.25rem;
+      background: rgba(10,10,20,0.55);
+      border: 1px solid var(--border);
+      border-radius: 0.875rem;
+      transition: border-color 0.2s;
+    }
+    .trust-row:hover { border-color: var(--wraith-border); }
+    .trust-row .step-num {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
       color: var(--wraith);
       background: var(--wraith-dim);
       border: 1px solid var(--wraith-border);
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      display: flex;
+      border-radius: 999px;
+      width: 42px;
+      height: 24px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
+      letter-spacing: 0.1em;
     }
-    .step-body h3 {
+    .trust-row h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 0.3rem;
+      margin: 0 0 0.3rem;
     }
-    .step-body p {
-      font-size: 0.9rem;
+    .trust-row p {
+      font-size: 0.88rem;
+      color: var(--dim);
+      line-height: 1.65;
+      margin: 0;
+    }
+    .trust-row a { color: var(--wraith); }
+
+    /* Use-case cards */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0 1rem;
+    }
+    .scenario-card {
+      padding: 1.25rem 1.35rem;
+      border: 1px solid var(--border);
+      border-radius: 0.875rem;
+      background: rgba(10,10,20,0.55);
+    }
+    .scenario-card .scenario-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--wraith);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .scenario-card p {
+      font-size: 0.88rem;
       color: var(--dim);
       line-height: 1.65;
       margin: 0;
     }
 
+    /* Proof row */
+    .proof-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.85rem;
+      margin: 1.5rem 0 0.5rem;
+    }
+    .proof-link {
+      display: block;
+      padding: 1rem 1.15rem;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      background: rgba(10,10,20,0.45);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .proof-link:hover { border-color: var(--wraith-border); background: var(--wraith-glow); text-decoration: none; }
+    .proof-link .proof-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--wraith);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .proof-link .proof-name {
+      font-size: 0.92rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .proof-link .proof-desc {
+      font-size: 0.78rem;
+      color: var(--dim);
+      margin-top: 0.2rem;
+      line-height: 1.5;
+    }
+
     /* Pricing */
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 1rem;
-      margin: 2rem 0 2.5rem;
+      margin: 2rem 0 1rem;
     }
     .plan-card {
       background: rgba(10,10,20,0.5);
       border: 1px solid var(--border);
       border-radius: 1rem;
       padding: 1.75rem 1.5rem;
+      display: flex;
+      flex-direction: column;
     }
     .plan-card.featured {
       background: var(--wraith-glow);
@@ -315,7 +359,7 @@ import PageHero from '../../components/PageHero.astro';
     .plan-card.featured .plan-label { color: var(--wraith); }
     .plan-price {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.25rem;
+      font-size: 2.1rem;
       font-weight: 700;
       color: var(--text);
       margin-bottom: 0.1rem;
@@ -325,66 +369,248 @@ import PageHero from '../../components/PageHero.astro';
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.62rem;
       color: var(--dim2);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.1rem;
+      letter-spacing: 0.06em;
     }
     .plan-features {
       list-style: none;
       padding: 0;
-      margin: 0;
-      font-size: 0.875rem;
+      margin: 0 0 1.25rem;
+      font-size: 0.86rem;
       color: var(--dim);
       display: flex;
       flex-direction: column;
-      gap: 0.45rem;
+      gap: 0.4rem;
+      flex: 1;
     }
     .plan-features li.hi { color: var(--text); }
+    .plan-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      text-align: center;
+      border: 1px solid var(--wraith-border);
+      background: var(--wraith-dim);
+      color: var(--wraith);
+      transition: background 0.15s;
+      letter-spacing: 0.04em;
+    }
+    .plan-cta:hover { background: rgba(129,140,248,0.22); text-decoration: none; }
+    .plan-card.featured .plan-cta {
+      background: var(--wraith);
+      color: #0a0a14;
+      border-color: var(--wraith);
+    }
+    .plan-card.featured .plan-cta:hover { background: #a3abf9; }
 
-    /* Callout override for wraith */
-    .callout-wraith {
-      border-left: 3px solid var(--wraith);
-      background: var(--wraith-glow);
-      border-radius: 0 0.75rem 0.75rem 0;
-      padding: 1.25rem 1.5rem;
-      margin: 2rem 0;
+    /* FAQ */
+    .faq-list { margin: 2rem 0 1rem; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 0;
+    }
+    .faq-item summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      color: var(--wraith);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item .faq-body {
+      margin-top: 0.8rem;
       font-size: 0.9rem;
       color: var(--dim);
       line-height: 1.75;
     }
-    .callout-wraith strong { color: var(--text); }
-    .callout-wraith a { color: var(--wraith); }
+    .faq-item .faq-body a { color: var(--wraith); }
+
+    /* Bundle strip */
+    .bundle-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--wraith-glow);
+      border: 1px solid var(--wraith-border);
+      border-radius: 1rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+    .bundle-strip .bundle-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--dim);
+      letter-spacing: 0.06em;
+    }
+    .bundle-strip .bundle-text strong { color: var(--text); }
+    .bundle-strip .bundle-apps {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    .bundle-strip .bundle-apps span { color: var(--wraith); }
+
+    /* Footer trust triad */
+    .footer-trust {
+      margin: 2.5rem 0 0;
+      text-align: center;
+    }
+    .footer-trust .trust-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--dim);
+      margin-bottom: 1.75rem;
+    }
+    .footer-trust .trust-links a { color: var(--wraith); }
+    .footer-trust .requires-line {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--dim2);
+      margin-top: 0.85rem;
+      letter-spacing: 0.04em;
+    }
 
     @media (min-width: 768px) {
-      .app-hero { padding: 6rem 3.5rem 4.5rem; }
+      .app-hero { padding: 6rem 3.5rem 3rem; }
       .app-main { padding: 0 3.5rem 7rem; }
     }
     @media (min-width: 1100px) {
-      .app-hero { padding: 7rem 5rem 5rem; }
+      .app-hero { padding: 7rem 5rem 3.5rem; }
       .app-main { padding: 0 5rem 8rem; }
     }
     @media (max-width: 480px) {
-      .app-hero { padding: 3rem 1.25rem 2.5rem; }
+      .app-hero { padding: 3rem 1.25rem 2rem; }
       .app-main { padding: 0 1.25rem 4rem; }
+      .trust-row { grid-template-columns: 1fr; gap: 0.5rem; }
     }
   </style>
 
-  <script slot="head" type="application/ld+json">
+  <script slot="head" type="application/ld+json" is:inline>
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "WraithVPN",
-      "operatingSystem": "iOS, macOS, Android",
+      "name": "Wraith",
+      "alternateName": "WraithVPN",
       "applicationCategory": "SecurityApplication",
-      "description": "WireGuard-based VPN with kill switch, multi-hop, and 10+ global exit nodes. Included with Enclave or Sovereign subscription.",
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "USD",
-        "price": "8.00",
-        "description": "Enclave subscription"
-      },
+      "operatingSystem": "iOS 17.0 or later",
+      "description": "WireGuard-based VPN built on Katafract-operated WraithGate nodes. Haven DNS at every exit, kill switch, up to 5 devices, no activity logs. Included with Enclave and Sovereign subscriptions.",
+      "url": "https://katafract.com/apps/wraith",
+      "image": "https://katafract.com/images/og-wraith.jpg",
+      "downloadUrl": "https://apps.apple.com/app/id6745785827",
       "author": {
         "@type": "Organization",
-        "name": "Katafract LLC"
-      }
+        "name": "Katafract LLC",
+        "url": "https://katafract.com"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Enclave",
+          "priceCurrency": "USD",
+          "price": "8.00",
+          "description": "Included in Enclave subscription — $8/mo or $64/yr",
+          "url": "https://buy.stripe.com/bJe28r4JX9TcgjocRqffy04"
+        },
+        {
+          "@type": "Offer",
+          "name": "Sovereign",
+          "priceCurrency": "USD",
+          "price": "18.00",
+          "description": "Included in Sovereign subscription — $18/mo or $144/yr, with multi-hop VPN",
+          "url": "https://buy.stripe.com/7sY9ATekx1mG2sydVuffy0h"
+        }
+      ]
+    }
+  </script>
+
+  <script slot="head" type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does Wraith work in countries with DPI or VPN restrictions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wraith uses standard WireGuard on UDP, which is fast and modern but is not designed to evade deep-packet-inspection firewalls. If you routinely operate in a jurisdiction that blocks VPN traffic, we're open about that and working on obfuscated transports for a future release."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How fast is Wraith compared to NordVPN or ExpressVPN?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Wraith runs WireGuard — the same protocol most modern VPNs use under the hood. Speed depends on your distance to the nearest exit node. Our fleet covers EU, US, Asia, and is continuously expanding. Haven DNS runs on the node itself, so DNS lookups never leave the tunnel."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How many devices can I use on one account?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Up to 5 devices on Enclave. Unlimited devices on Sovereign. A device is a single install of the Wraith app."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What gets logged?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No connection timestamps, no assigned-IP records, no DNS query logs, no session durations. The pipelines that would collect those were never built. Details at docs.katafract.io/trust/logs/."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who's behind Katafract?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Katafract LLC is a small, founder-operated company. We dogfood every app. Source and trust posture are inspectable at github.com/katafract-io and docs.katafract.io/trust/."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Wraith work with streaming services?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most services work normally because we operate our own fleet rather than leasing from IP-reputation-poor pools. We don't guarantee specific services will always work — that's outside our control — but we don't go out of our way to break them either."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if my subscription lapses?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your peer configuration is rotated and the tunnel stops. Haven DNS (free, no account) keeps working. Re-subscribe and your access is restored immediately. We don't keep billing hostages."
+          }
+        }
+      ]
     }
   </script>
 
@@ -392,218 +618,311 @@ import PageHero from '../../components/PageHero.astro';
     <div class="app-hero-eyebrow">
       <span>Wraith</span>
       <span>&middot;</span>
-      <span class="live-badge live-badge--soon"><span class="live-dot"></span>Coming Soon</span>
+      <span class="live-badge"><span class="live-dot"></span>iOS Live</span>
       <span>&middot;</span>
       <a href="/" class="back-link">by Katafract &nearr;</a>
     </div>
-    <h1>Your traffic<br>is your <em>business</em>.<br>Full stop.</h1>
-    <p class="tagline">Privacy-first VPN built on WireGuard. No logs. No tracking. No compromise. Global nodes across EU, US, and Asia. Haven DNS built in. Operated by people who refuse to be the product.</p>
+    <h1>Fast, private WireGuard &mdash;<br>with <em>Haven DNS</em> built in.</h1>
+    <p class="tagline">Your traffic rides our own fleet. No logs, no ads, no middlemen &mdash; because the infrastructure to run any of that doesn&rsquo;t exist on our side of the wire.</p>
+    <p class="trust-line">Infrastructure built so there&rsquo;s nothing to betray.</p>
     <div class="app-cta-row">
-      <a href="https://apps.apple.com/app/id6745785827" class="btn-appstore plausible-event-name=AppStore+Click plausible-event-app=wraith">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+      <a href="https://apps.apple.com/app/id6745785827" class="btn-appstore plausible-event-name=download_wraith_app_store" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
         Download on the App Store
       </a>
-      <a href="/support/wraith" class="btn--secondary">Learn More</a>
+      <a href="#how-it-works" class="btn-secondary plausible-event-name=view_wraith_how_it_works">How it works &darr;</a>
     </div>
+  </div>
 
   <main class="app-main">
 
-    <hr class="section-divider">
-
-    <div class="app-page-section">
-      <div class="app-section-label">What Wraith Is</div>
-      <h2 class="app-section-title">A VPN built for people who understand what&rsquo;s at stake</h2>
-      <p class="app-section-sub">Most VPNs sell privacy as a feature while quietly building the infrastructure to compromise it. WraithVPN is different. It&rsquo;s built on open protocols, runs on infrastructure we control end-to-end, and has one policy: we don&rsquo;t keep records of you.</p>
-    </div>
-
-    <div class="features-grid" style="margin-top:2.5rem">
-      <div class="feature-card">
-        <div class="feature-icon">&#x26A1;</div>
-        <div class="feature-title">WireGuard Protocol</div>
-        <div class="feature-desc">Open-source. Audited. Lean. WireGuard&rsquo;s modern cryptography handshakes faster and leaks less than anything before it. No proprietary black boxes.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#x1F6E1;&#xFE0F;</div>
-        <div class="feature-title">Haven DNS</div>
-        <div class="feature-desc">Every DNS query is a map of everything you&rsquo;ve looked at. Haven filters ads, blocks trackers, and never logs a single lookup. Included at every tier.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#x1F512;</div>
-        <div class="feature-title">Kill Switch</div>
-        <div class="feature-desc">If the tunnel drops, so does your connection. Nothing leaks while reconnecting. Your real IP never surfaces. No exceptions.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#x1F30D;</div>
-        <div class="feature-title">Global Nodes</div>
-        <div class="feature-desc">EU (Nuremberg, Helsinki), US (Portland, Ashburn, Newark), Asia (Singapore, Tokyo, Mumbai). Connect to the node nearest you or route through a specific region. Your call.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#x1F300;</div>
-        <div class="feature-title">Tunnel Modes</div>
-        <div class="feature-desc">Standard mode routes only DNS through Wraith. Full mode routes all traffic. Switch instantly. Use Standard for speed, Full when it matters.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">&#x1F9BE;</div>
-        <div class="feature-title">Zero-Log Architecture</div>
-        <div class="feature-desc">We don&rsquo;t log connection timestamps, assigned IPs, DNS queries, or session duration. There is nothing to subpoena. That&rsquo;s by design.</div>
-      </div>
+    <!-- 2. Why we built this -->
+    <section class="app-page-section">
+      <div class="app-section-label">Why Wraith</div>
+      <h2 class="app-section-title">Because the breach-letter cycle is exhausting.</h2>
+    </section>
+    <div class="why-block">
+      <p>I&rsquo;m Tek. I piled up third-party apps for every layer of privacy &mdash; each one another company I had to trust. Every few months another breach letter arrived from a company I&rsquo;d never heard of, holding data a company I <em>did</em> know had moved, sold, or leaked.</p>
+      <p>I stopped trusting third parties for the parts that mattered. I didn&rsquo;t want to ask anyone to trust me more than the companies that burned them either. So I built Wraith on infrastructure I operate end-to-end, with a posture that&rsquo;s inspectable rather than opaque.</p>
+      <div class="attribution">&mdash; Tek, founder</div>
     </div>
 
     <hr class="section-divider">
 
-    <div class="app-page-section">
-      <div class="app-section-label">Global Network</div>
-      <h2 class="app-section-title">Global network. More coming.</h2>
-      <p class="app-section-sub">All nodes run WireGuard and Haven DNS. The app auto-detects the best node for your location, or you choose manually.</p>
-    </div>
-
-    <div class="nodes-grid">
-      <div class="node-card">
-        <div class="node-region">US West</div>
-        <div class="node-name">Portland</div>
-        <div class="node-city">Oregon, US</div>
-        <div class="node-status"><span class="node-dot"></span> Operational</div>
+    <!-- 3. What it does -->
+    <section class="app-page-section">
+      <div class="app-section-label">What Wraith does</div>
+      <h2 class="app-section-title">Five things, done carefully.</h2>
+    </section>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon" aria-hidden="true">&#x26A1;</div>
+        <div class="feature-title">WireGuard across a global fleet</div>
+        <div class="feature-desc">Modern, audited, open protocol. Nodes in EU, US, and Asia &mdash; continuously expanding, not a fixed count.</div>
       </div>
-      <div class="node-card">
-        <div class="node-region">US East</div>
-        <div class="node-name">Ashburn</div>
-        <div class="node-city">Virginia, US</div>
-        <div class="node-status"><span class="node-dot"></span> Operational</div>
+      <div class="feature-card">
+        <div class="feature-icon" aria-hidden="true">&#x1F6E1;&#xFE0F;</div>
+        <div class="feature-title">Haven DNS at every exit</div>
+        <div class="feature-desc">Ads, trackers, and known malware domains are blocked at the DNS layer &mdash; before the app on your phone ever sees them.</div>
       </div>
-      <div class="node-card">
-        <div class="node-region">US East</div>
-        <div class="node-name">Newark</div>
-        <div class="node-city">New Jersey, US</div>
-        <div class="node-status"><span class="node-dot"></span> Operational</div>
+      <div class="feature-card">
+        <div class="feature-icon" aria-hidden="true">&#x1F512;</div>
+        <div class="feature-title">Kill switch</div>
+        <div class="feature-desc">If the tunnel drops, traffic is blocked. Nothing leaks to your ISP while the app reconnects.</div>
       </div>
-      <div class="node-card">
-        <div class="node-region">EU West</div>
-        <div class="node-name">Nuremberg</div>
-        <div class="node-city">Bavaria, DE</div>
-        <div class="node-status"><span class="node-dot"></span> Operational</div>
+      <div class="feature-card">
+        <div class="feature-icon" aria-hidden="true">&#x1F4F1;</div>
+        <div class="feature-title">Up to 5 devices</div>
+        <div class="feature-desc">One Enclave account, five installs. Sovereign lifts the cap to unlimited.</div>
       </div>
-      <div class="node-card">
-        <div class="node-region">EU North</div>
-        <div class="node-name">Helsinki</div>
-        <div class="node-city">Finland</div>
-        <div class="node-status"><span class="node-dot"></span> Operational</div>
-      </div>
-      <div class="node-card">
-        <div class="node-region">AP Southeast</div>
-        <div class="node-name">Singapore</div>
-        <div class="node-city">Southeast Asia</div>
-        <div class="node-status"><span class="node-dot"></span> Operational</div>
-      </div>
-      <div class="node-card">
-        <div class="node-region">AP Northeast</div>
-        <div class="node-name">Tokyo</div>
-        <div class="node-city">Japan</div>
-        <div class="node-status"><span class="node-dot"></span> Operational</div>
-      </div>
-      <div class="node-card">
-        <div class="node-region">AP South</div>
-        <div class="node-name">Mumbai</div>
-        <div class="node-city">India</div>
-        <div class="node-status"><span class="node-dot"></span> Operational</div>
+      <div class="feature-card">
+        <div class="feature-icon" aria-hidden="true">&#x1F9BE;</div>
+        <div class="feature-title">No activity logs</div>
+        <div class="feature-desc">No connection timestamps, no assigned-IP records, no DNS logs. The pipelines were never built. There&rsquo;s nothing to subpoena.</div>
       </div>
     </div>
 
     <hr class="section-divider">
 
-    <div class="app-page-section">
-      <div class="app-section-label">How It Works</div>
-      <h2 class="app-section-title">Private in three steps</h2>
-    </div>
-
-    <div class="steps">
-      <div class="step">
+    <!-- 4. How it works (the trust section) -->
+    <section class="app-page-section" id="how-it-works">
+      <div class="app-section-label">How it works</div>
+      <h2 class="app-section-title">Operator-grade trust, stated plainly.</h2>
+      <p class="app-section-sub">This is how Wraith is actually built. Each claim is inspectable on <a href="https://docs.katafract.io/trust/" style="color:var(--wraith)" target="_blank" rel="noopener">docs.katafract.io/trust</a>.</p>
+    </section>
+    <div class="trust-rows">
+      <div class="trust-row">
         <div class="step-num">01</div>
-        <div class="step-body">
-          <h3>Sign In with Apple</h3>
-          <p>Your identity stays with Apple. WraithVPN receives only an anonymized identifier &mdash; no email, no name, nothing you didn&rsquo;t choose to share. Sign in once, connect from any device.</p>
+        <div>
+          <h3>WireGuard via our own WraithGate fleet</h3>
+          <p>Every exit node is operated by Katafract &mdash; not rented from a reseller, not shared with a brand we don&rsquo;t control. IPs are listed publicly so you can verify each one.</p>
         </div>
       </div>
-      <div class="step">
+      <div class="trust-row">
         <div class="step-num">02</div>
-        <div class="step-body">
-          <h3>Choose Your Node</h3>
-          <p>WraithVPN surfaces the closest, fastest node by default. Or tap any location in the list to route through a specific region. Nodes update automatically as new servers come online.</p>
+        <div>
+          <h3>Haven DNS runs on the node itself</h3>
+          <p>Your DNS queries never leave the tunnel. AdGuard + OISD filter lists block ads, trackers, and known-malicious domains before your apps even see them.</p>
         </div>
       </div>
-      <div class="step">
+      <div class="trust-row">
         <div class="step-num">03</div>
-        <div class="step-body">
-          <h3>Connect. Disappear.</h3>
-          <p>One tap. WireGuard handshake in milliseconds. Haven DNS filters immediately. Kill switch armed. From this point forward, what you browse is yours alone.</p>
+        <div>
+          <h3>Kill switch + split tunnel</h3>
+          <p>If the tunnel drops, the app blocks traffic. If you need a specific app to bypass the tunnel &mdash; your bank, your home cameras &mdash; split tunnel is available.</p>
+        </div>
+      </div>
+      <div class="trust-row">
+        <div class="step-num">04</div>
+        <div>
+          <h3>No-logs posture &mdash; architectural, not promised</h3>
+          <p>No connection timestamps, no assigned-IP records, no DNS query logs. The code to collect those was never written. Read the full policy at <a href="https://docs.katafract.io/trust/logs/" target="_blank" rel="noopener">docs.katafract.io/trust/logs/</a>.</p>
+        </div>
+      </div>
+      <div class="trust-row">
+        <div class="step-num">05</div>
+        <div>
+          <h3>Token-based identity, not your email</h3>
+          <p>Apple handles sign-in. Wraith receives a token that grants access. We don&rsquo;t learn your name, your email, your billing address, or what else you own.</p>
+        </div>
+      </div>
+      <div class="trust-row">
+        <div class="step-num">06</div>
+        <div>
+          <h3>Verify the fleet</h3>
+          <p>Every exit IP is documented on <a href="https://docs.katafract.io/trust/infrastructure/" target="_blank" rel="noopener">docs.katafract.io/trust/infrastructure/</a>. Check them against public WHOIS, ASN, and your own traceroutes.</p>
         </div>
       </div>
     </div>
 
     <hr class="section-divider">
 
-    <div class="manifesto">
-      <div class="manifesto-label">Our commitment</div>
-      <h2>We believe in the integrity of your data &mdash; and ours.</h2>
-      <p>The VPN industry has a problem. Many providers market privacy while building revenue streams around the very data they claim to protect. Ad networks. Analytics pipelines. &ldquo;Anonymized&rdquo; usage statistics that aren&rsquo;t. We&rsquo;ve watched it happen and built WraithVPN in direct opposition to it.</p>
-      <p>We don&rsquo;t track which sites you visit. We don&rsquo;t log when you connected or for how long. We don&rsquo;t store IP addresses assigned to sessions. We don&rsquo;t sell anonymized anything &mdash; because we don&rsquo;t collect it in the first place. When someone asks us to hand over user data, we genuinely have nothing to give them.</p>
-      <p>This isn&rsquo;t a marketing position. It&rsquo;s an architectural one. The logs don&rsquo;t exist. The pipeline was never built. That choice was made before the first line of server code was written.</p>
-      <div class="privacy-pills">
-        <span class="privacy-pill">No connection logs</span>
-        <span class="privacy-pill">No IP logging</span>
-        <span class="privacy-pill">No DNS logging</span>
-        <span class="privacy-pill">No analytics</span>
-        <span class="privacy-pill">No third-party SDKs</span>
-        <span class="privacy-pill">Open protocol (WireGuard)</span>
+    <!-- 5. Who it's for + use cases -->
+    <section class="app-page-section">
+      <div class="app-section-label">Who it&rsquo;s for</div>
+      <h2 class="app-section-title">People who prefer knowing who they&rsquo;re trusting.</h2>
+      <p class="app-section-sub">Privacy-conscious travelers, journalists, operators, and anyone tired of VPN brands that treat their customer list as the product.</p>
+    </section>
+    <div class="scenario-grid">
+      <div class="scenario-card">
+        <div class="scenario-label">Airport / Cafe</div>
+        <p>Public Wi-Fi is a hostile network. One tap on Wraith and your DNS, your traffic, and your real IP stop leaking to whoever else is on the SSID.</p>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-label">International travel</div>
+        <p>Connect to a hotel network anywhere in the world. Haven DNS keeps blocking ads and trackers even on networks that inject both.</p>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-label">Home &amp; office</div>
+        <p>Per-device kill switch means your phone won&rsquo;t silently leak to your ISP if the tunnel blips. Works alongside home routers via our separate router endpoint.</p>
       </div>
     </div>
 
     <hr class="section-divider">
 
-    <div class="app-page-section" style="margin-bottom:1.5rem">
-      <div class="app-section-label">Plans</div>
-      <h2 class="app-section-title">Privacy that scales with you</h2>
-      <p class="app-section-sub">All plans include Haven DNS. VPN access starts at Enclave.</p>
+    <!-- 6. Proof / credibility -->
+    <section class="app-page-section">
+      <div class="app-section-label">Proof</div>
+      <h2 class="app-section-title">Inspectable, not opaque.</h2>
+      <p class="app-section-sub">We publish the posture. You decide whether it holds up.</p>
+    </section>
+    <div class="proof-row">
+      <a href="https://apps.apple.com/app/id6745785827" class="proof-link plausible-event-name=view_wraith_app_store_listing" target="_blank" rel="noopener">
+        <div class="proof-label">App Store</div>
+        <div class="proof-name">Wraith on iOS &nearr;</div>
+        <div class="proof-desc">Ratings and reviews on the App Store.</div>
+      </a>
+      <a href="https://github.com/katafract-io" class="proof-link plausible-event-name=view_wraith_github" target="_blank" rel="noopener">
+        <div class="proof-label">Source</div>
+        <div class="proof-name">github.com/katafract-io &nearr;</div>
+        <div class="proof-desc">Public code, infra scripts, and node bootstrap.</div>
+      </a>
+      <a href="/canary" class="proof-link plausible-event-name=view_wraith_canary">
+        <div class="proof-label">Canary</div>
+        <div class="proof-name">Warrant canary &rarr;</div>
+        <div class="proof-desc">Updated on a fixed schedule. Absence says what presence can&rsquo;t.</div>
+      </a>
+      <a href="https://docs.katafract.io/trust/" class="proof-link plausible-event-name=view_wraith_trust_docs" target="_blank" rel="noopener">
+        <div class="proof-label">Docs</div>
+        <div class="proof-name">Trust architecture &nearr;</div>
+        <div class="proof-desc">Log policy, infrastructure list, threat model.</div>
+      </a>
     </div>
 
+    <hr class="section-divider">
+
+    <!-- 7. Pricing -->
+    <section class="app-page-section">
+      <div class="app-section-label">Pricing</div>
+      <h2 class="app-section-title">Wraith is a bundled feature, not a standalone app.</h2>
+      <p class="app-section-sub">Pick a tier. Each unlocks Wraith along with the rest of the Enclave platform. Monthly, annual, or one-time forever.</p>
+    </section>
     <div class="pricing-grid">
-      <div class="plan-card featured">
-        <div class="plan-label">Enclave &nbsp;<span style="font-size:0.58rem;background:var(--wraith-dim);color:var(--wraith);padding:0.1rem 0.45rem;border-radius:999px;border:1px solid var(--wraith-border)">Popular</span></div>
-        <a href="/pricing" style="display:inline-flex;align-items:center;gap:0.5rem;color:var(--wraith);font-weight:600;text-decoration:none;margin-top:0.5rem;transition:opacity 0.15s"><span>View pricing →</span></a>
-        <ul class="plan-features">
-          <li class="hi">&#x2713; WraithVPN with kill switch</li>
-          <li class="hi">&#x2713; Haven DNS included</li>
-          <li class="hi">&#x2713; Global exit nodes</li>
-          <li class="hi">&#x2713; 5 devices</li>
-          <li class="hi">&#x2713; All utility apps unlocked</li>
-        </ul>
-      </div>
       <div class="plan-card">
-        <div class="plan-label">Sovereign</div>
-        <a href="/pricing" style="display:inline-flex;align-items:center;gap:0.5rem;color:#818CF8;font-weight:600;text-decoration:none;margin-top:0.5rem;transition:opacity 0.15s"><span>View pricing →</span></a>
+        <div class="plan-label">Enclave</div>
+        <div class="plan-price">$8<span style="font-size:0.9rem;color:var(--dim);font-weight:400"> / mo</span></div>
+        <div class="plan-cadence">or $64 / yr &mdash; save 33%</div>
+        <ul class="plan-features">
+          <li class="hi">&#x2713; Wraith VPN (single-hop)</li>
+          <li class="hi">&#x2713; Haven DNS with tier picker</li>
+          <li class="hi">&#x2713; Kill switch + split tunnel</li>
+          <li class="hi">&#x2713; 5 devices</li>
+          <li class="hi">&#x2713; Utility apps unlocked</li>
+          <li class="hi">&#x2713; 50 AI credits / month</li>
+        </ul>
+        <a href="https://buy.stripe.com/bJe28r4JX9TcgjocRqffy04" class="plan-cta plausible-event-name=subscribe_enclave_monthly_wraith_page" target="_blank" rel="noopener">Get Enclave &rarr;</a>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-label">Sovereign &middot; Popular</div>
+        <div class="plan-price">$18<span style="font-size:0.9rem;color:var(--dim);font-weight:400"> / mo</span></div>
+        <div class="plan-cadence">or $144 / yr &mdash; save 33%</div>
         <ul class="plan-features">
           <li class="hi">&#x2713; Everything in Enclave</li>
           <li class="hi">&#x2713; Multi-hop VPN routing</li>
-          <li class="hi">&#x2713; 1TB Vaultyx storage</li>
           <li class="hi">&#x2713; Unlimited devices</li>
-          <li class="hi">&#x2713; All future apps</li>
+          <li class="hi">&#x2713; 1 TB Vaultyx storage</li>
+          <li class="hi">&#x2713; All future Katafract apps</li>
+          <li class="hi">&#x2713; 100 AI credits / month</li>
         </ul>
+        <a href="https://buy.stripe.com/7sY9ATekx1mG2sydVuffy0h" class="plan-cta plausible-event-name=subscribe_sovereign_monthly_wraith_page" target="_blank" rel="noopener">Get Sovereign &rarr;</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-label">Sovereign Forever</div>
+        <div class="plan-price">$599.99<span style="font-size:0.9rem;color:var(--dim);font-weight:400"> one-time</span></div>
+        <div class="plan-cadence">Lifetime. Never a second charge.</div>
+        <ul class="plan-features">
+          <li class="hi">&#x2713; Everything in Sovereign</li>
+          <li class="hi">&#x2713; Paid once, yours forever</li>
+          <li class="hi">&#x2713; All future apps included</li>
+          <li class="hi">&#x2713; Grandfathered against price changes</li>
+          <li>Bought in-app via Apple</li>
+        </ul>
+        <a href="mailto:hello@katafract.com?subject=Sovereign%20Forever" class="plan-cta plausible-event-name=contact_sovereign_forever_wraith_page">Contact for checkout &rarr;</a>
       </div>
     </div>
+    <p class="price-note" style="margin-top:1rem">Prefer in-app purchase? Enclave and Sovereign subscriptions, plus Sovereign Forever, are also available through the Wraith iOS app via Apple IAP.</p>
 
-    <div class="callout-wraith">
-      <strong>Stripe subscriber?</strong> If you purchased through our web portal, link your subscription in-app using the token provided at checkout. Tap Settings &rarr; Enter Access Token. <a href="/support/wraith">Full instructions &rarr;</a>
+    <hr class="section-divider">
+
+    <!-- 8. FAQ -->
+    <section class="app-page-section">
+      <div class="app-section-label">FAQ</div>
+      <h2 class="app-section-title">Straight answers.</h2>
+    </section>
+    <div class="faq-list">
+      <details class="faq-item plausible-event-name=expand_wraith_faq">
+        <summary>Does Wraith work in countries with DPI or VPN restrictions?</summary>
+        <div class="faq-body">
+          Wraith uses standard WireGuard on UDP, which is fast and modern but is <em>not</em> designed to evade deep-packet-inspection firewalls. If you routinely operate in a jurisdiction that actively blocks VPN traffic, we&rsquo;re open about that and working on obfuscated transports for a future release.
+        </div>
+      </details>
+      <details class="faq-item plausible-event-name=expand_wraith_faq">
+        <summary>How fast is Wraith vs. NordVPN or ExpressVPN?</summary>
+        <div class="faq-body">
+          Wraith runs WireGuard &mdash; the same protocol most modern VPNs use under the hood. Throughput is a function of your distance to the nearest exit and the node&rsquo;s uplink. Our fleet covers EU, US, and Asia, and we continue to add regions. Haven DNS runs on the node itself, so DNS lookups don&rsquo;t make an extra round-trip.
+        </div>
+      </details>
+      <details class="faq-item plausible-event-name=expand_wraith_faq">
+        <summary>How many devices can I use on one account?</summary>
+        <div class="faq-body">
+          Up to 5 on <strong>Enclave</strong>. Unlimited on <strong>Sovereign</strong>. A device is a single install of the Wraith app; you can re-assign slots from the app if you replace a phone.
+        </div>
+      </details>
+      <details class="faq-item plausible-event-name=expand_wraith_faq">
+        <summary>What gets logged?</summary>
+        <div class="faq-body">
+          No connection timestamps, no assigned-IP records, no DNS query logs, no session durations. The pipelines that would collect those were never built. Full policy: <a href="https://docs.katafract.io/trust/logs/" target="_blank" rel="noopener">docs.katafract.io/trust/logs/</a>.
+        </div>
+      </details>
+      <details class="faq-item plausible-event-name=expand_wraith_faq">
+        <summary>Who&rsquo;s behind Katafract?</summary>
+        <div class="faq-body">
+          Katafract LLC is a small, founder-operated company. We dogfood every app we ship. Source and posture are inspectable at <a href="https://github.com/katafract-io" target="_blank" rel="noopener">github.com/katafract-io</a> and <a href="https://docs.katafract.io/trust/" target="_blank" rel="noopener">docs.katafract.io/trust/</a>.
+        </div>
+      </details>
+      <details class="faq-item plausible-event-name=expand_wraith_faq">
+        <summary>Does Wraith work with streaming services?</summary>
+        <div class="faq-body">
+          Most services work because we operate our own fleet rather than leasing from IP-reputation-poor pools. We don&rsquo;t guarantee any specific service will always work &mdash; that&rsquo;s outside our control &mdash; but we don&rsquo;t deliberately break them either.
+        </div>
+      </details>
+      <details class="faq-item plausible-event-name=expand_wraith_faq">
+        <summary>What happens if my subscription lapses?</summary>
+        <div class="faq-body">
+          Your peer configuration is rotated and the tunnel stops. Haven DNS (free, no account) keeps working on your devices. Re-subscribe and access restores immediately. We don&rsquo;t keep billing hostages.
+        </div>
+      </details>
     </div>
 
     <hr class="section-divider">
 
-    <div style="text-align:center;margin-bottom:1rem">
-      <a href="https://apps.apple.com/app/id6745785827" class="btn-appstore plausible-event-name=AppStore+Click plausible-event-app=wraith">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
-        Download on the App Store
+    <!-- 9. Part of Katafract Enclave -->
+    <section class="app-page-section">
+      <div class="app-section-label">The platform</div>
+      <h2 class="app-section-title">Wraith is one piece.</h2>
+    </section>
+    <a href="/pricing" class="bundle-strip plausible-event-name=view_pricing_from_wraith_bundle" style="text-decoration:none;color:inherit">
+      <div class="bundle-apps">
+        <span>Wraith</span><span style="color:var(--dim2)">&middot;</span>Vaultyx<span style="color:var(--dim2)">&middot;</span>Haven<span style="color:var(--dim2)">&middot;</span>DocArmor
+      </div>
+      <div class="bundle-text"><strong>Bundled in Enclave &amp; Sovereign</strong> &mdash; see all apps &rarr;</div>
+    </a>
+
+    <hr class="section-divider">
+
+    <!-- 10. Footer trust triad -->
+    <div class="footer-trust">
+      <div class="trust-links">
+        <a href="/privacy" class="plausible-event-name=view_wraith_privacy">Privacy policy</a>
+        <a href="/canary" class="plausible-event-name=view_wraith_canary_footer">Warrant canary</a>
+        <a href="https://github.com/katafract-io" class="plausible-event-name=view_wraith_github_footer" target="_blank" rel="noopener">Source &nearr;</a>
+        <a href="https://docs.katafract.io/trust/" class="plausible-event-name=view_wraith_trust_docs_footer" target="_blank" rel="noopener">Trust docs &nearr;</a>
+      </div>
+      <a href="https://apps.apple.com/app/id6745785827" class="btn-appstore plausible-event-name=download_wraith_app_store_footer" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.97 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+        Get Wraith on the App Store
       </a>
-    </div>
-    <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--dim2)">
-      Requires iOS 17.0 or later &middot; iPhone &middot; Subscription managed by Apple
+      <p class="requires-line">Requires iOS 17.0 or later &middot; iPhone &middot; Subscription managed by Apple</p>
     </div>
 
   </main>
@@ -614,7 +933,7 @@ import PageHero from '../../components/PageHero.astro';
         if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
       });
     }, { threshold: 0.08 });
-    document.querySelectorAll('.feature-card, .node-card, .plan-card, .step').forEach(el => {
+    document.querySelectorAll('.feature-card, .trust-row, .scenario-card, .proof-link, .plan-card').forEach(el => {
       el.classList.add('fade-up');
       observer.observe(el);
     });
