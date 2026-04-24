@@ -229,6 +229,7 @@ import Base from '../layouts/Base.astro';
         <li><span class="check" style="color:#FF006E">✓</span> No logs · No identity stored</li>
       </ul>
       <a href="https://buy.stripe.com/bJe28r4JX9TcgjocRqffy04" class="plan-cta primary plausible-event-name=Subscribe+Click" id="cta-enclave">Get Enclave →</a>
+      <p style="margin-top:.75rem;text-align:center;font-size:.72rem;color:#4a5060;font-family:'JetBrains Mono',monospace">After checkout → <a href="/welcome" style="color:#8C94A6">katafract.com/welcome</a></p>
     </div>
 
     <!-- Add-ons -->
@@ -272,6 +273,7 @@ import Base from '../layouts/Base.astro';
         <li><span class="check" style="color:#FF006E">✓</span> Unlimited devices · Cross-device sync</li>
       </ul>
       <a href="https://buy.stripe.com/7sY9ATekx1mG2sydVuffy0h"  class="plan-cta primary plausible-event-name=Subscribe+Click" id="cta-sovereign">Get Sovereign →</a>
+      <p style="margin-top:.75rem;text-align:center;font-size:.72rem;color:#4a5060;font-family:'JetBrains Mono',monospace">After checkout → <a href="/welcome" style="color:#8C94A6">katafract.com/welcome</a></p>
     </div>
 
   </div>
@@ -302,15 +304,28 @@ import Base from '../layouts/Base.astro';
         </tr>
       </thead>
       <tbody>
-        <tr><td>Client-side encryption</td><td class="yes-mag">AES-256-GCM</td><td class="no">Server-side only</td><td class="no">Server-side only</td><td class="no">Server-side only</td></tr>
-        <tr><td>Can provider read files?</td><td class="yes-mag">Never — we have no keys</td><td class="no">Yes, Apple can</td><td class="no">Yes, Dropbox can</td><td class="no">Yes, Google can</td></tr>
-        <tr><td>Content scanning (CSAM/AI)</td><td class="yes-mag">None</td><td class="no">CSAM scanning on upload</td><td class="no">Malware scanning</td><td class="no">AI training on content</td></tr>
-        <tr><td>Delta sync (FastCDC)</td><td class="yes-mag">Only changed chunks</td><td class="no">Full re-upload</td><td class="yes">Yes, but proprietary</td><td class="no">Full re-upload</td></tr>
+        <tr><td>Client-side encryption (default)</td><td class="yes-mag">AES-256-GCM, always on</td><td class="no">Server-side by default¹ (E2EE opt-in via ADP²)</td><td class="no">Server-side only³</td><td class="no">Server-side only⁴</td></tr>
+        <tr><td>Can provider read files?</td><td class="yes-mag">Never — we have no keys</td><td class="no">Yes, by default¹ (No with ADP²)</td><td class="no">Yes, Dropbox can³</td><td class="no">Yes, Google can⁴</td></tr>
+        <tr><td>Automated content scanning</td><td class="yes-mag">None — keys never leave your device</td><td class="no">Server-side abuse detection⁵</td><td class="no">Automated abuse detection³</td><td class="no">Automated abuse detection⁶</td></tr>
+        <tr><td>Delta sync</td><td class="yes-mag">FastCDC — only changed chunks</td><td class="no">Full re-upload</td><td class="yes">Block-level delta sync⁷</td><td class="no">Full re-upload</td></tr>
         <tr><td>VPN routing integration</td><td class="yes-mag">Auto routes via WraithVPN</td><td class="no">None</td><td class="no">None</td><td class="no">None</td></tr>
-        <tr><td>Lock-in risk</td><td class="yes-mag">Standard S3 export</td><td class="no">Proprietary format</td><td class="no">Proprietary format</td><td class="no">Proprietary format</td></tr>
-        <tr><td>1TB monthly price</td><td class="yes-mag">$18 (inc. VPN+DNS+apps)</td><td class="no">$9.99</td><td class="no">$11.99</td><td class="no">$9.99</td></tr>
+        <tr><td>No proprietary lock-in</td><td class="yes-mag">Open format — ciphertext is yours</td><td class="no">Proprietary Apple format</td><td class="no">Proprietary Dropbox format</td><td class="no">Proprietary Google format</td></tr>
+        <tr><td>Comparable storage / monthly price</td><td class="yes-mag">$18/mo — 1TB + VPN + DNS + apps</td><td class="no">$9.99/mo — 2TB⁸ (storage only, no 1TB tier)</td><td class="no">$11.99/mo — 2TB⁹ (storage only, no 1TB tier)</td><td class="no">$9.99/mo — 2TB¹⁰ (storage only, no 1TB tier)</td></tr>
       </tbody>
     </table>
+    <div class="compare-refs" style="margin-top:1.5rem;padding:1rem 1.5rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;font-size:.78rem;color:#8C94A6;line-height:1.8">
+      <p style="margin:0 0 .5rem;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.08em;font-size:.7rem">Sources — retrieved 2026-04-24</p>
+      <p style="margin:.25rem 0">¹ Apple iCloud Standard Data Protection — Apple holds encryption keys server-side by default. <a href="https://support.apple.com/en-us/102651" target="_blank" rel="noopener" style="color:#6B7280">support.apple.com/en-us/102651</a></p>
+      <p style="margin:.25rem 0">² Advanced Data Protection (ADP) is an opt-in setting that enables end-to-end encryption where only your trusted devices hold keys. Not enabled by default. <a href="https://support.apple.com/en-us/102651" target="_blank" rel="noopener" style="color:#6B7280">support.apple.com/en-us/102651</a></p>
+      <p style="margin:.25rem 0">³ Dropbox uses AES-256 server-managed encryption. Dropbox can access file contents and deploys automated abuse detection per their privacy policy. <a href="https://www.dropbox.com/privacy" target="_blank" rel="noopener" style="color:#6B7280">dropbox.com/privacy</a></p>
+      <p style="margin:.25rem 0">⁴ Google One storage is encrypted server-side with keys Google manages. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:#6B7280">policies.google.com/privacy</a></p>
+      <p style="margin:.25rem 0">⁵ Apple can scan iCloud content it holds keys for (Standard Data Protection) for abuse and safety purposes. Files protected by ADP are not accessible to Apple. <a href="https://www.apple.com/child-safety/" target="_blank" rel="noopener" style="color:#6B7280">apple.com/child-safety</a></p>
+      <p style="margin:.25rem 0">⁶ Google deploys automated systems to detect ToS violations. Google's privacy policy explicitly states Drive, Gmail, and Photos content is not used for personalized advertising. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:#6B7280">policies.google.com/privacy</a></p>
+      <p style="margin:.25rem 0">⁷ Dropbox uploads only changed chunks of a file (block-level delta sync). <a href="https://en.wikipedia.org/wiki/Dropbox_(service)" target="_blank" rel="noopener" style="color:#6B7280">en.wikipedia.org/wiki/Dropbox_(service)</a></p>
+      <p style="margin:.25rem 0">⁸ iCloud+ has no 1TB tier. Tiers: 200GB ($2.99/mo) → 2TB ($9.99/mo). <a href="https://www.apple.com/icloud/" target="_blank" rel="noopener" style="color:#6B7280">apple.com/icloud</a></p>
+      <p style="margin:.25rem 0">⁹ Dropbox Plus: 2TB at $11.99/mo (monthly billing) or $9.99/mo (annual). No 1TB tier. <a href="https://www.dropbox.com/plans" target="_blank" rel="noopener" style="color:#6B7280">dropbox.com/plans</a></p>
+      <p style="margin:.25rem 0">¹⁰ Google One has no 1TB tier. Plans: 100GB ($1.99/mo) → 2TB ($9.99/mo). <a href="https://one.google.com/about/plans" target="_blank" rel="noopener" style="color:#6B7280">one.google.com/about/plans</a></p>
+    </div>
   </div>
 
   <!-- Feature comparison -->

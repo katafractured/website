@@ -1,0 +1,200 @@
+---
+import Base from '../layouts/Base.astro';
+import { appBySlug } from '../data/apps.ts';
+
+const wraith = appBySlug('wraith');
+const wraithUrl = wraith?.appStoreUrl ?? null;
+---
+<Base
+  title={`Welcome to Enclave — Katafract`}
+  description={`Your Enclave subscription is active. Here's how to start using WraithVPN on every device.`}
+  section="home"
+  noindex={true}
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+  <style slot="head" is:global set:html={`
+    .welcome-page { padding: 7rem 0 6rem; }
+    .welcome-hero { text-align: center; margin-bottom: 3.5rem; }
+    .welcome-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
+    .welcome-hero p  { color: #8C94A6; font-size: 1.05rem; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+    .confirmed-pill { display: inline-flex; align-items: center; gap: .5rem; background: rgba(74,222,128,.12); border: 1px solid rgba(74,222,128,.3); color: #4ADE80; font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .08em; padding: .35rem .9rem; border-radius: 999px; margin-bottom: 1.75rem; }
+    .confirmed-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: #4ADE80; flex-shrink: 0; }
+    .paths-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto 3rem; }
+    .path-card { background: #0a0a14; border: 1px solid rgba(100,100,120,.15); border-radius: 20px; padding: 2.25rem; display: flex; flex-direction: column; }
+    .path-card.ios-card { border-color: rgba(255,0,110,.2); }
+    .path-icon { font-size: 2rem; margin-bottom: 1.25rem; }
+    .path-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: .5rem; }
+    .path-sub { color: #8C94A6; font-size: .875rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .path-steps { list-style: none; margin: 0 0 1.75rem; display: flex; flex-direction: column; gap: .65rem; }
+    .path-steps li { display: flex; align-items: flex-start; gap: .75rem; font-size: .875rem; color: #8C94A6; line-height: 1.5; }
+    .step-num { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; background: rgba(255,0,110,.15); border: 1px solid rgba(255,0,110,.3); color: #FF006E; font-family: 'JetBrains Mono', monospace; font-size: .65rem; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+    .path-cta { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .75rem 1.25rem; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 500; text-decoration: none; transition: opacity .2s; margin-top: auto; }
+    .path-cta:hover { opacity: .8; text-decoration: none; }
+    .path-cta.magenta { background: linear-gradient(135deg, rgba(255,0,110,.8), rgba(255,0,110,.5)); color: #fff; border: 1px solid rgba(255,0,110,.4); }
+    .path-cta.cyan { background: transparent; color: #00F0FF; border: 1px solid rgba(0,240,255,.3); }
+    .path-cta.ghost { background: transparent; color: #8C94A6; border: 1px solid rgba(100,100,120,.2); }
+    .coming-soon-note { background: rgba(249,115,22,.08); border: 1px solid rgba(249,115,22,.2); border-radius: 8px; padding: .75rem 1rem; font-size: .8rem; color: #F97316; line-height: 1.5; margin-bottom: 1.5rem; }
+    .help-card { max-width: 680px; margin: 0 auto 4rem; background: #0a0a14; border: 1px solid rgba(100,100,120,.12); border-radius: 20px; padding: 2rem; }
+    .help-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 1.25rem; }
+    .help-links { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.75rem; }
+    .help-link { display: inline-flex; align-items: center; gap: .4rem; font-family: 'JetBrains Mono', monospace; font-size: .78rem; color: #4ADE80; text-decoration: none; }
+    .help-link:hover { text-decoration: underline; }
+    .faq-mini { display: flex; flex-direction: column; gap: 0; border-top: 1px solid rgba(100,100,120,.1); }
+    .faq-mini-item { border-bottom: 1px solid rgba(100,100,120,.08); padding: 1rem 0; cursor: pointer; }
+    .faq-mini-q { font-weight: 600; font-size: .875rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; user-select: none; }
+    .faq-mini-q::after { content: '+'; color: #8C94A6; flex-shrink: 0; transition: transform .2s; }
+    .faq-mini-item.open .faq-mini-q::after { transform: rotate(45deg); }
+    .faq-mini-a { color: #8C94A6; font-size: .875rem; line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s ease; }
+    .faq-mini-item.open .faq-mini-a { max-height: 300px; padding-top: .65rem; }
+    @media (max-width: 640px) { .paths-grid { grid-template-columns: 1fr; } }
+  `}></style>
+
+  <main class="welcome-page">
+    <div class="container">
+
+      <div class="welcome-hero">
+        <div id="confirmed-pill" class="confirmed-pill" style="display:none">
+          <span class="dot"></span>
+          <span id="pill-text">Payment confirmed</span>
+        </div>
+        <h1>Welcome to Enclave.</h1>
+        <p>Your subscription is active. Here's how to start using it — pick your path:</p>
+      </div>
+
+      <div class="paths-grid">
+
+        <!-- iPhone / iPad -->
+        <div class="path-card ios-card">
+          <div class="path-icon">📱</div>
+          <div class="path-title">iPhone or iPad</div>
+          <div class="path-sub">You already have it. Install WraithVPN from the App Store and your subscription unlocks automatically via your Apple ID.</div>
+
+          {wraithUrl ? (
+            <>
+              <ul class="path-steps">
+                <li><span class="step-num">1</span><span>Tap the App Store button below — install WraithVPN.</span></li>
+                <li><span class="step-num">2</span><span>Open the app and sign in with your Apple ID.</span></li>
+                <li><span class="step-num">3</span><span>Your Enclave subscription unlocks automatically — no token to paste.</span></li>
+              </ul>
+              <a
+                href={wraithUrl}
+                class="path-cta magenta"
+                data-plausible-event-name="Welcome+AppStore+Click"
+                data-plausible-event-platform="ios"
+                onclick="window.plausible && window.plausible('Welcome AppStore Click', {props:{platform:'ios'}})"
+                target="_blank"
+                rel="noopener"
+              >
+                Download on the App Store →
+              </a>
+            </>
+          ) : (
+            <>
+              <div class="coming-soon-note">
+                WraithVPN is currently in Apple review — expected approval soon. You'll receive an email the moment it's available.
+              </div>
+              <ul class="path-steps">
+                <li><span class="step-num">1</span><span>Watch for our email notification when WraithVPN is approved.</span></li>
+                <li><span class="step-num">2</span><span>Install from the App Store link in that email.</span></li>
+                <li><span class="step-num">3</span><span>Sign in with Apple ID — your subscription activates instantly.</span></li>
+              </ul>
+              <span class="path-cta ghost" style="cursor:default;pointer-events:none">Coming soon to the App Store</span>
+            </>
+          )}
+        </div>
+
+        <!-- Everything else -->
+        <div class="path-card">
+          <div class="path-icon">💻</div>
+          <div class="path-title">Mac, Windows, Linux, Android, or Router</div>
+          <div class="path-sub">Visit the client portal, paste your subscription ID from the Stripe confirmation email, and we generate a WireGuard config file or QR code for your device.</div>
+          <ul class="path-steps">
+            <li><span class="step-num">1</span><span>Find your <strong>subscription ID</strong> in the Stripe receipt email (starts with <code style="font-family:'JetBrains Mono',monospace;font-size:.8em;color:#00F0FF">sub_</code>).</span></li>
+            <li><span class="step-num">2</span><span>Visit <strong>connect.katafract.com</strong> and paste it.</span></li>
+            <li><span class="step-num">3</span><span>Download your <code style="font-family:'JetBrains Mono',monospace;font-size:.8em;color:#00F0FF">.conf</code> file or scan the QR code in the WireGuard app — available free on all platforms.</span></li>
+          </ul>
+          <p style="font-size:.78rem;color:#4a5060;margin-bottom:1.5rem;line-height:1.5">
+            WireGuard is the industry-standard VPN protocol — open source, audited, runs everywhere. No proprietary app required on desktop.
+          </p>
+          <a
+            href="https://connect.katafract.com"
+            class="path-cta cyan"
+            data-plausible-event-name="Welcome+Connect+Click"
+            data-plausible-event-platform="desktop"
+            onclick="window.plausible && window.plausible('Welcome Connect Click', {props:{platform:'desktop'}})"
+            target="_blank"
+            rel="noopener"
+          >
+            Go to connect.katafract.com →
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Help panel -->
+      <div class="help-card">
+        <h2>I'd rather get help.</h2>
+        <div class="help-links">
+          <a href="/support" class="help-link">Support page →</a>
+          <a href="mailto:support@katafract.com" class="help-link">Email support →</a>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#8C94A6">Or reply to your Stripe receipt email — we'll walk you through it.</span>
+        </div>
+
+        <div class="faq-mini">
+
+          <div class="faq-mini-item">
+            <div class="faq-mini-q">I lost my subscription ID.</div>
+            <div class="faq-mini-a">Check the receipt email Stripe sent at checkout — the subject is usually "Your Katafract receipt". The subscription ID starts with <code style="font-family:'JetBrains Mono',monospace">sub_</code>. If you can't find it, email support@katafract.com with the email address you used at checkout.</div>
+          </div>
+
+          <div class="faq-mini-item">
+            <div class="faq-mini-q">How many devices can I use at once?</div>
+            <div class="faq-mini-a">Enclave supports 5 simultaneous devices. Sovereign supports unlimited devices. You can generate a separate WireGuard config for each device at connect.katafract.com.</div>
+          </div>
+
+          <div class="faq-mini-item">
+            <div class="faq-mini-q">Can I switch between iPhone and laptop?</div>
+            <div class="faq-mini-a">Yes. Your subscription covers both. Install WraithVPN on iPhone for automatic activation. For your laptop, download a WireGuard config at connect.katafract.com and import it into the WireGuard app. Both can be active at the same time (within your device limit).</div>
+          </div>
+
+          <div class="faq-mini-item">
+            <div class="faq-mini-q">I want to cancel.</div>
+            <div class="faq-mini-a">You can cancel anytime from the Stripe billing portal — a link is in your receipt email. Your access continues until the end of the current billing period. No questions asked, no cancellation fee.</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script slot="scripts" is:inline set:html={`
+    // Show confirmation pill if ?session_id=cs_live_... present in URL
+    (function() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var sid = params.get('session_id');
+        if (sid && sid.startsWith('cs_')) {
+          var masked = sid.slice(0, 8) + '****' + sid.slice(-4);
+          var pill = document.getElementById('confirmed-pill');
+          var txt  = document.getElementById('pill-text');
+          if (pill && txt) {
+            txt.textContent = 'Payment confirmed · ' + masked;
+            pill.style.display = 'inline-flex';
+          }
+          // Fire Plausible welcome-arrival event
+          window.plausible && window.plausible('Welcome Arrival', {
+            props: { tier: params.get('tier') || 'unknown' }
+          });
+        }
+      } catch(e) {}
+    })();
+
+    // Mini FAQ toggle
+    document.querySelectorAll('.faq-mini-item').forEach(function(item) {
+      item.querySelector('.faq-mini-q').addEventListener('click', function() {
+        item.classList.toggle('open');
+      });
+    });
+  `}></script>
+</Base>
