@@ -1,0 +1,135 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<Base
+  title="Blog — Katafract"
+  description="Quiet writing about privacy, identity, and the tools we build."
+  section="prose"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+  <style slot="head" is:global set:html={`
+    .blog-hero {
+      padding: 6rem 0 4rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(100, 100, 120, 0.1);
+    }
+    .blog-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+    .blog-hero p {
+      color: #8C94A6;
+      font-size: 1rem;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .blog-list {
+      max-width: 700px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+    .blog-post-item {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(100, 100, 120, 0.08);
+    }
+    .blog-post-item:last-child {
+      border-bottom: none;
+    }
+    .blog-post-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .blog-post-title a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .blog-post-title a:hover {
+      color: #FF006E;
+      text-decoration: underline;
+    }
+    .blog-post-meta {
+      display: flex;
+      gap: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #8C94A6;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .blog-post-description {
+      color: #8C94A6;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .blog-post-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .blog-post-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(74, 222, 128, 0.1);
+      color: #4ADE80;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .blog-empty {
+      max-width: 700px;
+      margin: 4rem auto;
+      padding: 2rem;
+      text-align: center;
+      color: #8C94A6;
+    }
+  `} />
+
+  <div class="blog-hero">
+    <h1>Blog</h1>
+    <p>Quiet writing about privacy, identity, and the tools we build.</p>
+  </div>
+
+  {posts.length > 0 ? (
+    <div class="blog-list">
+      {posts.map((post) => (
+        <article class="blog-post-item">
+          <h2 class="blog-post-title">
+            <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+          </h2>
+          <div class="blog-post-meta">
+            <span>{post.data.author}</span>
+            <span>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+          </div>
+          <p class="blog-post-description">{post.data.description}</p>
+          {post.data.tags && post.data.tags.length > 0 && (
+            <div class="blog-post-tags">
+              {post.data.tags.map((tag) => (
+                <span class="blog-post-tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  ) : (
+    <div class="blog-empty">
+      <p>No posts yet. Check back soon.</p>
+    </div>
+  )}
+</Base>

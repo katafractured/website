@@ -1,0 +1,211 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { renderToString } from 'astro/runtime/server/render.js';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const ogImage = post.data.ogImage || 'https://katafract.com/images/og-home.jpg';
+const publishedDate = post.data.pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+const updatedDate = post.data.updatedDate?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<Base
+  title={`${post.data.title} — Katafract Blog`}
+  description={post.data.description}
+  ogTitle={post.data.title}
+  ogDescription={post.data.description}
+  ogImage={ogImage}
+  section="prose"
+>
+  <link slot="head" rel="stylesheet" href="/style.css" />
+  <style slot="head" is:global set:html={`
+    .blog-article-header {
+      max-width: 700px;
+      margin: 4rem auto 3rem;
+      padding: 0 1.5rem;
+    }
+    .blog-article-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .blog-article-meta {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #8C94A6;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+    }
+    .blog-article-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .blog-article-meta-label {
+      color: #6B7280;
+      font-size: 0.65rem;
+    }
+    .blog-article-meta-value {
+      color: #8C94A6;
+    }
+    .blog-article-body {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+    .blog-article-body h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    .blog-article-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .blog-article-body p {
+      color: #B4BAC2;
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .blog-article-body ul,
+    .blog-article-body ol {
+      color: #B4BAC2;
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      margin-left: 1.5rem;
+    }
+    .blog-article-body li {
+      margin-bottom: 0.5rem;
+    }
+    .blog-article-body blockquote {
+      border-left: 3px solid rgba(255, 0, 110, 0.3);
+      padding-left: 1.5rem;
+      margin: 1.5rem 0;
+      color: #8C94A6;
+      font-style: italic;
+    }
+    .blog-article-body code {
+      background: rgba(100, 100, 120, 0.2);
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875em;
+      color: #4ADE80;
+    }
+    .blog-article-body pre {
+      background: rgba(10, 10, 20, 0.5);
+      border: 1px solid rgba(100, 100, 120, 0.15);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+    .blog-article-body pre code {
+      background: none;
+      padding: 0;
+      color: #4ADE80;
+    }
+    .blog-article-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .blog-article-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(74, 222, 128, 0.1);
+      color: #4ADE80;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .blog-article-nav {
+      max-width: 700px;
+      margin: 3rem auto 0;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid rgba(100, 100, 120, 0.1);
+    }
+    .blog-article-nav a {
+      color: #FF006E;
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+    .blog-article-nav a:hover {
+      color: #FF4D9A;
+      text-decoration: underline;
+    }
+  `} />
+
+  <header class="blog-article-header">
+    <h1 class="blog-article-title">{post.data.title}</h1>
+    <div class="blog-article-meta">
+      <div class="blog-article-meta-item">
+        <span class="blog-article-meta-label">Author</span>
+        <span class="blog-article-meta-value">{post.data.author}</span>
+      </div>
+      <div class="blog-article-meta-item">
+        <span class="blog-article-meta-label">Published</span>
+        <span class="blog-article-meta-value">{publishedDate}</span>
+      </div>
+      {updatedDate && (
+        <div class="blog-article-meta-item">
+          <span class="blog-article-meta-label">Updated</span>
+          <span class="blog-article-meta-value">{updatedDate}</span>
+        </div>
+      )}
+    </div>
+  </header>
+
+  <article class="blog-article-body">
+    <Content />
+  </article>
+
+  {post.data.tags && post.data.tags.length > 0 && (
+    <div class="blog-article-body" style="margin-bottom: 0; padding-bottom: 0;">
+      <div class="blog-article-tags">
+        {post.data.tags.map((tag) => (
+          <span class="blog-article-tag">{tag}</span>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <footer class="blog-article-nav">
+    <a href="/blog/">← All posts</a>
+  </footer>
+</Base>
