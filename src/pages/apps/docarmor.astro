@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 ---
 <Base
   title="DocArmor — Your IDs, encrypted, on your device"
@@ -9,24 +10,7 @@ import Base from '../../layouts/Base.astro';
   twitterCard="summary_large_image"
 >
   <style slot="head" is:global>
-    .app-hero { padding: 4rem 1.5rem 3rem; max-width: 900px; margin: 0 auto; }
     .app-main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 5rem; }
-    .app-hero-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      color: #E879F9;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .app-hero-eyebrow .back-link { color: var(--dim2); font-size: 0.65rem; letter-spacing: 0.15em; }
-    .app-hero-eyebrow .back-link:hover { color: var(--dim); text-decoration: none; }
-    .app-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 4rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 1.25rem; }
-    .app-hero h1 em { font-style: normal; color: #E879F9; }
-    .app-hero .tagline { font-size: 1.1rem; color: var(--dim); line-height: 1.7; max-width: 580px; margin-bottom: 2.5rem; }
     .coming-soon-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; padding: 0.6rem 1.25rem; border-radius: 999px; background: rgba(232,121,249,0.07); border: 1px solid rgba(232,121,249,0.2); color: #E879F9; margin-bottom: 3rem; }
     .section-divider { border: none; border-top: 1px solid var(--border); margin: 3.5rem 0; }
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 3rem; }
@@ -79,18 +63,19 @@ import Base from '../../layouts/Base.astro';
     }
   </script>
 
-  <div class="app-hero">
-    <div class="app-hero-eyebrow">
-      <span>DocArmor</span>
-      <span>&middot;</span>
-      <a href="/" class="back-link">by Katafract &nearr;</a>
+  <PageHero
+    eyebrow="DocArmor · by Katafract"
+    title="Your IDs, <em>encrypted</em>,<br>on your device"
+    subhead="Your driver's license, insurance cards, and passport are probably sitting unencrypted in your camera roll right now — syncing to iCloud, visible in shared albums. DocArmor scans, encrypts, and locks them behind Face ID. Nothing ever leaves your phone."
+    accent="#E879F9"
+  >
+    <div class="coming-soon-badge" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:'JetBrains Mono',monospace;font-size:0.78rem;padding:0.6rem 1.25rem;border-radius:999px;background:rgba(232,121,249,0.07);border:1px solid rgba(232,121,249,0.2);color:#E879F9;margin-top:1rem">
+      ⏳ Coming soon to the App Store
     </div>
-    <h1>Your IDs, <em>encrypted</em>,<br>on your device</h1>
-    <p class="tagline">Your driver&rsquo;s license, insurance cards, and passport are probably sitting unencrypted in your camera roll right now &mdash; syncing to iCloud, visible in shared albums. DocArmor scans, encrypts, and locks them behind Face ID. Nothing ever leaves your phone.</p>
-    <div class="coming-soon-badge">
-      &#x1F511; One-time unlock available. DocArmor stores photos of your documents for your convenience. It is not a legal substitute for your passport, driver's license, or other government-issued IDs. &mdash; add <a href="/apps/vaultyx" style="color:#E879F9;margin-left:0.25rem">Sovereign</a>&nbsp;for cloud backup
+    <div style="text-align:center;margin-top:1rem">
+      <p style="font-size:0.875rem"><a href="/android/" class="plausible-event-name=DocArmor+Interest" style="color:#E879F9">Android? Join the waitlist →</a></p>
     </div>
-  </div>
+  </PageHero>
 
   <main class="app-main">
 
