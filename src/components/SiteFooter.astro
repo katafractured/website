@@ -1,14 +1,23 @@
 ---
-// Site-wide footer. Edit links in one place.
+// Site-wide footer. Operator-grade design.
 ---
 <footer>
+  <div class="footer-gradient"></div>
+
   <div class="footer-inner">
+    <!-- Brand & Links Block -->
     <div class="footer-top">
       <div class="footer-brand-block">
-        <div class="brand"><img src="/katafract-mark.svg" class="nav-mark" alt="" /><span>Katafract</span></div>
-        <p>A privacy platform, operated end-to-end. Own your network, identity, and files.</p>
+        <div class="brand fd" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+          <img src="/katafract-mark.svg" class="footer-mark" alt="" />
+          <span style="font-size: 1.25rem; font-weight: 600; letter-spacing: 0.04em;">Katafract</span>
+        </div>
+        <p class="footer-tagline fd" style="font-size: 0.95rem; font-weight: 500; line-height: 1.5; color: var(--text); margin-bottom: 0.75rem;">
+          Infrastructure built so there's nothing to betray.
+        </p>
         <div class="footer-motto fm">Teneo &middot; Effrenus &middot; Katafractarius</div>
       </div>
+
       <div class="footer-links">
         <div class="footer-col">
           <div class="footer-col-title">Apps</div>
@@ -46,9 +55,254 @@
         </div>
       </div>
     </div>
+
+    <!-- Operator Signal Pills -->
+    <div class="footer-pills">
+      <a href="/canary" class="footer-pill">
+        <span class="pill-dot" style="background: #00FF00;"></span>
+        <span class="pill-text">Warrant Canary · Current</span>
+      </a>
+      <a href="https://status.katafract.io" class="footer-pill" rel="noopener">
+        <span class="pill-dot" style="background: var(--cyan);"></span>
+        <span class="pill-text">Status · Live</span>
+      </a>
+      <a href="https://github.com/katafract-io" class="footer-pill" rel="noopener">
+        <span class="pill-dot" style="background: var(--magenta);"></span>
+        <span class="pill-text">GitHub · Open Source</span>
+      </a>
+    </div>
+
+    <!-- Bottom Band -->
     <div class="footer-bottom">
-      <span>&copy; 2026 Katafract LLC. All rights reserved.</span>
-      <span>🔒 No data collected on users. Ever.</span>
+      <span class="footer-copyright">&copy; 2026 Katafract LLC. All rights reserved.</span>
+      <div class="footer-center-motto">Solo-operated. Self-hosted. No ads. No trackers.</div>
+      <div class="footer-links-bottom">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/accessibility">Accessibility</a>
+      </div>
     </div>
   </div>
 </footer>
+
+<style>
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle 800px at 5% 10%, rgba(0, 240, 255, 0.04) 0%, transparent 80%),
+    radial-gradient(circle 600px at 95% 90%, rgba(255, 0, 110, 0.03) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.footer-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 4rem max(2rem, calc((100% - 1080px) / 2)) 2.5rem;
+}
+
+/* Brand Block */
+.footer-brand-block {
+  flex-shrink: 0;
+  margin-bottom: 2.5rem;
+}
+
+.footer-mark {
+  height: 2.25rem;
+  width: auto;
+  aspect-ratio: 100 / 118;
+}
+
+.footer-tagline {
+  letter-spacing: 0.01em;
+}
+
+.footer-motto {
+  font-size: 0.68rem;
+  color: var(--dim);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+/* Top Section: Brand + Links Grid */
+.footer-top {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 2.5rem;
+}
+
+.footer-links {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-col-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--magenta);
+  margin-bottom: 0.25rem;
+}
+
+.footer-col a {
+  color: var(--dim);
+  font-size: 0.9rem;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.footer-col a:hover {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--cyan);
+}
+
+/* Operator Signal Pills */
+.footer-pills {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.footer-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--dim);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.footer-pill:hover {
+  color: var(--text);
+  border-color: var(--cyan);
+}
+
+.pill-dot {
+  display: inline-block;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pill-text {
+  letter-spacing: 0.05em;
+}
+
+/* Bottom Band */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-copyright {
+  font-size: 0.9rem;
+  color: var(--dim);
+}
+
+.footer-center-motto {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--dim2);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-links-bottom {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.footer-links-bottom a {
+  color: var(--dim);
+  transition: color 0.2s ease;
+}
+
+.footer-links-bottom a:hover {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--cyan);
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .footer-inner {
+    padding: 3rem max(1.5rem, calc((100% - 100%) / 2)) 2rem;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .footer-pills {
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .footer-pill {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .footer-center-motto {
+    text-align: center;
+  }
+
+  .footer-links-bottom {
+    justify-content: center;
+    width: 100%;
+  }
+}
+</style>
