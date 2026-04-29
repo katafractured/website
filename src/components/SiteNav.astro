@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  section?: 'home' | 'enclave' | 'dns' | 'platform' | 'apps' | 'pricing' | 'about' | 'prose';
+  section?: 'home' | 'enclave' | 'dns' | 'platform' | 'apps' | 'pricing' | 'about' | 'prose' | 'welcome' | 'android';
 }
 const { section = 'home' } = Astro.props;
 const active = (k: string) => (section === k ? 'active' : '');

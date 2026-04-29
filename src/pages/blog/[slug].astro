@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { renderToString } from 'astro/runtime/server/render.js';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
