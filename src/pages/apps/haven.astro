@@ -12,6 +12,8 @@ const app = appBySlug('haven');
   ogDescription={`Haven DNS blocks ads, trackers, and malware at the DNS layer — before requests leave your device. Free. No account. No VPN required.`}
   ogImage="https://katafract.com/images/og-haven.jpg"
 >
+  <link slot="head" rel="stylesheet" href="/style.css" />
+
   <style slot="head" is:global>
     :root { --app-accent: var(--haven); }
     .app-main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 5rem; }

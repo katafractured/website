@@ -9,6 +9,8 @@ import PageHero from '../../components/PageHero.astro';
   section="apps"
   twitterCard="summary_large_image"
 >
+  <link slot="head" rel="stylesheet" href="/style.css" />
+
   <style slot="head" is:global>
     /* DocArmor accent — violet */
     :root { --app-accent: var(--docarmor); }

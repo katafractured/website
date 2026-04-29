@@ -12,6 +12,8 @@ const app = appBySlug('exifarmor');
   ogDescription={`Every photo you share contains hidden GPS coordinates, device info, and timestamps. ExifArmor strips it all with one tap. Free with 5 daily strips, or $0.99 to unlock.`}
   ogImage="https://katafract.com/images/og-exifarmor.jpg"
 >
+  <link slot="head" rel="stylesheet" href="/style.css" />
+
   <style slot="head" is:global set:html={`
     :root { --app-accent: var(--exifarmor); }
     .app-main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 5rem; }
