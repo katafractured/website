@@ -38,7 +38,10 @@ import Base from '../layouts/Base.astro';
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       flex-shrink: 0;
       border: 1px solid;
     }
@@ -131,7 +134,7 @@ import Base from '../layouts/Base.astro';
       <div class="app-policy-list">
 
         <a href="/privacy/safeopen" class="app-policy-card" style="border-color: rgba(0,240,255,0.1);" onmouseover="this.style.borderColor='rgba(0,240,255,0.25)'" onmouseout="this.style.borderColor='rgba(0,240,255,0.1)'">
-          <div class="app-policy-icon" style="background:rgba(0,240,255,0.05);border-color:rgba(0,240,255,0.2);color:#00F0FF">&#x1F517;</div>
+          <div class="app-policy-icon" style="background:rgba(0,240,255,0.05);border-color:rgba(0,240,255,0.2);color:#00F0FF">SAFE</div>
           <div class="app-policy-meta">
             <div class="app-policy-name">SafeOpen</div>
             <div class="app-policy-desc">Free tier is fully on-device. Pro uses a secure backend proxy for AI analysis &mdash; your IP never touches the destination.</div>
@@ -141,7 +144,7 @@ import Base from '../layouts/Base.astro';
         </a>
 
         <a href="/privacy/exifarmor" class="app-policy-card" style="--hover-color: rgba(0,240,255,0.12); border-color: rgba(0,240,255,0.1);" onmouseover="this.style.borderColor='rgba(0,240,255,0.25)'" onmouseout="this.style.borderColor='rgba(0,240,255,0.1)'">
-          <div class="app-policy-icon" style="background:rgba(0,240,255,0.05);border-color:rgba(0,240,255,0.2);color:#00F0FF">&#x1F6E1;&#xFE0F;</div>
+          <div class="app-policy-icon" style="background:rgba(0,240,255,0.05);border-color:rgba(0,240,255,0.2);color:#00F0FF">EXIF</div>
           <div class="app-policy-meta">
             <div class="app-policy-name">ExifArmor</div>
             <div class="app-policy-desc">Photo metadata stripping. No photos, EXIF data, or location ever leaves your device.</div>
@@ -151,7 +154,7 @@ import Base from '../layouts/Base.astro';
         </a>
 
         <a href="/privacy/parkarmor" class="app-policy-card" style="border-color: rgba(74,222,128,0.1);" onmouseover="this.style.borderColor='rgba(74,222,128,0.25)'" onmouseout="this.style.borderColor='rgba(74,222,128,0.1)'">
-          <div class="app-policy-icon" style="background:rgba(74,222,128,0.05);border-color:rgba(74,222,128,0.2);color:#4ADE80">&#x1F4CD;</div>
+          <div class="app-policy-icon" style="background:rgba(74,222,128,0.05);border-color:rgba(74,222,128,0.2);color:#4ADE80">PARK</div>
           <div class="app-policy-meta">
             <div class="app-policy-name">ParkArmor</div>
             <div class="app-policy-desc">Parking location saved locally only. No location history, no cloud sync, no accounts.</div>
@@ -161,7 +164,7 @@ import Base from '../layouts/Base.astro';
         </a>
 
         <a href="/privacy/docarmor" class="app-policy-card" style="border-color: rgba(232,121,249,0.1);" onmouseover="this.style.borderColor='rgba(232,121,249,0.25)'" onmouseout="this.style.borderColor='rgba(232,121,249,0.1)'">
-          <div class="app-policy-icon" style="background:rgba(232,121,249,0.05);border-color:rgba(232,121,249,0.2);color:#E879F9">&#x1F510;</div>
+          <div class="app-policy-icon" style="background:rgba(232,121,249,0.05);border-color:rgba(232,121,249,0.2);color:#E879F9">DOC</div>
           <div class="app-policy-meta">
             <div class="app-policy-name">DocArmor</div>
             <div class="app-policy-desc">AES-256 encrypted document vault. Face ID protected. iCloud sync explicitly disabled.</div>

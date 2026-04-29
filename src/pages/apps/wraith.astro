@@ -123,7 +123,7 @@ import PageHero from '../../components/PageHero.astro';
       transition: border-color 0.2s;
     }
     .feature-card:hover { border-color: var(--wraith-border); }
-    .feature-icon { font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .feature-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--wraith); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.85rem; opacity: 0.85; }
     .feature-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.2rem;
@@ -558,7 +558,7 @@ import PageHero from '../../components/PageHero.astro';
     accent="var(--wraith)"
   >
     <div class="wraith-hero-meta">
-      <span class="live-badge">⏳ iOS · In review</span>
+      <span class="live-badge">iOS · In review</span>
       <a href="/" class="back-link">by Katafract &nearr;</a>
     </div>
     <p class="trust-line">Infrastructure built so there&rsquo;s nothing to betray.</p>
@@ -591,27 +591,27 @@ import PageHero from '../../components/PageHero.astro';
     </section>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon" aria-hidden="true">&#x26A1;</div>
+        <div class="feature-icon">01 · Protocol</div>
         <div class="feature-title">WireGuard across a global fleet</div>
         <div class="feature-desc">Modern, audited, open protocol. Nodes in EU, US, and Asia &mdash; continuously expanding, not a fixed count.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" aria-hidden="true">&#x1F6E1;&#xFE0F;</div>
+        <div class="feature-icon">02 · Filtering</div>
         <div class="feature-title">Haven DNS at every exit</div>
         <div class="feature-desc">Ads, trackers, and known malware domains are blocked at the DNS layer &mdash; before the app on your phone ever sees them.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" aria-hidden="true">&#x1F512;</div>
+        <div class="feature-icon">03 · Failover</div>
         <div class="feature-title">Kill switch</div>
         <div class="feature-desc">If the tunnel drops, traffic is blocked. Nothing leaks to your ISP while the app reconnects.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" aria-hidden="true">&#x1F4F1;</div>
+        <div class="feature-icon">04 · Devices</div>
         <div class="feature-title">Up to 5 devices</div>
         <div class="feature-desc">One Enclave account, five installs. Sovereign lifts the cap to unlimited.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon" aria-hidden="true">&#x1F9BE;</div>
+        <div class="feature-icon">05 · Logs</div>
         <div class="feature-title">No activity logs</div>
         <div class="feature-desc">No connection timestamps, no assigned-IP records, no DNS logs. The pipelines were never built. There&rsquo;s nothing to subpoena.</div>
       </div>

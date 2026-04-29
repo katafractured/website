@@ -20,7 +20,7 @@ import PageHero from '../../components/PageHero.astro';
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 3rem; }
     .feature-card { background: rgba(10,10,20,0.5); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color 0.2s; }
     .feature-card:hover { border-color: rgba(255,0,110,0.2); }
-    .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .feature-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--app-accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.85rem; opacity: 0.85; }
     .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
     .feature-desc { font-size: 0.875rem; color: var(--dim); line-height: 1.65; }
     .privacy-block { background: rgba(255,0,110,0.03); border: 1px solid rgba(255,0,110,0.1); border-radius: 1rem; padding: 2rem; margin: 2rem 0; }
@@ -69,7 +69,7 @@ import PageHero from '../../components/PageHero.astro';
     accent="var(--vaultyx)"
   >
     <div style="margin-top:2rem">
-      <div class="coming-soon-badge">⏳ Coming soon · Builds ready</div>
+      <div class="coming-soon-badge">Coming soon</div>
       <div style="margin-top:1rem;font-size:0.9rem;color:var(--dim)">Get notified: <a href="/#signup" style="color:var(--vaultyx)">Join the list →</a></div>
     </div>
   </PageHero>
@@ -86,32 +86,32 @@ import PageHero from '../../components/PageHero.astro';
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">🔐</div>
+        <div class="feature-icon">01 · Encryption</div>
         <div class="feature-title">AES-256-GCM Encryption</div>
         <div class="feature-desc">Military-grade encryption on your device. Your encryption key never leaves your possession. Katafract stores only encrypted blobs.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">⚡</div>
+        <div class="feature-icon">02 · Sync</div>
         <div class="feature-title">FastCDC Delta Sync</div>
         <div class="feature-desc">Edit 1 byte of a 1GB file? Only ~64KB uploads. Content-defined chunking means you only sync what changed, not the entire file.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🔄</div>
+        <div class="feature-icon">03 · Transport</div>
         <div class="feature-title">Auto VPN Routing</div>
         <div class="feature-desc">All traffic routes through WraithVPN automatically. Your ISP sees the WireGuard tunnel, not your files or metadata.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">📸</div>
+        <div class="feature-icon">04 · Backup</div>
         <div class="feature-title">Photo Backup</div>
         <div class="feature-desc">Backup original-quality photos and videos. Automatic deduplication by content hash — store the same photo once, even across devices.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">📦</div>
+        <div class="feature-icon">05 · Export</div>
         <div class="feature-title">Standard S3 Backend</div>
         <div class="feature-desc">Your data lives in standard S3. Export anytime with any S3 client. No lock-in, no proprietary APIs — just open standards.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🌍</div>
+        <div class="feature-icon">06 · Replication</div>
         <div class="feature-title">Distributed Globally</div>
         <div class="feature-desc">Data replicated across US, EU, and Asia. 500Mbps+ unmetered bandwidth per node. Automatic failover, zero manual intervention.</div>
       </div>
@@ -120,7 +120,7 @@ import PageHero from '../../components/PageHero.astro';
     <hr class="section-divider">
 
     <div class="privacy-block">
-      <h2>🔒 Mathematically impossible to scan</h2>
+      <h2>Mathematically impossible to scan</h2>
       <p>Vaultyx uses client-side encryption. The server never receives your unencrypted data, never holds your encryption keys, and has no way to read your files. Content scanning, AI training, warrant compliance — all mathematically impossible without your key.</p>
       <ul class="unlike-list">
         <li><strong>Unlike iCloud:</strong> Apple scans photos before they upload. We never see anything to scan.</li>

@@ -19,7 +19,7 @@ import PageHero from '../../components/PageHero.astro';
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 3rem; }
     .feature-card { background: rgba(10,10,20,0.5); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color 0.2s; }
     .feature-card:hover { border-color: rgba(232,121,249,0.2); }
-    .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .feature-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--app-accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.85rem; opacity: 0.85; }
     .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
     .feature-desc { font-size: 0.875rem; color: var(--dim); line-height: 1.65; }
     .privacy-block { background: rgba(232,121,249,0.03); border: 1px solid rgba(232,121,249,0.1); border-radius: 1rem; padding: 2rem; margin: 2rem 0; }
@@ -58,7 +58,7 @@ import PageHero from '../../components/PageHero.astro';
     accent="var(--docarmor)"
   >
     <div class="coming-soon-badge">
-      ⏳ Coming soon to the App Store
+      Coming soon to the App Store
     </div>
     <div style="text-align:center;margin-top:1rem">
       <p style="font-size:0.875rem"><a href="/android/" class="plausible-event-name=DocArmor+Interest" style="color:var(--docarmor)">Android? Join the waitlist →</a></p>
@@ -77,32 +77,32 @@ import PageHero from '../../components/PageHero.astro';
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">&#x1F4F7;</div>
+        <div class="feature-icon">01 · Capture</div>
         <div class="feature-title">Built-In Scanner</div>
         <div class="feature-desc">Scan documents directly in-app. VisionKit processes the camera feed on-device. Scans are encrypted before they ever touch disk.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F510;</div>
+        <div class="feature-icon">02 · Encryption</div>
         <div class="feature-title">AES-256 Encryption</div>
         <div class="feature-desc">Every document is encrypted with AES-256 via Apple CryptoKit. The encryption key lives in the iOS Keychain and never leaves your device.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1FAE3;</div>
+        <div class="feature-icon">03 · Auth</div>
         <div class="feature-title">Face ID / Touch ID</div>
         <div class="feature-desc">Your vault locks when you leave the app and requires biometric authentication to reopen. DocArmor never sees your biometric data &mdash; only iOS does.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x2601;&#xFE0F;</div>
+        <div class="feature-icon">04 · Backup</div>
         <div class="feature-title">Optional Cloud Backup</div>
         <div class="feature-desc">Add a Sovereign subscription (through Vaultyx) and DocArmor can back up to Katafract&rsquo;s zero-knowledge Shards S3 &mdash; encrypted on-device, never visible to us. Off by default, off on iCloud, off on Apple.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F4C2;</div>
+        <div class="feature-icon">05 · Sort</div>
         <div class="feature-title">Organized Folders</div>
         <div class="feature-desc">Create categories like Medical, Travel, or Finance. Every folder uses the same vault key. Everything stays encrypted.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F4E4;</div>
+        <div class="feature-icon">06 · Export</div>
         <div class="feature-title">Secure Export</div>
         <div class="feature-desc">Share a document to Files, AirDrop, or another app when you need it. Export is always explicit &mdash; nothing leaves without your action.</div>
       </div>
@@ -111,7 +111,7 @@ import PageHero from '../../components/PageHero.astro';
     <hr class="section-divider">
 
     <div class="privacy-block">
-      <h2>&#x1F512; Zero-knowledge by default</h2>
+      <h2>Zero-knowledge by default</h2>
       <p>DocArmor encrypts every document with AES-256 before it touches disk. The key is in the iOS Keychain, bound to your device and biometrics. Without Sovereign, there are no servers at all &mdash; Katafract never sees your vault.</p>
       <p>If you turn on Sovereign cloud backup, files are re-encrypted locally with a Sovereign-derived key and uploaded as opaque chunks to Shards S3. Katafract still can&rsquo;t read them &mdash; the encryption happens on your device, before upload.</p>
       <p>Apple Privacy Nutrition Label: <strong>Data Not Collected.</strong></p>
@@ -127,7 +127,7 @@ import PageHero from '../../components/PageHero.astro';
     <hr class="section-divider">
 
     <div class="privacy-block">
-      <h2>&#x26A0;&#xFE0F; Not a legal substitute</h2>
+      <h2>Not a legal substitute</h2>
       <p>DocArmor is a personal-document management tool. A digital copy in DocArmor does not replace the physical passport, license, or ID you need to cross a border, board a flight, or satisfy official identification.</p>
     </div>
 

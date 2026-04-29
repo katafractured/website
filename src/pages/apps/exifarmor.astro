@@ -47,8 +47,13 @@ const app = appBySlug('exifarmor');
     }
     .feature-card:hover { border-color: rgba(0,240,255,0.18); }
     .feature-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--app-accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+      opacity: 0.85;
     }
     .feature-title {
       font-family: 'Cormorant Garamond', serif;
@@ -190,32 +195,32 @@ const app = appBySlug('exifarmor');
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">&#x1F5FA;&#xFE0F;</div>
+        <div class="feature-icon">01 · Preview</div>
         <div class="feature-title">Exposure Preview</div>
         <div class="feature-desc">See exactly what&rsquo;s hidden in your photo &mdash; GPS pin on a map, device model, timestamps &mdash; before you decide what to strip.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x26A1;</div>
+        <div class="feature-icon">02 · Strip</div>
         <div class="feature-title">One-Tap Strip</div>
         <div class="feature-desc">Remove all metadata from a photo in a single tap. A clean copy is saved to your library. Your original is untouched.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F4F8;</div>
+        <div class="feature-icon">03 · Batch</div>
         <div class="feature-title">Batch Mode</div>
         <div class="feature-desc">Select dozens of photos at once and strip them all in one go. Pro feature &mdash; perfect before bulk sharing or posting.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F517;</div>
+        <div class="feature-icon">04 · Share</div>
         <div class="feature-title">Share Extension</div>
         <div class="feature-desc">Strip metadata directly from Photos, Messages, or any other app using the iOS share sheet. Never leave the app you&rsquo;re in.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F527;</div>
+        <div class="feature-icon">05 · Custom</div>
         <div class="feature-title">Custom Strip</div>
         <div class="feature-desc">Choose exactly which fields to remove and which to keep. Keep the timestamp but drop GPS. Your call, every time.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F6E1;&#xFE0F;</div>
+        <div class="feature-icon">06 · Report</div>
         <div class="feature-title">Privacy Report</div>
         <div class="feature-desc">Track how many exposures you&rsquo;ve neutralized over time. Badges reward consistent privacy habits.</div>
       </div>
@@ -255,7 +260,7 @@ const app = appBySlug('exifarmor');
     <hr class="section-divider">
 
     <div class="privacy-block">
-      <h2>&#x1F512; Your photos never leave your device</h2>
+      <h2>Your photos never leave your device</h2>
       <p>ExifArmor processes everything on-device. There are no servers, no cloud uploads, no network calls. Your photos, their metadata, and the cleaned versions stay entirely on your iPhone.</p>
       <p>Apple Privacy Nutrition Label: <strong>Data Not Collected.</strong></p>
       <div class="privacy-pills">

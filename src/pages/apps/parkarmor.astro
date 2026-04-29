@@ -50,7 +50,7 @@ const app = appBySlug('parkarmor');
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 3rem; }
     .feature-card { background: rgba(10,10,20,0.5); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color 0.2s; }
     .feature-card:hover { border-color: rgba(74,222,128,0.2); }
-    .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .feature-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--app-accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.85rem; opacity: 0.85; display: flex; align-items: center; gap: 0.6rem; }
     .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
     .feature-desc { font-size: 0.875rem; color: var(--dim); line-height: 1.65; }
     .privacy-block { background: rgba(74,222,128,0.03); border: 1px solid rgba(74,222,128,0.1); border-radius: 1rem; padding: 2rem; margin: 2rem 0; }
@@ -89,23 +89,23 @@ const app = appBySlug('parkarmor');
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">&#x1F4CD;</div>
-        <div class="feature-title">One-Tap Pin <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--parkarmor);letter-spacing:0.05em">FREE</span></div>
+        <div class="feature-icon">01 · Pin · Free</div>
+        <div class="feature-title">One-Tap Pin</div>
         <div class="feature-desc">Tap once as you walk away. ParkArmor saves your current GPS location. The free tier always remembers your most recent spot.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F9ED;</div>
-        <div class="feature-title">Walking Directions <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--parkarmor);letter-spacing:0.05em">FREE</span></div>
+        <div class="feature-icon">02 · Navigate · Free</div>
+        <div class="feature-title">Walking Directions</div>
         <div class="feature-desc">Tap &ldquo;Navigate Back&rdquo; to launch Apple Maps with walking directions to your exact spot. No fumbling, no searching.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x23F1;&#xFE0F;</div>
-        <div class="feature-title">Parking Timer <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--parkarmor);letter-spacing:0.05em">PRO</span></div>
+        <div class="feature-icon">03 · Timer · Pro</div>
+        <div class="feature-title">Parking Timer</div>
         <div class="feature-desc">Set your meter expiry and get a local notification before time runs out. No server &mdash; the alert fires entirely on your device.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F4F1;</div>
-        <div class="feature-title">Lock Screen Widget <span style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--parkarmor);letter-spacing:0.05em">PRO</span></div>
+        <div class="feature-icon">04 · Widget · Pro</div>
+        <div class="feature-title">Lock Screen Widget</div>
         <div class="feature-desc">See your saved spot and timer countdown without unlocking your phone. Multiple saved spots and full history also unlocked with Pro.</div>
       </div>
     </div>
@@ -113,7 +113,7 @@ const app = appBySlug('parkarmor');
     <hr class="section-divider">
 
     <div class="privacy-block">
-      <h2>&#x1F512; Your location never leaves your device</h2>
+      <h2>Your location never leaves your device</h2>
       <p>ParkArmor stores your parking location only in local device storage. It is never transmitted to Katafract, Apple, or anyone else. There are no servers, no cloud sync, and no location history retained anywhere outside your phone.</p>
       <p>Apple Privacy Nutrition Label: <strong>Data Not Collected.</strong></p>
       <div class="privacy-pills">

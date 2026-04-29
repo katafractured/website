@@ -213,7 +213,7 @@ import Base from '../layouts/Base.astro';
       padding: 1.25rem;
       text-align: center;
     }
-    .arch-node-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+    .arch-node-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--cyan); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; opacity: 0.85; }
     .arch-node-name {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
@@ -376,22 +376,22 @@ import Base from '../layouts/Base.astro';
     <p class="arch-sub">Enclave is not a resold product. We run our own infrastructure, write our own software, and operate our own exit nodes. Every component is purpose-built for privacy.</p>
     <div class="arch-grid">
       <div class="arch-node">
-        <div class="arch-node-icon">🌐</div>
+        <div class="arch-node-icon">01 · DNS</div>
         <div class="arch-node-name">Haven DNS</div>
         <div class="arch-node-desc">AdGuard Home on each node, binding only on WireGuard interface. No public DNS exposure.</div>
       </div>
       <div class="arch-node">
-        <div class="arch-node-icon">🔒</div>
+        <div class="arch-node-icon">02 · Exits</div>
         <div class="arch-node-name">WraithGate Nodes</div>
         <div class="arch-node-desc">WireGuard exit nodes in Nuremberg, Helsinki, Singapore, Tokyo, Mumbai, Ashburn, Portland, and Newark. nftables firewall, minimal attack surface.</div>
       </div>
       <div class="arch-node">
-        <div class="arch-node-icon">🕸️</div>
+        <div class="arch-node-icon">03 · Mesh</div>
         <div class="arch-node-name">ShroudNet Mesh</div>
         <div class="arch-node-desc">Private Headscale mesh connecting all nodes. Management traffic never touches the public internet.</div>
       </div>
       <div class="arch-node">
-        <div class="arch-node-icon">🛡️</div>
+        <div class="arch-node-icon">04 · Control</div>
         <div class="arch-node-name">Artemis Control</div>
         <div class="arch-node-desc">Internal control plane for node health, provisioning, and key rotation. Not publicly accessible.</div>
       </div>

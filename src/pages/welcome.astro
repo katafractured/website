@@ -19,7 +19,7 @@ import Base from '../layouts/Base.astro';
     .paths-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto 3rem; }
     .path-card { background: #0a0a14; border: 1px solid rgba(100,100,120,.15); border-radius: 20px; padding: 2.25rem; display: flex; flex-direction: column; }
     .path-card.ios-card { border-color: rgba(255,0,110,.2); }
-    .path-icon { font-size: 2rem; margin-bottom: 1.25rem; }
+    .path-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00F0FF; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 1.25rem; opacity: 0.85; }
     .path-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: .5rem; }
     .path-sub { color: #8C94A6; font-size: .875rem; margin-bottom: 1.5rem; line-height: 1.6; }
     .path-steps { list-style: none; margin: 0 0 1.75rem; display: flex; flex-direction: column; gap: .65rem; }
@@ -64,7 +64,7 @@ import Base from '../layouts/Base.astro';
              iOS buyers purchase inside the app via Apple ID and never hit
              Stripe, so there's no iOS panel here. -->
         <div class="path-card">
-          <div class="path-icon">🔑</div>
+          <div class="path-icon">Step · WireGuard config</div>
           <div class="path-title">Get your WireGuard config</div>
           <div class="path-sub">Buying via Stripe means you want a WireGuard config for Mac, Windows, Linux, Android, or a router. Open your Stripe receipt email, head to connect.katafract.com, and download it.</div>
           <ul class="path-steps">

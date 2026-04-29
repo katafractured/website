@@ -20,7 +20,7 @@ const app = appBySlug('praetor');
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 3rem; }
     .feature-card { background: rgba(10,10,20,0.5); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color 0.2s; }
     .feature-card:hover { border-color: rgba(255,0,110,0.2); }
-    .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .feature-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--app-accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.85rem; opacity: 0.85; }
     .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
     .feature-desc { font-size: 0.875rem; color: var(--dim); line-height: 1.65; }
     .privacy-block { background: rgba(255,0,110,0.03); border: 1px solid rgba(255,0,110,0.1); border-radius: 1rem; padding: 2rem; margin: 2rem 0; }
@@ -53,7 +53,7 @@ const app = appBySlug('praetor');
     accent="var(--app-accent)"
   >
     <div class="in-dev-badge">
-      📧 In development
+      In development
     </div>
   </PageHero>
 
@@ -69,17 +69,17 @@ const app = appBySlug('praetor');
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">🔐</div>
+        <div class="feature-icon">01 · Mail</div>
         <div class="feature-title">Encrypted IMAP/SMTP Sync</div>
         <div class="feature-desc">Connect any IMAP mailbox. Mail syncs locally, encrypted at rest. You hold all keys. No plaintext mail on servers.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">📇</div>
+        <div class="feature-icon">02 · PIM</div>
         <div class="feature-title">Local Contacts + Calendar</div>
         <div class="feature-desc">Manage contacts and calendar events entirely on your device. Sync via CardDAV/CalDAV or keep them local only. Your choice.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🍎</div>
+        <div class="feature-icon">03 · Platform</div>
         <div class="feature-title">Native macOS + iOS</div>
         <div class="feature-desc">Swift-first app for Mac and iPhone. Pixel-perfect, zero Electron, zero web wrapper. SwiftUI throughout, Shortcuts support.</div>
       </div>
@@ -88,7 +88,7 @@ const app = appBySlug('praetor');
     <hr class="section-divider">
 
     <div class="privacy-block">
-      <h2>🔒 Your inbox, not anyone's data warehouse</h2>
+      <h2>Your inbox, not anyone's data warehouse</h2>
       <p>Praetor stores mail, contacts, and events locally on your device only. Unlike Gmail, Outlook, and iCloud Mail, your inbox is never scanned for ads, never analyzed for behavioral profiling, and never used to train AI models. Your device is the only copy — we have no access, no backups, no metadata.</p>
       <div class="privacy-pills">
         <span class="privacy-pill">Offline-first design</span>

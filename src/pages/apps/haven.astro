@@ -39,7 +39,7 @@ const app = appBySlug('haven');
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 3rem; }
     .feature-card { background: rgba(10,10,20,0.5); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color 0.2s; }
     .feature-card:hover { border-color: rgba(74,222,128,0.18); }
-    .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .feature-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--app-accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.85rem; opacity: 0.85; }
     .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
     .feature-desc { font-size: 0.875rem; color: var(--dim); line-height: 1.65; }
     .app-page-section { margin-bottom: 0.5rem; }
@@ -85,22 +85,22 @@ const app = appBySlug('haven');
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">🚫</div>
+        <div class="feature-icon">01 · Blocks</div>
         <div class="feature-title">Ad Networks</div>
         <div class="feature-desc">Blocks Google Ads, Meta Audience Network, AppLovin, and hundreds of other ad providers.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🕵️</div>
+        <div class="feature-icon">02 · Blocks</div>
         <div class="feature-title">Tracking</div>
         <div class="feature-desc">Blocks cross-site trackers, fingerprinting services, analytics beacons, and telemetry endpoints.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">⚠️</div>
+        <div class="feature-icon">03 · Blocks</div>
         <div class="feature-title">Malware</div>
         <div class="feature-desc">Blocks known malware domains, phishing sites, and command-and-control servers.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🌐</div>
+        <div class="feature-icon">04 · Scope</div>
         <div class="feature-title">Every App</div>
         <div class="feature-desc">Works across all apps and browsers on your device — including those that ignore manual DNS settings.</div>
       </div>
@@ -116,22 +116,22 @@ const app = appBySlug('haven');
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">🔓</div>
+        <div class="feature-icon">01 · Identity</div>
         <div class="feature-title">No Account</div>
         <div class="feature-desc">Haven works without signing up, without creating an account, and without logging your identity. Install the profile and you're done.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">⚡</div>
+        <div class="feature-icon">02 · Latency</div>
         <div class="feature-title">Fast</div>
         <div class="feature-desc">Queries resolve on Katafract's global anycast network — same as WraithVPN. Sub-millisecond latency in most regions.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🔒</div>
+        <div class="feature-icon">03 · Transit</div>
         <div class="feature-title">Encrypted</div>
         <div class="feature-desc">Uses DNS-over-HTTPS (DoH) by default, so your queries aren't logged by your ISP.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">📱</div>
+        <div class="feature-icon">04 · Reach</div>
         <div class="feature-title">Works Everywhere</div>
         <div class="feature-desc">Configure once on iPhone or Mac and it protects all network traffic — Safari, Mail, apps, everything.</div>
       </div>

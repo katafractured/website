@@ -149,7 +149,7 @@ import Base from '../layouts/Base.astro';
       transition: border-color .2s;
     }
     .pillar:hover { border-color: rgba(0,240,255,.15); }
-    .pillar-icon { color: var(--cyan); opacity: .6; margin-bottom: 1rem; font-size: 1.2rem; transition: opacity .2s; }
+    .pillar-icon { font-family: 'JetBrains Mono', monospace; color: var(--cyan); opacity: .6; margin-bottom: 1rem; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; transition: opacity .2s; }
     .pillar:hover .pillar-icon { opacity: 1; }
     .pillar h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; margin-bottom: .6rem; }
     .pillar p { color: var(--dim); font-size: .875rem; line-height: 1.65; }
@@ -170,7 +170,9 @@ import Base from '../layouts/Base.astro';
     .app-icon {
       width: 48px; height: 48px; border-radius: .75rem;
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 1.35rem;
+      flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 600;
+      letter-spacing: .04em;
       border: 1px solid; /* color set inline */
     }
     .app-meta { flex: 1; min-width: 0; }
@@ -338,17 +340,17 @@ import Base from '../layouts/Base.astro';
     </div>
     <div class="pillars fade-up fade-up-d2">
       <div class="pillar">
-        <div class="pillar-icon">🔒</div>
+        <div class="pillar-icon">01 · Locality</div>
         <h3 class="fd">On-device only</h3>
         <p>Every app processes locally. No accounts, no cloud sync, no analytics SDKs. Apple privacy label for all: data not collected.</p>
       </div>
       <div class="pillar">
-        <div class="pillar-icon">👁</div>
+        <div class="pillar-icon">02 · Origin</div>
         <h3 class="fd">Problems we have too</h3>
         <p>We don't build apps for market research. We build tools we personally need, then share them with everyone else.</p>
       </div>
       <div class="pillar">
-        <div class="pillar-icon">🛡</div>
+        <div class="pillar-icon">03 · Posture</div>
         <h3 class="fd">Nothing to breach</h3>
         <p>No servers storing your data means no databases to hack, no breaches to disclose, and nothing to subpoena. Ever.</p>
       </div>
@@ -371,7 +373,7 @@ import Base from '../layouts/Base.astro';
       <!-- ExifArmor -->
       <div class="app-card plausible-event-name=App+Card+Click plausible-event-app=exifarmor" data-app="0" style="--app-color:#00F0FF">
         <div class="app-card-header">
-          <div class="app-icon" style="background:rgba(0,240,255,.05);border-color:rgba(0,240,255,.15);color:#00F0FF">🛡️</div>
+          <div class="app-icon" style="background:rgba(0,240,255,.05);border-color:rgba(0,240,255,.15);color:#00F0FF">EXIF</div>
           <div class="app-meta">
             <div class="app-name-row">
               <span class="app-name fd">ExifArmor</span>
@@ -420,7 +422,7 @@ import Base from '../layouts/Base.astro';
       <!-- ParkArmor -->
       <div class="app-card plausible-event-name=App+Card+Click plausible-event-app=parkarmor" data-app="1">
         <div class="app-card-header">
-          <div class="app-icon" style="background:rgba(74,222,128,.05);border-color:rgba(74,222,128,.15);color:#4ADE80">📍</div>
+          <div class="app-icon" style="background:rgba(74,222,128,.05);border-color:rgba(74,222,128,.15);color:#4ADE80">PARK</div>
           <div class="app-meta">
             <div class="app-name-row">
               <span class="app-name fd">ParkArmor</span>
@@ -469,7 +471,7 @@ import Base from '../layouts/Base.astro';
       <!-- DocArmor -->
       <div class="app-card plausible-event-name=App+Card+Click plausible-event-app=docarmor" data-app="2">
         <div class="app-card-header">
-          <div class="app-icon" style="background:rgba(232,121,249,.05);border-color:rgba(232,121,249,.15);color:#E879F9">🔐</div>
+          <div class="app-icon" style="background:rgba(232,121,249,.05);border-color:rgba(232,121,249,.15);color:#E879F9">DOC</div>
           <div class="app-meta">
             <div class="app-name-row">
               <span class="app-name fd">DocArmor</span>
@@ -515,7 +517,7 @@ import Base from '../layouts/Base.astro';
       <!-- SafeOpen -->
       <div class="app-card plausible-event-name=App+Card+Click plausible-event-app=safeopen" data-app="3">
         <div class="app-card-header">
-          <div class="app-icon" style="background:rgba(249,115,22,.05);border-color:rgba(249,115,22,.15);color:#F97316">🔍</div>
+          <div class="app-icon" style="background:rgba(249,115,22,.05);border-color:rgba(249,115,22,.15);color:#F97316">SAFE</div>
           <div class="app-meta">
             <div class="app-name-row">
               <span class="app-name fd">SafeOpen</span>
@@ -560,11 +562,11 @@ import Base from '../layouts/Base.astro';
       <!-- Vaultyx -->
       <div class="app-card plausible-event-name=App+Card+Click plausible-event-app=vaultyx" data-app="4">
         <div class="app-card-header">
-          <div class="app-icon" style="background:rgba(255,0,110,.05);border-color:rgba(255,0,110,.15);color:#FF006E">☁️</div>
+          <div class="app-icon" style="background:rgba(255,0,110,.05);border-color:rgba(255,0,110,.15);color:#FF006E">VAULT</div>
           <div class="app-meta">
             <div class="app-name-row">
               <span class="app-name fd">Vaultyx</span>
-              <span class="app-badge fm" style="background:rgba(255,0,110,.1);color:#FF006E">Coming soon · Builds ready</span>
+              <span class="app-badge fm" style="background:rgba(255,0,110,.1);color:#FF006E">Coming soon</span>
               <span class="app-cat fm">Cloud Storage</span>
             </div>
             <div class="app-tagline fm">Zero-knowledge encrypted cloud storage</div>
@@ -717,7 +719,7 @@ import Base from '../layouts/Base.astro';
       <p style="color:var(--dim);margin-bottom:2.5rem;line-height:1.7">Get notified when we launch new apps or ship updates. No spam, no tracking — just announcements.</p>
       <form class="signup-form" id="signup-form" action="https://api.katafract.com/v1/newsletter/subscribe" method="POST">
         <input type="email" name="email" placeholder="your@email.com" required>
-        <button type="submit" class="btn-primary fm">✉ Subscribe</button>
+        <button type="submit" class="btn-primary fm">Subscribe</button>
       </form>
       <div id="signup-success" class="signup-success" style="display:none">⬡ You're on the list.</div>
     </div>

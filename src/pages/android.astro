@@ -86,7 +86,7 @@ import Base from '../layouts/Base.astro';
       background: rgba(10,10,20,.5); transition: border-color .2s, background .2s;
     }
     .app-link:hover { border-color: rgba(0,240,255,.2); background: rgba(10,10,20,.7); text-decoration: none; }
-    .app-link .icon { font-size: 2.5rem; margin-bottom: .5rem; }
+    .app-link .icon { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 600; color: var(--cyan); letter-spacing: .08em; margin-bottom: .75rem; opacity: .85; }
     .app-link .name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: .25rem; }
     .app-link .category { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: var(--dim2); }
 
@@ -113,7 +113,7 @@ import Base from '../layouts/Base.astro';
     <div class="form-block">
       <form class="signup-form" id="android-form">
         <input type="email" name="email" placeholder="your@email.com" required>
-        <button type="submit" class="btn-primary fm">✉ Join</button>
+        <button type="submit" class="btn-primary fm">Join</button>
       </form>
       <div id="android-success" class="signup-success" style="display:none">⬡ You're on the list.</div>
     </div>
@@ -123,22 +123,22 @@ import Base from '../layouts/Base.astro';
       <h3>Already live on iOS & Android</h3>
       <div class="apps-grid">
         <a href="/apps/wraith" class="app-link">
-          <div class="icon">🛡️</div>
+          <div class="icon">WRAITH</div>
           <div class="name">WraithVPN</div>
           <div class="category">iOS</div>
         </a>
         <a href="/apps/safeopen" class="app-link">
-          <div class="icon">🔍</div>
+          <div class="icon">SAFE</div>
           <div class="name">SafeOpen</div>
           <div class="category">iOS</div>
         </a>
         <a href="/apps/exifarmor" class="app-link">
-          <div class="icon">🛡️</div>
+          <div class="icon">EXIF</div>
           <div class="name">ExifArmor</div>
           <div class="category">iOS</div>
         </a>
         <a href="/apps/parkarmor" class="app-link">
-          <div class="icon">📍</div>
+          <div class="icon">PARK</div>
           <div class="name">ParkArmor</div>
           <div class="category">iOS</div>
         </a>

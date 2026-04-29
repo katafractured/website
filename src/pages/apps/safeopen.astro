@@ -32,7 +32,7 @@ const app = appBySlug('safeopen');
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 3rem; }
     .feature-card { background: rgba(10,10,20,0.5); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color 0.2s; }
     .feature-card:hover { border-color: rgba(0,212,255,0.2); }
-    .feature-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .feature-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--app-accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.85rem; opacity: 0.85; }
     .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
     .feature-desc { font-size: 0.875rem; color: var(--dim); line-height: 1.65; }
     .pack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 1.5rem; }
@@ -111,7 +111,7 @@ const app = appBySlug('safeopen');
     accent="var(--app-accent)"
   >
     <div class="live-badge">
-      ⏳ Coming soon to iOS &middot; In Apple review
+      Coming soon to iOS &middot; In Apple review
     </div>
   </PageHero>
 
@@ -127,32 +127,32 @@ const app = appBySlug('safeopen');
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">&#x1F4F7;</div>
+        <div class="feature-icon">01 · Capture</div>
         <div class="feature-title">QR Scanner</div>
         <div class="feature-desc">Point your camera at any QR code or barcode. Decodes instantly into URLs, Wi-Fi credentials, contacts, calendar events, SMS, email, geo, crypto, scripts, and plain text. Fully offline.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F517;</div>
+        <div class="feature-icon">02 · Inspect</div>
         <div class="feature-title">Paste &amp; Inspect</div>
         <div class="feature-desc">Paste any link or share it from another app. SafeOpen normalizes the URL, classifies the payload, and shows you the destination before you do anything with it.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x26A0;&#xFE0F;</div>
+        <div class="feature-icon">03 · Risk</div>
         <div class="feature-title">Local Risk Scoring</div>
         <div class="feature-desc">Heuristics flag raw IP addresses, punycode lookalike domains, unusual ports, suspicious path keywords, excessive query parameters, executable scripts, and known URL shorteners.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F4AC;</div>
+        <div class="feature-icon">04 · Explain</div>
         <div class="feature-title">Plain-language Explanation</div>
         <div class="feature-desc">No jargon. Every risk flag comes with a clear explanation of why it matters. You decide with full context, not just a colored badge.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x2702;&#xFE0F;</div>
+        <div class="feature-icon">05 · Strip</div>
         <div class="feature-title">Tracking-parameter Stripping</div>
         <div class="feature-desc">Detects and removes 38+ known tracking parameters (UTM, fbclid, gclid, msclkid, and more). Shows the clean URL alongside the original so you can copy it without the surveillance baggage.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F4CB;</div>
+        <div class="feature-icon">06 · History</div>
         <div class="feature-title">Local Scan History</div>
         <div class="feature-desc">Every inspection is saved on your device. Review, copy, or share any past result. History never syncs to iCloud and never leaves your phone.</div>
       </div>
@@ -168,12 +168,12 @@ const app = appBySlug('safeopen');
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">&#x1F9E0;</div>
+        <div class="feature-icon">07 · Summary</div>
         <div class="feature-title">AI Summary</div>
         <div class="feature-desc">Our servers fetch the destination through a Katafract relay and use OpenAI to generate a plain-English summary of what the link contains. The destination never sees your IP.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">&#x1F6E1;&#xFE0F;</div>
+        <div class="feature-icon">08 · Relay</div>
         <div class="feature-title">Open Safely</div>
         <div class="feature-desc">Open the link inside an isolated, non-persistent in-app browser served from a Katafract relay. Each session gets a disposable IPv6 address that the destination sees instead of your real IP, released after 10 minutes. Cookies and storage are destroyed when the session ends.</div>
       </div>
@@ -370,7 +370,7 @@ const app = appBySlug('safeopen');
     <hr class="section-divider">
 
     <div class="privacy-block">
-      <h2>&#x1F512; 100% transparency on what we collect</h2>
+      <h2>100% transparency on what we collect</h2>
       <p>The on-device features (scan, decode, risk score, strip trackers, history) make zero network calls. We receive nothing.</p>
       <p>The two credit features (AI Summary, Open Safely) send the URL you submitted plus an anonymous device UUID to Katafract. The URL is logged for 30 days for abuse prevention and then deleted by an automated job. The device UUID is stored in your Keychain only so we can track your credit balance. None of it is linked to your Apple ID, name, or email.</p>
       <p>For AI Summary, the fetched page text is sent to OpenAI under their API terms. No personal information is ever sent to OpenAI.</p>

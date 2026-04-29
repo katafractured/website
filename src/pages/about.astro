@@ -26,7 +26,7 @@ import Base from '../layouts/Base.astro';
       transition: border-color 0.2s, background 0.2s;
     }
     a.app-card:hover { border-color: rgba(0,240,255,0.2); background: var(--bg3); text-decoration: none; }
-    .app-card-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .app-card-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--cyan); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.85rem; opacity: 0.85; }
     .app-card-name {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.15rem;
@@ -100,35 +100,35 @@ import Base from '../layouts/Base.astro';
 
       <div class="app-grid">
         <a href="/apps/exifarmor" class="app-card">
-          <div class="app-card-icon">🛡️</div>
+          <div class="app-card-icon">01 · ExifArmor</div>
           <div class="app-card-name">ExifArmor</div>
           <div class="app-card-cat">Photo &amp; Video</div>
           <div class="app-card-desc">Strip hidden GPS, camera, and timestamp metadata from photos before you share them. One tap. Originals untouched.</div>
           <span class="app-card-status status-live">Live on App Store</span>
         </a>
         <a href="/apps/parkarmor" class="app-card">
-          <div class="app-card-icon">📍</div>
+          <div class="app-card-icon">02 · ParkArmor</div>
           <div class="app-card-name">ParkArmor</div>
           <div class="app-card-cat">Navigation</div>
           <div class="app-card-desc">Save your parking spot in one tap. Get walking directions back, set a meter timer, check your lock screen widget.</div>
           <span class="app-card-status status-live">Live on App Store</span>
         </a>
         <a href="/apps/docarmor" class="app-card">
-          <div class="app-card-icon">🔐</div>
+          <div class="app-card-icon">03 · DocArmor</div>
           <div class="app-card-name">DocArmor</div>
           <div class="app-card-cat">Security</div>
           <div class="app-card-desc">AES-256 encrypted vault for your IDs, insurance cards, and passports. Face ID protected. iCloud sync disabled.</div>
           <span class="app-card-status status-planned">Planned</span>
         </a>
         <a href="/apps/safeopen" class="app-card">
-          <div class="app-card-icon">🔍</div>
+          <div class="app-card-icon">04 · SafeOpen</div>
           <div class="app-card-name">SafeOpen</div>
           <div class="app-card-cat">Security</div>
           <div class="app-card-desc">Scan QR codes and inspect links before you open them. Our proxy follows the redirect chain and generates an AI summary — before you tap.</div>
           <span class="app-card-status status-live">Live on App Store</span>
         </a>
         <a href="/apps/vaultyx" class="app-card">
-          <div class="app-card-icon">☁️</div>
+          <div class="app-card-icon">05 · Vaultyx</div>
           <div class="app-card-name">Vaultyx</div>
           <div class="app-card-cat">Cloud Storage</div>
           <div class="app-card-desc">Zero-knowledge encrypted cloud storage with FastCDC delta sync. Your files route through WraithVPN. Only you hold the encryption key.</div>

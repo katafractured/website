@@ -139,7 +139,7 @@ export const APPS: AppMeta[] = [
     name: 'Vaultyx',
     bundleId: 'com.katafract.vault',
     status: 'ready',
-    statusBadge: 'Coming soon · Builds ready',
+    statusBadge: 'Coming soon',
     appStoreUrl: null,
     price: 'Sovereign tier only ($18/mo)',
     accent: '#FF006E',
