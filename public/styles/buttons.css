@@ -59,3 +59,24 @@
   background: transparent;
   color: rgba(0, 240, 255, 0.8);
 }
+
+/* App Store CTA — neutral white pill, used on app pages
+   that link to a live App Store listing. Was previously
+   redeclared in vaultyx/wraith/exifarmor/parkarmor pages. */
+.btn-appstore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  color: #050510;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.75rem;
+  border-radius: 999px;
+  transition: background 0.15s;
+}
+
+.btn-appstore:hover {
+  background: #e8e8e8;
+  text-decoration: none;
+}

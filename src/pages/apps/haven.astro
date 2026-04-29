@@ -16,7 +16,7 @@ const app = appBySlug('haven');
 
   <style slot="head" is:global>
     :root { --app-accent: var(--haven); }
-    .app-main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+    /* .app-main / .section-divider / .app-section-{label,title,sub} live in /style.css */
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -36,7 +36,6 @@ const app = appBySlug('haven');
       font-size: 0.78rem;
       color: var(--dim2);
     }
-    .section-divider { border: none; border-top: 1px solid var(--border); margin: 3.5rem 0; }
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 3rem; }
     .feature-card { background: rgba(10,10,20,0.5); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color 0.2s; }
     .feature-card:hover { border-color: rgba(74,222,128,0.18); }
@@ -44,12 +43,6 @@ const app = appBySlug('haven');
     .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
     .feature-desc { font-size: 0.875rem; color: var(--dim); line-height: 1.65; }
     .app-page-section { margin-bottom: 0.5rem; }
-    .app-section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--app-accent); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.75rem; }
-    .app-section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
-    .app-section-sub { font-size: 0.95rem; color: var(--dim); line-height: 1.7; margin-bottom: 0; }
-    @media (min-width: 768px) { .app-main { padding: 0 3.5rem 7rem; } }
-    @media (min-width: 1100px) { .app-main { padding: 0 5rem 8rem; } }
-    @media (max-width: 480px) { .app-main { padding: 0 1.25rem 4rem; } }
   </style>
   <script slot="head" type="application/ld+json" is:inline set:html={`
   {

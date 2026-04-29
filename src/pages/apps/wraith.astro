@@ -13,9 +13,11 @@ import PageHero from '../../components/PageHero.astro';
   <link slot="head" rel="stylesheet" href="/style.css" />
 
   <style slot="head" is:global>
-    /* Wraith brand override — purple accent instead of cyan */
+    /* Wraith brand override — purple accent instead of cyan.
+       --wraith hex lives in /styles/app-colors.css; the alpha
+       helper-vars below are wraith-specific. */
     :root {
-      --wraith: #818CF8;
+      --app-accent: var(--wraith);
       --wraith-dim: rgba(129,140,248,0.12);
       --wraith-border: rgba(129,140,248,0.2);
       --wraith-glow: rgba(129,140,248,0.06);
@@ -46,8 +48,8 @@ import PageHero from '../../components/PageHero.astro';
       margin-bottom: 1.75rem;
     }
 
-    /* App main container */
-    .app-main { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+    /* .app-main / .section-divider / .app-section-{label,title,sub} live in /style.css */
+    /* .btn-appstore lives in /styles/buttons.css */
 
     .app-cta-row {
       display: flex;
@@ -56,20 +58,6 @@ import PageHero from '../../components/PageHero.astro';
       flex-wrap: wrap;
       margin-bottom: 0.5rem;
     }
-
-    .btn-appstore {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: white;
-      color: #050510;
-      font-weight: 700;
-      font-size: 0.9rem;
-      padding: 0.8rem 1.75rem;
-      border-radius: 999px;
-      transition: background 0.15s;
-    }
-    .btn-appstore:hover { background: #e8e8e8; text-decoration: none; }
 
     .btn-secondary {
       display: inline-flex;
@@ -120,13 +108,6 @@ import PageHero from '../../components/PageHero.astro';
       50% { opacity: 0.35; }
     }
 
-    /* Divider */
-    .section-divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 3.5rem 0;
-    }
-
     /* Features */
     .features-grid {
       display: grid;
@@ -156,29 +137,8 @@ import PageHero from '../../components/PageHero.astro';
       line-height: 1.65;
     }
 
-    /* Section headings */
+    /* Section headings — .app-section-{label,title,sub} live in /style.css */
     .app-page-section { margin-bottom: 0.5rem; }
-    .app-section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--wraith);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-    .app-section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-    .app-section-sub {
-      font-size: 0.95rem;
-      color: var(--dim);
-      line-height: 1.7;
-      margin-bottom: 0;
-    }
 
     /* Why block — Tek voice */
     .why-block {
@@ -484,14 +444,7 @@ import PageHero from '../../components/PageHero.astro';
       letter-spacing: 0.04em;
     }
 
-    @media (min-width: 768px) {
-      .app-main { padding: 0 3.5rem 7rem; }
-    }
-    @media (min-width: 1100px) {
-      .app-main { padding: 0 5rem 8rem; }
-    }
     @media (max-width: 480px) {
-      .app-main { padding: 0 1.25rem 4rem; }
       .trust-row { grid-template-columns: 1fr; gap: 0.5rem; }
     }
   </style>
