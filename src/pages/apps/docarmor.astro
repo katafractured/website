@@ -92,17 +92,12 @@ import PageHero from '../../components/PageHero.astro';
         <div class="feature-desc">Your vault locks when you leave the app and requires biometric authentication to reopen. DocArmor never sees your biometric data &mdash; only iOS does.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">04 · Backup</div>
-        <div class="feature-title">Optional Cloud Backup</div>
-        <div class="feature-desc">Add a Sovereign subscription (through Vaultyx) and DocArmor can back up to Katafract&rsquo;s zero-knowledge Shards S3 &mdash; encrypted on-device, never visible to us. Off by default, off on iCloud, off on Apple.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">05 · Sort</div>
+        <div class="feature-icon">04 · Sort</div>
         <div class="feature-title">Organized Folders</div>
         <div class="feature-desc">Create categories like Medical, Travel, or Finance. Every folder uses the same vault key. Everything stays encrypted.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">06 · Export</div>
+        <div class="feature-icon">05 · Export</div>
         <div class="feature-title">Secure Export</div>
         <div class="feature-desc">Share a document to Files, AirDrop, or another app when you need it. Export is always explicit &mdash; nothing leaves without your action.</div>
       </div>
@@ -112,15 +107,14 @@ import PageHero from '../../components/PageHero.astro';
 
     <div class="privacy-block">
       <h2>Zero-knowledge by default</h2>
-      <p>DocArmor encrypts every document with AES-256 before it touches disk. The key is in the iOS Keychain, bound to your device and biometrics. Without Sovereign, there are no servers at all &mdash; Katafract never sees your vault.</p>
-      <p>If you turn on Sovereign cloud backup, files are re-encrypted locally with a Sovereign-derived key and uploaded as opaque chunks to Shards S3. Katafract still can&rsquo;t read them &mdash; the encryption happens on your device, before upload.</p>
+      <p>DocArmor encrypts every document with AES-256 before it touches disk. The key is in the iOS Keychain, bound to your device and biometrics. There are no servers, no cloud sync &mdash; Katafract never sees your vault.</p>
       <p>Apple Privacy Nutrition Label: <strong>Data Not Collected.</strong></p>
       <div class="privacy-pills">
         <span class="privacy-pill">AES-256 on-device</span>
         <span class="privacy-pill">Face ID protected</span>
-        <span class="privacy-pill">Cloud backup opt-in</span>
-        <span class="privacy-pill">Zero-knowledge Shards</span>
+        <span class="privacy-pill">No cloud sync</span>
         <span class="privacy-pill">No iCloud sync</span>
+        <span class="privacy-pill">Local-only vault</span>
       </div>
     </div>
 
@@ -135,16 +129,15 @@ import PageHero from '../../components/PageHero.astro';
 
     <div class="callout">
       <p><strong>Free to start, one-time $7.99 unlock available.</strong> Download DocArmor free and use basic features offline: encrypted storage, Face ID unlock, folders. Unlock all features with a one-time in-app purchase. Because your vault is encrypted locally, <strong>uninstalling the app permanently deletes all vault contents</strong> &mdash; export anything important before uninstalling.</p>
-      <p style="margin-top:0.75rem"><strong>Want cloud backup?</strong> Add <a href="/apps/vaultyx" style="color:var(--docarmor)">Sovereign</a> (purchased in Vaultyx) and DocArmor gains encrypted cloud sync through Katafract Shards. Same zero-knowledge promise &mdash; encryption happens before upload. <a href="/pricing">View pricing →</a></p>
       <p style="margin-top:0.75rem;margin-bottom:0"><a href="/terms/docarmor">Full Terms of Service &rarr;</a></p>
     </div>
 
     <hr class="section-divider">
 
     <div style="text-align:center;padding:1rem 0 2rem">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--dim2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem">On the App Store</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--dim2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem">Coming soon</div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--text);margin-bottom:0.5rem">Free &middot; iOS &middot; iPhone &amp; iPad</div>
-      <div style="font-size:0.875rem;color:var(--dim)">Optional cloud backup via Sovereign in <a href="/apps/vaultyx" style="color:var(--docarmor)">Vaultyx</a></div>
+      <div style="font-size:0.875rem;color:var(--dim)">$7.99 one-time unlock for full features</div>
     </div>
 
   </main>

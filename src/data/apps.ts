@@ -23,7 +23,7 @@ export interface AppMeta {
   status: AppStatus;
   statusBadge: string;       // human-readable label shown on all pages
   appStoreUrl: string | null; // null until live in App Store
-  price: string;             // short label: "Free + $0.99 unlock", "Sovereign tier only", etc.
+  price: string;             // short label: "Free + $0.99 unlock", "Coming soon", etc.
   accent: string;            // hex for app accent color (matches CSS vars)
   tagline: string;           // 1-line blurb for homepage cards
   description: string;       // 2-sentence blurb for meta/compare cards
@@ -48,7 +48,7 @@ export const APPS: AppMeta[] = [
     status: 'live',
     statusBadge: 'Live on App Store',
     appStoreUrl: 'https://apps.apple.com/app/id6760979268',
-    price: 'Free + $0.99 unlock · bundled with Enclave',
+    price: 'Free + $0.99 Pro Unlock',
     accent: '#00F0FF',
     tagline: 'Share photos, not your location',
     description: 'Strips hidden GPS coordinates, device info, and timestamps from photos before you share. One tap, originals untouched.',
@@ -66,7 +66,7 @@ export const APPS: AppMeta[] = [
     status: 'live',
     statusBadge: 'Live on App Store',
     appStoreUrl: 'https://apps.apple.com/app/id6760988040',
-    price: 'Free + $0.99 unlock · bundled with Enclave',
+    price: 'Free + $0.99 Pro Unlock',
     accent: '#4ADE80',
     tagline: 'Never lose your car again',
     description: 'One tap saves your parked spot. Walking directions back, timer, lock screen widget. Your location never leaves your device.',
@@ -86,7 +86,7 @@ export const APPS: AppMeta[] = [
     // NOTE: App Store URL exists in schema/proof section of wraith.astro (id6745785827)
     // but the app is not yet approved/live. Set to null until Apple approves.
     appStoreUrl: null,
-    price: 'Enclave tier only ($8/mo)',
+    price: 'Coming soon · in Apple review',
     accent: '#818CF8',
     tagline: 'Fast, private WireGuard VPN with Haven DNS built in',
     description: 'WireGuard VPN on Katafract-operated nodes. Haven DNS at every exit, kill switch, 5 devices, no logs.',
@@ -105,7 +105,7 @@ export const APPS: AppMeta[] = [
     statusBadge: 'Coming soon · In review',
     // NOTE: id6761782681 referenced in index.astro — not yet approved
     appStoreUrl: null,
-    price: 'Free + credits · bundled with Enclave',
+    price: 'Free + credit packs from $0.99',
     accent: '#F97316',
     tagline: 'Know what you\'re opening before you tap',
     description: 'QR scanner and link inspector. On-device risk scoring, AI summaries via privacy relay. Free with consumable scan credits.',
@@ -123,10 +123,10 @@ export const APPS: AppMeta[] = [
     status: 'ready',
     statusBadge: 'Coming soon',
     appStoreUrl: null,
-    price: '$7.99 one-time · bundled with Enclave',
+    price: '$7.99 one-time unlock',
     accent: '#E879F9',
     tagline: 'Your IDs, encrypted, on your device',
-    description: 'AES-256 encrypted vault for IDs, insurance cards, and passports. Face ID protected. Cloud backup with Sovereign.',
+    description: 'AES-256 encrypted vault for IDs, insurance cards, and passports. Face ID protected. Local-only, no cloud.',
     platforms: ['iOS'],
     hasDedicatedPage: true,
     hasSupport: true,
@@ -177,7 +177,7 @@ export const APPS: AppMeta[] = [
     status: 'stub',
     statusBadge: 'In development',
     appStoreUrl: null,
-    price: 'Sovereign tier only (future)',
+    price: 'In development · pricing TBD',
     accent: '#FF006E',
     tagline: 'Offline-first PIM and encrypted email',
     description: 'Personal information manager and email client. IMAP/SMTP sync, encrypted locally, never in the cloud. Not yet shipped.',

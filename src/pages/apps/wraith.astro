@@ -4,8 +4,8 @@ import PageHero from '../../components/PageHero.astro';
 ---
 <Base
   title="Wraith — Fast, private WireGuard VPN with Haven DNS built in"
-  description="Wraith is Katafract's WireGuard VPN. Fleet we operate ourselves, Haven DNS at every exit, kill switch, 5 devices, no logs. Included with Enclave and Sovereign. iOS coming soon."
-  ogDescription="Fast, private WireGuard VPN with Haven DNS at every exit. No logs. 5 devices. Included with Enclave ($8/mo) and Sovereign ($18/mo). Coming soon to iOS."
+  description="Wraith is Katafract's WireGuard VPN. Fleet we operate ourselves, Haven DNS at every exit, kill switch, no logs. iOS in Apple review queue."
+  ogDescription="Fast, private WireGuard VPN with Haven DNS at every exit. No logs. Coming soon to iOS — currently in Apple review."
   ogImage="https://katafract.com/images/og-wraith.jpg"
   section="apps"
   twitterCard="summary_large_image"
@@ -457,32 +457,14 @@ import PageHero from '../../components/PageHero.astro';
       "alternateName": "WraithVPN",
       "applicationCategory": "SecurityApplication",
       "operatingSystem": "iOS 17.0 or later",
-      "description": "WireGuard-based VPN built on Katafract-operated WraithGate nodes. Haven DNS at every exit, kill switch, up to 5 devices, no activity logs. Included with Enclave and Sovereign subscriptions.",
+      "description": "WireGuard-based VPN built on Katafract-operated WraithGate nodes. Haven DNS at every exit, kill switch, no activity logs. iOS in Apple review.",
       "url": "https://katafract.com/apps/wraith",
       "image": "https://katafract.com/images/og-wraith.jpg",
       "author": {
         "@type": "Organization",
         "name": "Katafract LLC",
         "url": "https://katafract.com"
-      },
-      "offers": [
-        {
-          "@type": "Offer",
-          "name": "Enclave",
-          "priceCurrency": "USD",
-          "price": "8.00",
-          "description": "Included in Enclave subscription — $8/mo or $64/yr",
-          "url": "https://buy.stripe.com/bJe28r4JX9TcgjocRqffy04"
-        },
-        {
-          "@type": "Offer",
-          "name": "Sovereign",
-          "priceCurrency": "USD",
-          "price": "18.00",
-          "description": "Included in Sovereign subscription — $18/mo or $144/yr, with multi-hop VPN",
-          "url": "https://buy.stripe.com/7sY9ATekx1mG2sydVuffy0h"
-        }
-      ]
+      }
     }
   </script>
 
@@ -512,7 +494,7 @@ import PageHero from '../../components/PageHero.astro';
           "name": "How many devices can I use on one account?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Up to 5 devices on Enclave. Unlimited devices on Sovereign. A device is a single install of the Wraith app."
+            "text": "Wraith is currently in Apple review. Device limits and pricing will be confirmed at launch."
           }
         },
         {
@@ -563,7 +545,6 @@ import PageHero from '../../components/PageHero.astro';
     </div>
     <p class="trust-line">Infrastructure built so there&rsquo;s nothing to betray.</p>
     <div class="app-cta-row">
-      <a href="/pricing" class="btn-appstore plausible-event-name=subscribe_wraith_coming_soon">Get Enclave — be first in line &rarr;</a>
       <a href="#how-it-works" class="btn-secondary plausible-event-name=view_wraith_how_it_works">How it works &darr;</a>
     </div>
     <div style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--dim);">App Store approval in progress. Android? <a href="/android/" style="color: var(--wraith);">Join the waitlist →</a></div>
@@ -587,7 +568,7 @@ import PageHero from '../../components/PageHero.astro';
     <!-- 3. What it does -->
     <section class="app-page-section">
       <div class="app-section-label">What Wraith does</div>
-      <h2 class="app-section-title">Five things, done carefully.</h2>
+      <h2 class="app-section-title">Four things, done carefully.</h2>
     </section>
     <div class="features-grid">
       <div class="feature-card">
@@ -606,12 +587,7 @@ import PageHero from '../../components/PageHero.astro';
         <div class="feature-desc">If the tunnel drops, traffic is blocked. Nothing leaks to your ISP while the app reconnects.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">04 · Devices</div>
-        <div class="feature-title">Up to 5 devices</div>
-        <div class="feature-desc">One Enclave account, five installs. Sovereign lifts the cap to unlimited.</div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">05 · Logs</div>
+        <div class="feature-icon">04 · Logs</div>
         <div class="feature-title">No activity logs</div>
         <div class="feature-desc">No connection timestamps, no assigned-IP records, no DNS logs. The pipelines were never built. There&rsquo;s nothing to subpoena.</div>
       </div>
@@ -702,11 +678,11 @@ import PageHero from '../../components/PageHero.astro';
       <p class="app-section-sub">We publish the posture. You decide whether it holds up.</p>
     </section>
     <div class="proof-row">
-      <a href="/pricing" class="proof-link plausible-event-name=view_wraith_pricing_proof">
+      <div class="proof-link" style="cursor:default">
         <div class="proof-label">Coming soon</div>
-        <div class="proof-name">App Store · In review &rarr;</div>
-        <div class="proof-desc">Apple review in progress. Subscribe to Enclave to get access on day one.</div>
-      </a>
+        <div class="proof-name">App Store · In review</div>
+        <div class="proof-desc">Apple review in progress. We'll publish the App Store link here when it's approved.</div>
+      </div>
       <a href="https://github.com/katafract-io" class="proof-link plausible-event-name=view_wraith_github" target="_blank" rel="noopener">
         <div class="proof-label">Source</div>
         <div class="proof-name">github.com/katafract-io &nearr;</div>
@@ -726,58 +702,12 @@ import PageHero from '../../components/PageHero.astro';
 
     <hr class="section-divider">
 
-    <!-- 7. Pricing -->
+    <!-- 7. Status -->
     <section class="app-page-section">
-      <div class="app-section-label">Pricing</div>
-      <h2 class="app-section-title">Wraith is a bundled feature, not a standalone app.</h2>
-      <p class="app-section-sub">Pick a tier. Each unlocks Wraith along with the rest of the Enclave platform. Monthly, annual, or one-time forever.</p>
+      <div class="app-section-label">Status</div>
+      <h2 class="app-section-title">In Apple review.</h2>
+      <p class="app-section-sub">Wraith is currently in Apple's review queue. We'll announce pricing and availability here when the app is approved.</p>
     </section>
-    <div class="pricing-grid">
-      <div class="plan-card">
-        <div class="plan-label">Enclave</div>
-        <div class="plan-price">$8<span style="font-size:0.9rem;color:var(--dim);font-weight:400"> / mo</span></div>
-        <div class="plan-cadence">or $64 / yr &mdash; save 33%</div>
-        <ul class="plan-features">
-          <li class="hi">&#x2713; Wraith VPN (single-hop)</li>
-          <li class="hi">&#x2713; Haven DNS with tier picker</li>
-          <li class="hi">&#x2713; Kill switch + LAN passthrough</li>
-          <li class="hi">&#x2713; 5 devices</li>
-          <li class="hi">&#x2713; Utility apps unlocked</li>
-          <li class="hi">&#x2713; 50 AI credits / month</li>
-        </ul>
-        <a href="https://buy.stripe.com/bJe28r4JX9TcgjocRqffy04" class="plan-cta plausible-event-name=subscribe_enclave_monthly_wraith_page" target="_blank" rel="noopener">Get Enclave &rarr;</a>
-        <p style="margin-top:.6rem;text-align:center;font-size:.7rem;color:#4a5060;font-family:'JetBrains Mono',monospace">After checkout → <a href="/welcome" style="color:#8C94A6">katafract.com/welcome</a></p>
-      </div>
-      <div class="plan-card featured">
-        <div class="plan-label">Sovereign &middot; Popular</div>
-        <div class="plan-price">$18<span style="font-size:0.9rem;color:var(--dim);font-weight:400"> / mo</span></div>
-        <div class="plan-cadence">or $144 / yr &mdash; save 33%</div>
-        <ul class="plan-features">
-          <li class="hi">&#x2713; Everything in Enclave</li>
-          <li class="hi">&#x2713; Multi-hop VPN routing</li>
-          <li class="hi">&#x2713; Unlimited devices</li>
-          <li class="hi">&#x2713; 1 TB Vaultyx storage</li>
-          <li class="hi">&#x2713; All future Katafract apps</li>
-          <li class="hi">&#x2713; 100 AI credits / month</li>
-        </ul>
-        <a href="https://buy.stripe.com/7sY9ATekx1mG2sydVuffy0h" class="plan-cta plausible-event-name=subscribe_sovereign_monthly_wraith_page" target="_blank" rel="noopener">Get Sovereign &rarr;</a>
-        <p style="margin-top:.6rem;text-align:center;font-size:.7rem;color:#4a5060;font-family:'JetBrains Mono',monospace">After checkout → <a href="/welcome" style="color:#8C94A6">katafract.com/welcome</a></p>
-      </div>
-      <div class="plan-card">
-        <div class="plan-label">Sovereign Forever</div>
-        <div class="plan-price">$599.99<span style="font-size:0.9rem;color:var(--dim);font-weight:400"> one-time</span></div>
-        <div class="plan-cadence">Lifetime. Never a second charge.</div>
-        <ul class="plan-features">
-          <li class="hi">&#x2713; Everything in Sovereign</li>
-          <li class="hi">&#x2713; Paid once, yours forever</li>
-          <li class="hi">&#x2713; All future apps included</li>
-          <li class="hi">&#x2713; Grandfathered against price changes</li>
-          <li>Bought in-app via Apple</li>
-        </ul>
-        <a href="mailto:hello@katafract.com?subject=Sovereign%20Forever" class="plan-cta plausible-event-name=contact_sovereign_forever_wraith_page">Contact for checkout &rarr;</a>
-      </div>
-    </div>
-    <p class="price-note" style="margin-top:1rem">Prefer in-app purchase? Enclave and Sovereign subscriptions, plus Sovereign Forever, are also available through the Wraith iOS app via Apple IAP.</p>
 
     <hr class="section-divider">
 
@@ -790,7 +720,7 @@ import PageHero from '../../components/PageHero.astro';
       <details class="faq-item plausible-event-name=expand_wraith_faq">
         <summary>Does Wraith work in countries with DPI or VPN restrictions?</summary>
         <div class="faq-body">
-          Wraith uses standard WireGuard on UDP, which is fast and modern but is <em>not</em> designed to evade deep-packet-inspection firewalls. If you routinely operate in a jurisdiction that actively blocks VPN traffic, we&rsquo;re open about that and working on obfuscated transports for a future release.
+          Wraith uses standard WireGuard on UDP, plus an obfuscated Shadowsocks fallback for environments where direct UDP/WG is blocked. We're open about the limits — if a jurisdiction actively blocks all VPN traffic, no fallback is universal.
         </div>
       </details>
       <details class="faq-item plausible-event-name=expand_wraith_faq">
@@ -802,7 +732,7 @@ import PageHero from '../../components/PageHero.astro';
       <details class="faq-item plausible-event-name=expand_wraith_faq">
         <summary>How many devices can I use on one account?</summary>
         <div class="faq-body">
-          Up to 5 on <strong>Enclave</strong>. Unlimited on <strong>Sovereign</strong>. A device is a single install of the Wraith app; you can re-assign slots from the app if you replace a phone.
+          Wraith is currently in Apple review. Device limits and pricing will be confirmed here when the app launches.
         </div>
       </details>
       <details class="faq-item plausible-event-name=expand_wraith_faq">
@@ -826,23 +756,23 @@ import PageHero from '../../components/PageHero.astro';
       <details class="faq-item plausible-event-name=expand_wraith_faq">
         <summary>What happens if my subscription lapses?</summary>
         <div class="faq-body">
-          Your peer configuration is rotated and the tunnel stops. Haven DNS (free, no account) keeps working on your devices. Re-subscribe and access restores immediately. We don&rsquo;t keep billing hostages.
+          Your peer configuration is rotated and the tunnel stops. Haven DNS (free, no account) keeps working on your devices. Re-subscribe and access restores immediately. We don&rsquo;t keep billing hostages. Pricing details will be published when the app is approved.
         </div>
       </details>
     </div>
 
     <hr class="section-divider">
 
-    <!-- 9. Part of Katafract Enclave -->
+    <!-- 9. Part of Katafract -->
     <section class="app-page-section">
       <div class="app-section-label">The platform</div>
       <h2 class="app-section-title">Wraith is one piece.</h2>
     </section>
-    <a href="/pricing" class="bundle-strip plausible-event-name=view_pricing_from_wraith_bundle" style="text-decoration:none;color:inherit">
+    <a href="/#apps" class="bundle-strip plausible-event-name=view_apps_from_wraith_bundle" style="text-decoration:none;color:inherit">
       <div class="bundle-apps">
         <span>Wraith</span><span style="color:var(--dim2)">&middot;</span>Vaultyx<span style="color:var(--dim2)">&middot;</span>Haven<span style="color:var(--dim2)">&middot;</span>DocArmor
       </div>
-      <div class="bundle-text"><strong>Bundled in Enclave &amp; Sovereign</strong> &mdash; see all apps &rarr;</div>
+      <div class="bundle-text"><strong>See the full Katafract app lineup</strong> &rarr;</div>
     </a>
 
     <hr class="section-divider">
@@ -855,10 +785,7 @@ import PageHero from '../../components/PageHero.astro';
         <a href="https://github.com/katafract-io" class="plausible-event-name=view_wraith_github_footer" target="_blank" rel="noopener">Source &nearr;</a>
         <a href="https://docs.katafract.io/trust/" class="plausible-event-name=view_wraith_trust_docs_footer" target="_blank" rel="noopener">Trust docs &nearr;</a>
       </div>
-      <a href="/pricing" class="btn-appstore plausible-event-name=subscribe_from_wraith_footer">
-        Get Enclave — App Store approval in progress &rarr;
-      </a>
-      <p class="requires-line">iOS 17.0+ &middot; iPhone &middot; In Apple review queue &middot; Subscribe to be ready on day one</p>
+      <p class="requires-line">iOS 17.0+ &middot; iPhone &middot; In Apple review queue</p>
     </div>
 
   </main>
