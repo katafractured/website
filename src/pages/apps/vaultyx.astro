@@ -52,9 +52,10 @@ const app = appBySlug('vaultyx');
     .compare-table .cell-no  { color: #94A3B8; opacity: 0.7; }
     .compare-table .cell-partial { color: #FBBF24; }
     .compare-caption { font-size: 0.72rem; color: var(--dim2); line-height: 1.6; margin-top: 0.85rem; font-style: italic; }
-    .compare-wrap { overflow-x: auto; margin: 1.5rem -0.5rem 1rem; padding: 0 0.5rem; }
+    .compare-wrap { overflow-x: auto; margin: 1.5rem 0 1rem; max-width: 100%; -webkit-overflow-scrolling: touch; }
+    .compare-table { min-width: 720px; }
 
-    .s3-codeblock { background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--text); line-height: 1.75; margin: 1rem 0; overflow-x: auto; }
+    .s3-codeblock { background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--text); line-height: 1.75; margin: 1rem 0; overflow-x: auto; white-space: pre; max-width: 100%; }
     .s3-codeblock .comment { color: var(--dim2); }
     .s3-codeblock .key { color: var(--app-accent); }
 
