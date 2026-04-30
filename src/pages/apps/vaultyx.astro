@@ -1,76 +1,100 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
+import { appBySlug } from '../../data/apps';
+const app = appBySlug('vaultyx');
 ---
 <Base
-  title="Vaultyx — Zero-Knowledge Cloud Storage by Katafract"
-  description="Vaultyx is end-to-end encrypted cloud storage with client-side AES-256-GCM encryption. FastCDC delta sync. Routes through WraithVPN. Coming soon to the App Store."
-  ogDescription="AES-256-GCM encrypted cloud storage. FastCDC delta sync. Automatic VPN routing. We never see your files. Coming soon."
+  title="Vaultyx — Encrypted cloud storage we cannot read"
+  description="Zero-knowledge encrypted cloud storage. AES-256-GCM on your device, keys in your iOS Keychain, files replicated across 3 datacenters in 2 jurisdictions. From $1.99/month. iOS live, Android in development."
+  ogDescription="Encrypted cloud storage we cannot read. AES-256 on your device, replicated across 3 datacenters. From $1.99/mo. Standard S3 API access included."
   section="apps"
   twitterCard="summary_large_image"
 >
   <link slot="head" rel="stylesheet" href="/style.css" />
 
   <style slot="head" is:global>
-    /* Vaultyx accent — magenta */
     :root { --app-accent: var(--vaultyx); }
     /* .app-main / .section-divider / .app-section-{label,title,sub} live in /style.css */
-    /* .btn-appstore lives in /styles/buttons.css */
-    .coming-soon-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; padding: 0.6rem 1.25rem; border-radius: 999px; background: rgba(255,0,110,0.07); border: 1px solid rgba(255,0,110,0.2); color: var(--app-accent); margin-top: 1.5rem; }
+
+    .live-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; padding: 0.6rem 1.25rem; border-radius: 999px; background: rgba(255,0,110,0.07); border: 1px solid rgba(255,0,110,0.2); color: var(--app-accent); margin-bottom: 1.5rem; }
+
     .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 3rem; }
     .feature-card { background: rgba(10,10,20,0.5); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: border-color 0.2s; }
     .feature-card:hover { border-color: rgba(255,0,110,0.2); }
     .feature-icon { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--app-accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.85rem; opacity: 0.85; }
     .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
     .feature-desc { font-size: 0.875rem; color: var(--dim); line-height: 1.65; }
+
+    .pack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin: 2rem 0 1rem; }
+    .pack-card { background: rgba(10,10,20,0.5); border: 1px solid var(--border); border-radius: 1rem; padding: 1.75rem 1.5rem; text-align: center; }
+    .pack-card.feature { border-color: rgba(255,0,110,0.35); background: rgba(255,0,110,0.03); }
+    .pack-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--app-accent); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .pack-cap { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--text); line-height: 1; }
+    .pack-cap-label { font-size: 0.78rem; color: var(--dim); margin-top: 0.15rem; }
+    .pack-price { font-family: 'JetBrains Mono', monospace; font-size: 1.15rem; color: var(--app-accent); margin-top: 0.85rem; }
+    .pack-per { font-size: 0.7rem; color: var(--dim2); margin-top: 0.2rem; font-family: 'JetBrains Mono', monospace; }
+    .pack-best { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--app-accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem; }
+
     .privacy-block { background: rgba(255,0,110,0.03); border: 1px solid rgba(255,0,110,0.1); border-radius: 1rem; padding: 2rem; margin: 2rem 0; }
     .privacy-block h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--text); margin-bottom: 0.75rem; }
-    .privacy-block p { font-size: 0.9rem; color: var(--dim); line-height: 1.7; margin-bottom: 0.5rem; }
+    .privacy-block p { font-size: 0.9rem; color: var(--dim); line-height: 1.7; margin-bottom: 0.6rem; }
     .privacy-block p:last-child { margin-bottom: 0; }
     .privacy-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
     .privacy-pill { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; padding: 0.25rem 0.75rem; border-radius: 999px; background: rgba(255,0,110,0.06); border: 1px solid rgba(255,0,110,0.15); color: var(--app-accent); }
+
+    .compare-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 0.75rem; font-size: 0.83rem; }
+    .compare-table thead th { text-align: left; padding: 0.7rem 0.6rem; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--dim2); text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid var(--border); font-weight: 500; }
+    .compare-table tbody td { padding: 0.7rem 0.6rem; color: var(--dim); line-height: 1.45; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
+    .compare-table tbody tr.us td { color: var(--text); background: rgba(255,0,110,0.04); }
+    .compare-table tbody tr.us td:first-child { font-weight: 600; color: var(--app-accent); }
+    .compare-table .cell-yes { color: #34D399; }
+    .compare-table .cell-no  { color: #94A3B8; opacity: 0.7; }
+    .compare-table .cell-partial { color: #FBBF24; }
+    .compare-caption { font-size: 0.72rem; color: var(--dim2); line-height: 1.6; margin-top: 0.85rem; font-style: italic; }
+    .compare-wrap { overflow-x: auto; margin: 1.5rem -0.5rem 1rem; padding: 0 0.5rem; }
+
+    .s3-codeblock { background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--text); line-height: 1.75; margin: 1rem 0; overflow-x: auto; }
+    .s3-codeblock .comment { color: var(--dim2); }
+    .s3-codeblock .key { color: var(--app-accent); }
+
     .unlike-list { list-style: none; padding: 0; margin: 1rem 0 1.25rem; display: flex; flex-direction: column; gap: 0.6rem; }
     .unlike-list li { font-size: 0.9rem; color: var(--dim); line-height: 1.55; padding-left: 1.25rem; position: relative; }
     .unlike-list li::before { content: '—'; position: absolute; left: 0; color: var(--app-accent); font-weight: 600; }
     .unlike-list li strong { color: var(--text); font-weight: 700; }
-    .comparison-block { background: rgba(255,0,110,0.02); border: 1px solid rgba(255,0,110,0.08); border-radius: 1rem; padding: 2rem; margin: 2rem 0; }
-    .comparison-header { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 600; color: var(--text); margin-bottom: 1.5rem; text-align: center; }
-    .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .comparison-item { display: flex; flex-direction: column; gap: 0.25rem; }
-    .comparison-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--dim2); text-transform: uppercase; letter-spacing: 0.08em; }
-    .comparison-val { font-size: 0.95rem; color: var(--text); }
+
+    .footnote-block { font-size: 0.72rem; color: var(--dim2); line-height: 1.7; margin-top: 1rem; }
+    .footnote-block code { background: rgba(255,255,255,0.04); padding: 0.05rem 0.3rem; border-radius: 0.25rem; font-size: 0.75rem; }
   </style>
 
-  <script slot="head" type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Vaultyx",
-      "operatingSystem": "iOS, macOS",
-      "applicationCategory": "SecurityApplication",
-      "description": "Zero-knowledge encrypted cloud storage. Store documents, photos, and files with end-to-end encryption where only you hold the key.",
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "USD",
-        "price": "18.00",
-        "description": "Sovereign subscription includes 1 TB storage"
-      },
-      "author": {
-        "@type": "Organization",
-        "name": "Katafract LLC"
-      }
-    }
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Vaultyx",
+    "operatingSystem": "iOS, macOS",
+    "applicationCategory": "SecurityApplication",
+    "description": "Zero-knowledge encrypted cloud storage. AES-256-GCM on your device, keys in your iOS Keychain, replicated across 3 datacenters in 2 jurisdictions.",
+    "offers": [
+      { "@type": "Offer", "priceCurrency": "USD", "price": "1.99", "name": "Vaultyx 100 GB monthly" },
+      { "@type": "Offer", "priceCurrency": "USD", "price": "9.99", "name": "Vaultyx 1 TB monthly" },
+      { "@type": "Offer", "priceCurrency": "USD", "price": "39.99", "name": "Vaultyx 5 TB monthly" }
+    ],
+    "author": { "@type": "Organization", "name": "Katafract LLC" }
+  })}>
   </script>
 
   <PageHero
     eyebrow="Vaultyx"
-    title="Your files, <em>encrypted</em>,<br>on your terms"
-    subhead="Encrypted cloud storage where only you hold the key. AES-256-GCM encryption, FastCDC delta sync, and automatic VPN routing — we never see your files, ever. Backup photos, documents, and videos with confidence."
+    title="Encrypted cloud storage<br>we <em>cannot read</em>"
+    subhead="AES-256-GCM encryption on your device. Encryption keys live in your iOS Keychain — never on our servers. Files replicated across 3 datacenters in 2 jurisdictions. We receive ciphertext, store ciphertext, and have no way to decrypt it. From $1.99 / month."
     accent="var(--vaultyx)"
   >
     <div style="margin-top:2rem">
-      <div class="coming-soon-badge">Coming soon</div>
-      <div style="margin-top:1rem;font-size:0.9rem;color:var(--dim)">Get notified: <a href="/#signup" style="color:var(--vaultyx)">Join the list →</a></div>
+      <div class="live-badge">Live on iOS App Store</div>
+      <div style="margin-top:0.5rem">
+        <a href="https://apps.apple.com/app/id6762418528" class="btn-appstore plausible-event-name=AppStore+Click plausible-event-app=vaultyx">Download on the App Store</a>
+      </div>
+      <div style="margin-top:1rem;font-size:0.78rem;color:var(--dim2);font-family:'JetBrains Mono',monospace">Android in development — <a href="/#signup" style="color:var(--vaultyx)">join the waitlist →</a></div>
     </div>
   </PageHero>
 
@@ -79,108 +103,279 @@ import PageHero from '../../components/PageHero.astro';
     <hr class="section-divider">
 
     <div style="margin-bottom:0.5rem">
-      <div class="app-section-label">Features</div>
-      <h2 class="app-section-title">Storage built around privacy</h2>
-      <p class="app-section-sub">Zero-knowledge by design. We cannot read your files, even if we wanted to.</p>
+      <div class="app-section-label">Pricing</div>
+      <h2 class="app-section-title">Pick a capacity. Change it any time.</h2>
+      <p class="app-section-sub">Three tiers, billed monthly or annually. Annual saves ~17%. No commitments beyond your current period.</p>
+    </div>
+
+    <div class="pack-grid">
+      <div class="pack-card">
+        <div class="pack-label">100 GB</div>
+        <div class="pack-cap">$1.99</div>
+        <div class="pack-cap-label">/ month</div>
+        <div class="pack-price">$19.99 / year</div>
+        <div class="pack-per">~$1.66/mo annual</div>
+      </div>
+      <div class="pack-card feature">
+        <div class="pack-best">Most popular</div>
+        <div class="pack-label">1 TB</div>
+        <div class="pack-cap">$9.99</div>
+        <div class="pack-cap-label">/ month</div>
+        <div class="pack-price">$99.99 / year</div>
+        <div class="pack-per">~$8.33/mo annual</div>
+      </div>
+      <div class="pack-card">
+        <div class="pack-label">5 TB</div>
+        <div class="pack-cap">$39.99</div>
+        <div class="pack-cap-label">/ month</div>
+        <div class="pack-price">$399.99 / year</div>
+        <div class="pack-per">~$33.33/mo annual</div>
+      </div>
+    </div>
+    <div class="footnote-block">All tiers include unlimited bandwidth, S3 API access, and replication across 3 datacenters. Same encryption, same architecture across all tiers.</div>
+
+    <hr class="section-divider">
+
+    <div style="margin-bottom:0.5rem">
+      <div class="app-section-label">How it works</div>
+      <h2 class="app-section-title">Zero-knowledge by architecture, not policy</h2>
     </div>
 
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">01 · Encryption</div>
-        <div class="feature-title">AES-256-GCM Encryption</div>
-        <div class="feature-desc">Military-grade encryption on your device. Your encryption key never leaves your possession. Katafract stores only encrypted blobs.</div>
+        <div class="feature-icon">01 · Encrypt</div>
+        <div class="feature-title">AES-256-GCM on device</div>
+        <div class="feature-desc">Files encrypted on your iPhone, iPad, or Mac before upload. Each file gets a unique key. Each folder gets a unique key. Keys live in your iOS Keychain.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">02 · Sync</div>
-        <div class="feature-title">FastCDC Delta Sync</div>
-        <div class="feature-desc">Edit 1 byte of a 1GB file? Only ~64KB uploads. Content-defined chunking means you only sync what changed, not the entire file.</div>
+        <div class="feature-icon">02 · Chunk</div>
+        <div class="feature-title">FastCDC delta sync</div>
+        <div class="feature-desc">Content-defined chunking (16 KB to 256 KB blocks). Edit one byte of a 1 GB file, only the affected chunk re-uploads.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">03 · Transport</div>
-        <div class="feature-title">Auto VPN Routing</div>
-        <div class="feature-desc">All traffic routes through WraithVPN automatically. Your ISP sees the WireGuard tunnel, not your files or metadata.</div>
+        <div class="feature-icon">03 · Replicate</div>
+        <div class="feature-title">3 datacenters, 2 jurisdictions</div>
+        <div class="feature-desc">Encrypted blobs replicated across us-central, us-east (Virginia), and ca-east (Beauharnois). Replication factor 2: every block exists in at least 2 zones. A regional outage doesn't lose your files.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">04 · Backup</div>
-        <div class="feature-title">Photo Backup</div>
-        <div class="feature-desc">Backup original-quality photos and videos. Automatic deduplication by content hash — store the same photo once, even across devices.</div>
+        <div class="feature-icon">04 · Sync</div>
+        <div class="feature-title">Cross-device via Keychain</div>
+        <div class="feature-desc">iCloud Keychain syncs your vault keys to your other Apple devices. Open the same vault on iPhone, iPad, and Mac without re-uploading anything.</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">05 · Export</div>
-        <div class="feature-title">Standard S3 Backend</div>
-        <div class="feature-desc">Your data lives in standard S3. Export anytime with any S3 client. No lock-in, no proprietary APIs — just open standards.</div>
+        <div class="feature-title">Standard S3 API</div>
+        <div class="feature-desc">Connect rclone, AWS CLI, Cyberduck, or any S3-compatible client to <code>vaultyx.objstore.io</code> with your access key. Full bucket access. No proprietary lock-in.</div>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">06 · Replication</div>
-        <div class="feature-title">Distributed Globally</div>
-        <div class="feature-desc">Data replicated across US, EU, and Asia. 500Mbps+ unmetered bandwidth per node. Automatic failover, zero manual intervention.</div>
+        <div class="feature-icon">06 · Honest</div>
+        <div class="feature-title">No content scanning</div>
+        <div class="feature-desc">No scanning. No ads. No phone-home analytics. No third-party tracking SDKs. No AI training on your files. It's not policy — we literally don't have the keys to read anything.</div>
       </div>
     </div>
 
     <hr class="section-divider">
 
     <div class="privacy-block">
-      <h2>Mathematically impossible to scan</h2>
-      <p>Vaultyx uses client-side encryption. The server never receives your unencrypted data, never holds your encryption keys, and has no way to read your files. Content scanning, AI training, warrant compliance — all mathematically impossible without your key.</p>
+      <h2>What "zero-knowledge" actually means</h2>
+      <p>Most "encrypted" cloud services encrypt your files at rest on their servers — but they hold the keys. They <em>can</em> decrypt your files. They scan content for safety. They hand over plaintext when subpoenaed.</p>
+      <p>Vaultyx is different by architecture: the encryption runs on your device, before upload. Your iOS Keychain holds the only copy of the keys. The Katafract servers only ever see ciphertext.</p>
       <ul class="unlike-list">
-        <li><strong>Unlike iCloud:</strong> Apple scans photos before they upload. We never see anything to scan.</li>
-        <li><strong>Unlike Dropbox:</strong> We have no plaintext copy on servers. Ever.</li>
-        <li><strong>Unlike Google Drive:</strong> No content analysis, no AI training, no account profiles built from your data.</li>
+        <li><strong>Unlike iCloud:</strong> Apple holds the keys to most iCloud files (excluding Advanced Data Protection users). They scan photos for known content. They've handed plaintext to law enforcement.</li>
+        <li><strong>Unlike Dropbox / Google Drive / OneDrive:</strong> They hold the keys, scan content for AI training and ads, and respond to warrants by handing over plaintext.</li>
+        <li><strong>Like Proton Drive / Tresorit / Sync.com:</strong> True zero-knowledge — keys live on your devices. Vaultyx adds standard S3 API access on top.</li>
       </ul>
       <div class="privacy-pills">
-        <span class="privacy-pill">AES-256-GCM encrypted</span>
-        <span class="privacy-pill">Client-side only</span>
-        <span class="privacy-pill">No server-side keys</span>
+        <span class="privacy-pill">AES-256-GCM</span>
+        <span class="privacy-pill">Keys in your Keychain</span>
+        <span class="privacy-pill">Server sees ciphertext only</span>
         <span class="privacy-pill">No content scanning</span>
-        <span class="privacy-pill">Zero logs</span>
+        <span class="privacy-pill">No AI training on your files</span>
+        <span class="privacy-pill">Standard S3 API</span>
       </div>
     </div>
 
     <hr class="section-divider">
 
-    <div class="comparison-block">
-      <div class="comparison-header">How Vaultyx compares</div>
-      <div class="comparison-grid">
-        <div class="comparison-item">
-          <div class="comparison-label">Encryption</div>
-          <div class="comparison-val">AES-256-GCM client-side</div>
-        </div>
-        <div class="comparison-item">
-          <div class="comparison-label">Delta Sync</div>
-          <div class="comparison-val">FastCDC (only changed chunks)</div>
-        </div>
-        <div class="comparison-item">
-          <div class="comparison-label">Server Access</div>
-          <div class="comparison-val">Encrypted blobs only</div>
-        </div>
-        <div class="comparison-item">
-          <div class="comparison-label">Content Scanning</div>
-          <div class="comparison-val">Impossible — server can't read</div>
-        </div>
-        <div class="comparison-item">
-          <div class="comparison-label">Data Export</div>
-          <div class="comparison-val">Standard S3 API</div>
-        </div>
-        <div class="comparison-item">
-          <div class="comparison-label">Storage Replication</div>
-          <div class="comparison-val">3x across geographic zones</div>
-        </div>
-      </div>
+    <div style="margin-bottom:0.5rem">
+      <div class="app-section-label">Honest comparison</div>
+      <h2 class="app-section-title">How Vaultyx really compares</h2>
+      <p class="app-section-sub">Real prices pulled from competitor sites today. Vaultyx priced at the 1 TB tier ($9.99/mo) and 5 TB tier ($7.99/TB/mo) for direct $/TB comparison.</p>
+    </div>
+
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Storage</th>
+            <th>$/TB/mo</th>
+            <th>Egress</th>
+            <th>End-to-end<br>encrypted</th>
+            <th>Multi-region</th>
+            <th>Mobile<br>app</th>
+            <th>S3 API</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="us">
+            <td>Vaultyx 1 TB</td>
+            <td>1 TB</td>
+            <td>$9.99</td>
+            <td class="cell-yes">free</td>
+            <td class="cell-yes">yes</td>
+            <td class="cell-yes">3 zones, 2 jurisdictions</td>
+            <td class="cell-yes">iOS</td>
+            <td class="cell-yes">yes</td>
+          </tr>
+          <tr class="us">
+            <td>Vaultyx 5 TB</td>
+            <td>5 TB</td>
+            <td>$7.99</td>
+            <td class="cell-yes">free</td>
+            <td class="cell-yes">yes</td>
+            <td class="cell-yes">3 zones, 2 jurisdictions</td>
+            <td class="cell-yes">iOS</td>
+            <td class="cell-yes">yes</td>
+          </tr>
+          <tr>
+            <td>Proton Drive Plus</td>
+            <td>200 GB</td>
+            <td>~$24.95</td>
+            <td class="cell-yes">included</td>
+            <td class="cell-yes">yes</td>
+            <td class="cell-partial">EU only</td>
+            <td class="cell-yes">iOS, Android</td>
+            <td class="cell-no">no</td>
+          </tr>
+          <tr>
+            <td>Tresorit Personal</td>
+            <td>1 TB</td>
+            <td>~$11.99</td>
+            <td class="cell-yes">included</td>
+            <td class="cell-yes">yes</td>
+            <td class="cell-partial">EU/US</td>
+            <td class="cell-yes">iOS, Android</td>
+            <td class="cell-no">no</td>
+          </tr>
+          <tr>
+            <td>Sync.com Solo Standard</td>
+            <td>2 TB</td>
+            <td>~$4.00</td>
+            <td class="cell-yes">included</td>
+            <td class="cell-yes">yes</td>
+            <td class="cell-partial">US/CA</td>
+            <td class="cell-yes">iOS, Android</td>
+            <td class="cell-no">no</td>
+          </tr>
+          <tr>
+            <td>Storj DCS</td>
+            <td>any</td>
+            <td>$4.00</td>
+            <td class="cell-no">$7/TB</td>
+            <td class="cell-yes">yes</td>
+            <td class="cell-yes">distributed</td>
+            <td class="cell-no">no</td>
+            <td class="cell-yes">yes</td>
+          </tr>
+          <tr>
+            <td>Backblaze B2</td>
+            <td>any</td>
+            <td>$6.00</td>
+            <td class="cell-partial">3× free, then $10/TB</td>
+            <td class="cell-no">at-rest only</td>
+            <td class="cell-partial">regional</td>
+            <td class="cell-no">no</td>
+            <td class="cell-yes">yes</td>
+          </tr>
+          <tr>
+            <td>Wasabi Hot</td>
+            <td>any</td>
+            <td>$6.99</td>
+            <td class="cell-yes">free</td>
+            <td class="cell-no">at-rest only</td>
+            <td class="cell-partial">regional</td>
+            <td class="cell-no">no</td>
+            <td class="cell-yes">yes</td>
+          </tr>
+          <tr>
+            <td>Cloudflare R2</td>
+            <td>any</td>
+            <td>$15.00</td>
+            <td class="cell-yes">free</td>
+            <td class="cell-no">at-rest only</td>
+            <td class="cell-yes">global</td>
+            <td class="cell-no">no</td>
+            <td class="cell-yes">yes</td>
+          </tr>
+          <tr>
+            <td>iCloud+ 2 TB</td>
+            <td>2 TB</td>
+            <td>~$5.00</td>
+            <td class="cell-yes">included</td>
+            <td class="cell-no">at-rest only*</td>
+            <td class="cell-yes">global</td>
+            <td class="cell-yes">iOS</td>
+            <td class="cell-no">no</td>
+          </tr>
+          <tr>
+            <td>Google Drive 2 TB</td>
+            <td>2 TB</td>
+            <td>~$5.00</td>
+            <td class="cell-yes">included</td>
+            <td class="cell-no">at-rest only</td>
+            <td class="cell-yes">global</td>
+            <td class="cell-yes">iOS, Android</td>
+            <td class="cell-no">no</td>
+          </tr>
+          <tr>
+            <td>AWS S3 Standard</td>
+            <td>any</td>
+            <td>~$23</td>
+            <td class="cell-no">$90/TB</td>
+            <td class="cell-no">at-rest only</td>
+            <td class="cell-yes">global (extra $)</td>
+            <td class="cell-no">no</td>
+            <td class="cell-yes">yes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="compare-caption">
+      Prices in USD as of April 2026. *iCloud Advanced Data Protection (opt-in) provides end-to-end encryption for some categories; default iCloud is at-rest only. Sync.com pricing assumes annual billing. Storj effective $/TB depends on egress volume — at 1× monthly egress, $4 storage + $7 egress = $11/TB. We compare against the closest tier of each competitor; competitor pricing changes — check their site for current numbers.
     </div>
 
     <hr class="section-divider">
 
-    <div class="callout">
-      <p><strong>Included with Sovereign subscription</strong> — see <a href="/pricing">current pricing</a>. Vaultyx comes with 1TB of encrypted storage, automatic VPN routing, and synced across all your devices.</p>
-      <p style="margin-top:0.75rem;margin-bottom:0"><a href="/pricing" class="plausible-event-name=Sovereign+CTA plausible-event-app=vaultyx">See Sovereign tier →</a></p>
+    <div style="margin-bottom:0.5rem">
+      <div class="app-section-label">S3 API</div>
+      <h2 class="app-section-title">Use it as raw S3 storage too</h2>
+      <p class="app-section-sub">Every Vaultyx subscription includes standard S3 API access. Connect rclone, AWS CLI, Cyberduck, Veeam — anything that speaks S3 — to your bucket. The same encrypted blobs your iPhone uploads are accessible via this API; you control encryption client-side, we provide the storage.</p>
     </div>
+
+    <div class="s3-codeblock"><span class="comment"># rclone config</span>
+<span class="key">[vaultyx]</span>
+type = s3
+provider = Other
+endpoint = https://vaultyx.objstore.io
+region = us-east-1
+access_key_id = KAT...
+secret_access_key = ...
+
+<span class="comment"># Then list / upload / download as usual:</span>
+rclone ls vaultyx:vault-&lt;your-id&gt;
+rclone copy ./photos vaultyx:vault-&lt;your-id&gt;/photos</div>
+
+    <div class="footnote-block">Endpoint: <code>https://vaultyx.objstore.io</code> · Region: <code>us-east-1</code> · Buckets: virtual-host or path style. Per-user access keys generated in the Vaultyx app. Same Garage cluster underneath as the encrypted-blob storage your iOS app uses.</div>
 
     <hr class="section-divider">
 
     <div style="text-align:center;padding:1rem 0 2rem">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--dim2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem">Included with Sovereign</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--text);margin-bottom:0.5rem">1TB encrypted storage · Zero-knowledge</div>
-      <div style="font-size:0.875rem;color:var(--dim)">iOS coming soon · macOS + Android in development</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--dim2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem">Live on iOS · Android in development</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--text);margin-bottom:1rem">From $1.99 / month · 100 GB to 5 TB</div>
+      <div>
+        <a href="https://apps.apple.com/app/id6762418528" class="btn-appstore plausible-event-name=AppStore+Click plausible-event-app=vaultyx">Download on the App Store</a>
+      </div>
     </div>
 
   </main>
