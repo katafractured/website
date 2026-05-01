@@ -1,0 +1,57 @@
+name: pr-check
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: pr-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect package manager
+        id: pm
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            echo "manager=pnpm" >> "$GITHUB_OUTPUT"
+          elif [ -f yarn.lock ]; then
+            echo "manager=yarn" >> "$GITHUB_OUTPUT"
+          elif [ -f package-lock.json ]; then
+            echo "manager=npm" >> "$GITHUB_OUTPUT"
+          elif [ -f package.json ]; then
+            echo "manager=npm" >> "$GITHUB_OUTPUT"
+          else
+            echo "manager=none" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Setup Node 20
+        if: steps.pm.outputs.manager != 'none'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: ${{ steps.pm.outputs.manager == 'pnpm' && 'pnpm' || (steps.pm.outputs.manager == 'yarn' && 'yarn' || 'npm') }}
+
+      - name: Install pnpm
+        if: steps.pm.outputs.manager == 'pnpm'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install + build
+        if: steps.pm.outputs.manager != 'none'
+        run: |
+          case "${{ steps.pm.outputs.manager }}" in
+            pnpm) pnpm install --frozen-lockfile && pnpm run build ;;
+            yarn) yarn install --frozen-lockfile && yarn build ;;
+            npm)  npm ci || npm install
+                  npm run build --if-present ;;
+          esac
+
+      - name: No package.json — nothing to build
+        if: steps.pm.outputs.manager == 'none'
+        run: echo "No package.json found; static-only repo. Skipping build."
