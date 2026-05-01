@@ -2,13 +2,13 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const allPosts = await getCollection('journal', ({ data }) => !data.draft);
 const posts = allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
 
 <Base
-  title="Blog — Katafract"
-  description="Quiet writing about privacy, identity, and the tools we build."
+  title="Journal — Katafract"
+  description="Founder-voice writing on privacy architecture, the platform underneath, and what we ship and why."
   section="prose"
 >
   <link slot="head" rel="stylesheet" href="/style.css" />
@@ -101,8 +101,9 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.
   `} />
 
   <div class="blog-hero">
-    <h1>Blog</h1>
-    <p>Quiet writing about privacy, identity, and the tools we build.</p>
+    <h1>Journal</h1>
+    <p>Founder-voice writing on privacy architecture, the platform underneath, and what we ship and why.</p>
+    <p style="margin-top: 0.75rem;"><a href="/journal/feed.xml" style="color: #8C94A6; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">RSS feed →</a></p>
   </div>
 
   {posts.length > 0 ? (
@@ -110,7 +111,7 @@ const posts = allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.
       {posts.map((post) => (
         <article class="blog-post-item">
           <h2 class="blog-post-title">
-            <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+            <a href={`/journal/${post.slug}/`}>{post.data.title}</a>
           </h2>
           <div class="blog-post-meta">
             <span>{post.data.author}</span>
