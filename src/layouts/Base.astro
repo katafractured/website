@@ -71,6 +71,26 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).toStri
   <link rel="stylesheet" href="/styles/buttons.css" />
   <link rel="stylesheet" href="/styles/app-colors.css" />
 
+  <!-- Site-wide JSON-LD: Organization (legal entity) + WebSite (sitelinks search). No founder name — Tek pseudonymously. See workshop/marketing/seo-jsonld-templates.md. -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Katafract LLC",
+    url: "https://katafract.com",
+    logo: "https://katafract.com/images/katafract-mark.svg",
+    sameAs: [
+      "https://github.com/katafract-io",
+      "https://docs.katafract.io",
+    ],
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Katafract",
+    url: "https://katafract.com",
+    publisher: { "@type": "Organization", name: "Katafract LLC" },
+  })} />
+
   <!-- Page-specific head additions (JSON-LD, extra meta, inline styles) -->
   <slot name="head" />
 
