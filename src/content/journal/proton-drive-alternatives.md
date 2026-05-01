@@ -46,7 +46,7 @@ A few specific design choices show up if you push on it.
 - Identity: Sigil token. No email-to-account binding. Stripe handles billing email separately; the file system knows nothing about it.
 - Recovery: 12-word phrase. Lose it, the data is gone. There is no support-side reset.
 - Pricing: $18/mo Sovereign tier includes 1 TB Vaultyx, plus the rest of the Katafract stack (multi-hop VPN, all utility apps, MeritMosaic unlimited, future apps). Standalone Vaultyx tiers run $1.99 / $9.99 / $39.99 monthly for 100 GB / 1 TB / 5 TB.
-- Limits: Vaultyx is younger than Proton Drive. Sharing is read-only at present (V1); collaborative-edit / shared-folder is V2 and not yet shipped. Mac Finder selective-sync extension is V2. macOS only (no native Linux client yet). Be honest about the gaps; the core file storage is solid, the surrounding workflow is still being built out.
+- Limits: Vaultyx is younger than Proton Drive. **Clients today are iOS + Android.** macOS native, Mac Finder selective-sync extension, and shared folders / collaborative editing are V2 and not yet shipped. No Linux client yet. Be honest about the gaps; the core file storage is solid, the surrounding workflow is still being built out.
 - Where Vaultyx is genuinely different from Proton Drive: the *manifest* is encrypted (Proton's manifest contents are encrypted but the structural metadata is visible to the server), and the identity is decoupled from the storage entirely (in Proton, Drive identity is a Proton account; in Vaultyx, it's an anonymous token).
 
 ### If your goal is "I want to host this myself"
